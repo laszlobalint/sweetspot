@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
 import { Delivery } from './order.dto';
 import { Item } from '../item/item.entity';
 import { Exclude } from 'class-transformer';
@@ -9,22 +9,26 @@ export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', width: 100 })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', width: 100 })
   phone: string;
 
-  @Column()
+  @Column({ type: 'varchar', width: 100 })
   email: string;
 
-  @Column()
+  @Column({ type: 'varchar', width: 200 })
   address: string;
 
-  @Column()
+  @Column({ type: 'int', width: 100 })
   price: number;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: Delivery,
+    default: Delivery.SHIPPING,
+  })
   delivery: Delivery;
 
   @OneToMany(
@@ -33,7 +37,9 @@ export class Order extends BaseEntity {
   )
   items: Item[];
 
-  @Exclude()
   @CreateDateColumn({ type: 'timestamptz' })
   createdDate: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz' })
+  updateDate: Date;
 }

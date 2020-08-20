@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Order } from '../order/order.entity';
 
@@ -8,23 +8,23 @@ export class Item extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', width: 200 })
   title: string;
 
-  @Column()
+  @Column({ type: 'varchar', width: 200 })
   picture: string;
 
-  @Column()
+  @Column({ type: 'boolean' })
   glutenfree: boolean;
 
-  @Column()
+  @Column({ type: 'boolean' })
   sugarfree: boolean;
 
-  //   @Column()
-  //   ingredients: string[];
+  @Column('simple-array')
+  ingredients: string[];
 
-  //   @Column()
-  //   allergens: string[];
+  @Column('simple-array')
+  allergens: string[];
 
   @Exclude()
   @ManyToOne(
@@ -32,4 +32,11 @@ export class Item extends BaseEntity {
     order => order.items,
   )
   order: Order;
+
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdDate: Date;
+
+  @Exclude()
+  @UpdateDateColumn({ type: 'timestamptz' })
+  updateDate: Date;
 }
