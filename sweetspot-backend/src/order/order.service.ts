@@ -1,39 +1,46 @@
-import { Injectable } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
-import { CreateOrderDto, GetOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult } from 'typeorm';
+import { OrderRepository } from './order.repository';
+import { Order } from './order.entity';
+import { CreateOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
 
 @Injectable()
 export class OrdersService {
-  private dummyOrders: any[] = [];
+  constructor(@InjectRepository(OrderRepository) private readonly orderRepository: OrderRepository) {}
 
-  getAllOrders(): GetOrderDto[] {
-    return this.dummyOrders;
+  async getAllOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
+    return this.orderRepository.getOrders(getOrdersFilterDto);
   }
 
-  getOrdersWithFilters(getOrdersFilter: GetOrdersFilterDto): GetOrderDto[] {
-    const { name, email } = getOrdersFilter;
-    let orders = this.getAllOrders();
-    orders = orders.filter(order => order.name.toLowerCase() === name.toLowerCase() || order.email.toLowerCase() === email.toLowerCase());
-    return orders;
+  async getOrderById(id: number): Promise<Order> {
+    const foundOrder = await this.orderRepository.findOne(id);
+    if (!foundOrder) throw new NotFoundException();
+    return foundOrder;
   }
 
-  getOrderById(id: string): GetOrderDto {
-    return this.dummyOrders.find(order => order.id === id);
+  async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
+    return this.orderRepository.createOrder(createOrderDto);
   }
 
-  createOrder(newOrder: CreateOrderDto): GetOrderDto {
-    const order: GetOrderDto = { id: uuidv4(), ...newOrder };
-    this.dummyOrders.push(order);
-    return order;
+  async updateOrder(id: number, updateOrderDto: UpdateOrderDto): Promise<Order> {
+    const oldOrder = await this.getOrderById(id);
+    if (!oldOrder) throw new NotFoundException();
+    const newOrder = {
+      id,
+      name: updateOrderDto.name,
+      phone: updateOrderDto.phone,
+      email: updateOrderDto.email,
+      address: `${updateOrderDto.address.postalCode} ${updateOrderDto.address.settlement}, ${updateOrderDto.address.street}; ${updateOrderDto.address.country}`,
+      price: updateOrderDto.price,
+      delivery: updateOrderDto.delivery,
+    };
+    return this.orderRepository.save(newOrder);
   }
 
-  updateOrder(id: string, updateOrder: UpdateOrderDto): GetOrderDto {
-    const i: number = this.dummyOrders.indexOf(this.dummyOrders.find(order => order.id === id));
-    this.dummyOrders[i] = { id: this.dummyOrders[i].id, ...updateOrder };
-    return this.dummyOrders[i];
-  }
-
-  deleteOrderById(id: string): void {
-    this.dummyOrders = this.dummyOrders.filter(order => order.id !== id);
+  async deleteOrderById(id: number): Promise<DeleteResult> {
+    const deleteResult = await this.orderRepository.delete(id);
+    if (!deleteResult.affected) throw new NotFoundException();
+    return deleteResult;
   }
 }

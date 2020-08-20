@@ -1,37 +1,38 @@
-import { CreateOrderDto, GetOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
-import { Controller, Get, Post, Body, Param, Delete, Put, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Query, UsePipes, ValidationPipe, ParseIntPipe } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
+import { Order } from './order.entity';
+import { CreateOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
 import { OrdersService } from './order.service';
+import { OrderValidationPipe } from './order.pipe';
 
 @Controller('orders')
 export class OrderController {
   constructor(private readonly orderService: OrdersService) {}
 
   @Get()
-  getAllOrders(@Query() getOrdersFilter: GetOrdersFilterDto): GetOrderDto[] {
-    if (Object.keys(getOrdersFilter).length) {
-      return this.orderService.getOrdersWithFilters(getOrdersFilter);
-    } else {
-      return this.orderService.getAllOrders();
-    }
+  getAllOrders(@Query() getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
+    return this.orderService.getAllOrders(getOrdersFilterDto);
   }
 
   @Get('/:id')
-  getOrderById(@Param('id') id: string): GetOrderDto {
+  getOrderById(@Param('id', ParseIntPipe) id: number): Promise<Order> {
     return this.orderService.getOrderById(id);
   }
 
   @Post()
-  createOrder(@Body() createTaskDto: CreateOrderDto): CreateOrderDto {
+  @UsePipes(ValidationPipe)
+  createOrder(@Body(OrderValidationPipe) createTaskDto: CreateOrderDto): Promise<Order> {
     return this.orderService.createOrder(createTaskDto);
   }
 
   @Put('/:id')
-  updateOrderById(@Param('id') id: string, @Body() updateOrder: UpdateOrderDto): GetOrderDto {
+  @UsePipes(ValidationPipe)
+  updateOrderById(@Param('id', ParseIntPipe) id: number, @Body(OrderValidationPipe) updateOrder: UpdateOrderDto): Promise<Order> {
     return this.orderService.updateOrder(id, updateOrder);
   }
 
   @Delete('/:id')
-  deleteOrderById(@Param('id') id: string): void {
-    this.orderService.deleteOrderById(id);
+  deleteOrderById(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+    return this.orderService.deleteOrderById(id);
   }
 }
