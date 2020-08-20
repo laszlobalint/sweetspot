@@ -1,4 +1,16 @@
-import { IsEmail, IsNotEmpty, IsPositive, IsArray, IsObject, IsEnum, IsOptional } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsPositive,
+  IsArray,
+  IsObject,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MinLength,
+  MaxLength,
+  Max,
+} from 'class-validator';
 import { ItemDto } from '../item/item.dto';
 
 export enum Country {
@@ -12,18 +24,31 @@ export enum Delivery {
 }
 
 export class CreateOrderDto {
-  @IsNotEmpty()
+  @IsString()
+  @MinLength(8)
+  @MaxLength(30)
   name: string;
-  @IsNotEmpty()
+
+  @IsString()
+  @MinLength(6)
+  @MaxLength(20)
   phone: string;
+
   @IsEmail()
+  @MinLength(3)
+  @MaxLength(40)
   email: string;
+
   @IsObject()
   address: Address;
+
   @IsPositive()
+  @Max(100000)
   price: number;
+
   @IsEnum(Delivery)
   delivery: Delivery;
+
   @IsArray()
   items: ItemDto[];
 }
@@ -38,10 +63,15 @@ export class GetOrderDto extends CreateOrderDto {
 
 export class GetOrdersFilterDto {
   @IsOptional()
-  @IsNotEmpty()
+  @IsString()
+  @MinLength(8)
+  @MaxLength(30)
   name?: string;
+
   @IsOptional()
   @IsEmail()
+  @MinLength(3)
+  @MaxLength(40)
   email?: string;
 }
 

@@ -2,7 +2,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
 import { Delivery } from './order.dto';
 import { Item } from '../item/item.entity';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Order extends BaseEntity {
