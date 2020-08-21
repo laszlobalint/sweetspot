@@ -1,0 +1,15 @@
+server:
+  port: 3333
+
+db:
+  type: 'postgres'
+  port: 5555
+  database: 'sweetspot'
+
+jwt:
+  strategyName: 'jwt'
+  expiresIn: 3600
+
+mode:
+  development: 'development'
+  production: 'production'

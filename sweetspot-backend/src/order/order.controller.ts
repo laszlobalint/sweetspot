@@ -1,14 +1,15 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, Query, UsePipes, ValidationPipe, ParseIntPipe, UseGuards } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
-import { Order } from './order.entity';
-import { CreateOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
-import { OrdersService } from './order.service';
-import { OrderValidationPipe } from './order.pipe';
-import { GetUser } from '../auth/jwt/jwt.get-user.decorator';
-import { User } from '../auth/auth.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { DeleteResult } from 'typeorm';
 
-@Controller('orders')
+import { GetUser } from '../auth/jwt/jwt.get-user.decorator';
+import { CreateOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
+import { User } from '../auth/auth.entity';
+import { Order } from './order.entity';
+import { OrderValidationPipe } from './order.pipe';
+import { OrdersService } from './order.service';
+
+@Controller('api/orders')
 export class OrderController {
   constructor(private readonly orderService: OrdersService) {}
 
@@ -32,6 +33,7 @@ export class OrderController {
   }
 
   @Put('/:id')
+  @UseGuards(AuthGuard('jwt'))
   @UsePipes(ValidationPipe)
   updateOrderById(@Param('id', ParseIntPipe) id: number, @Body(OrderValidationPipe) updateOrder: UpdateOrderDto): Promise<Order> {
     return this.orderService.updateOrder(id, updateOrder);

@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
+
+import { CreateOrderDto, GetOrdersFilterDto, UpdateOrderDto } from './order.dto';
 import { Order } from './order.entity';
-import { CreateOrderDto, GetOrdersFilterDto } from './order.dto';
 
 @EntityRepository(Order)
 export class OrderRepository extends Repository<Order> {
@@ -25,5 +26,18 @@ export class OrderRepository extends Repository<Order> {
     order.items = [];
     await order.save();
     return order;
+  }
+
+  updateOrder(updateOrderDto: UpdateOrderDto, id: number): Order {
+    return {
+      id,
+      name: updateOrderDto.name,
+      phone: updateOrderDto.phone,
+      email: updateOrderDto.email,
+      address: `${updateOrderDto.address.postalCode} ${updateOrderDto.address.settlement}, ${updateOrderDto.address.street}; ${updateOrderDto.address.country}`,
+      price: updateOrderDto.price,
+      delivery: updateOrderDto.delivery,
+      items: [],
+    } as Order;
   }
 }
