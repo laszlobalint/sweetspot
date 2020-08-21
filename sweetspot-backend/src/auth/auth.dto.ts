@@ -15,8 +15,14 @@ export class AuthDto {
 
 export interface JwtPayload {
   username: string;
+  iat: number;
+  exp: number;
 }
 
 export interface AccessToken {
   accessToken: string;
+}
+
+export interface Logout {
+  message: string;
 }

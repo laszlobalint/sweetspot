@@ -3,7 +3,7 @@ import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/c
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RateLimiterInterceptor, RateLimiterModule } from 'nestjs-rate-limiter';
 
-import { typeOrmConfig } from './config/typeorm.config';
+import { typeOrmConfig } from './config/ormconfig';
 import { FrontendMiddleware } from './config/frontend.middleware';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './order/order.module';

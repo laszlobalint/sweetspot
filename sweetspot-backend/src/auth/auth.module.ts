@@ -12,7 +12,7 @@ const jwtConfig = config.get('jwt');
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: jwtConfig.strategyName }),
+    PassportModule.register({ defaultStrategy: jwtConfig.strategyName, property: 'user', session: false }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
       signOptions: {

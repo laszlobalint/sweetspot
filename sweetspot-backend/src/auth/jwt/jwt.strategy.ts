@@ -11,7 +11,11 @@ import { UserRepository } from '../auth.repository';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(@InjectRepository(UserRepository) private readonly userRepository: UserRepository) {
-    super({ jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: process.env.JWT_SECRET || config.get('jwt.secret') });
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: process.env.JWT_SECRET || config.get('jwt.secret'),
+    });
   }
 
   async validate(payload: JwtPayload): Promise<User> {
