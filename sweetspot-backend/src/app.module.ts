@@ -7,6 +7,7 @@ import { typeOrmConfig } from './config/ormconfig';
 import { FrontendMiddleware } from './config/frontend.middleware';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './order/order.module';
+import { IngredientModule } from './ingredient/ingredient.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { OrdersModule } from './order/order.module';
     }),
     AuthModule,
     OrdersModule,
+    IngredientModule,
   ],
   controllers: [],
   providers: [

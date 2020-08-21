@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 import { Order } from '../order/order.entity';
+import { Ingredient } from '../ingredient/ingredient.entity';
 
 @Entity()
 export class Item extends BaseEntity {
@@ -22,12 +22,15 @@ export class Item extends BaseEntity {
   sugarfree: boolean;
 
   @Column({ type: 'simple-array' })
-  ingredients: string[];
-
-  @Column({ type: 'simple-array' })
   allergens: string[];
 
-  @Exclude()
+  @OneToMany(
+    _type => Ingredient,
+    ingredient => ingredient.item,
+    { eager: true },
+  )
+  ingredients: Ingredient[];
+
   @ManyToOne(
     _type => Order,
     order => order.items,
@@ -41,7 +44,6 @@ export class Item extends BaseEntity {
   @CreateDateColumn({ type: 'timestamptz' })
   createdDate: Date;
 
-  @Exclude()
   @UpdateDateColumn({ type: 'timestamptz' })
   updateDate: Date;
 }
