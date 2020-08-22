@@ -33,7 +33,7 @@ export class Order extends BaseEntity {
 
   @OneToMany(
     _type => Item,
-    item => item.order,
+    item => item.orders,
     { eager: true },
   )
   items: Item[];

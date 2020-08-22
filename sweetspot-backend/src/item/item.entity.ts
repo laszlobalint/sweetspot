@@ -35,7 +35,7 @@ export class Item extends BaseEntity {
     order => order.items,
     { eager: false },
   )
-  order: Order;
+  orders: Order[];
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdDate: Date;

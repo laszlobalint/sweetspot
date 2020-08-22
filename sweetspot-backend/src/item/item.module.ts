@@ -5,7 +5,7 @@ import { ItemController } from './item.controller';
 import { ItemService } from './item.service';
 import { ItemRepository } from './item.repository';
 import { IngredientService } from '../ingredient/ingredient.service';
-import { IngredientRepository } from 'src/ingredient/ingredient.repository';
+import { IngredientRepository } from '../ingredient/ingredient.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ItemRepository, IngredientRepository])],

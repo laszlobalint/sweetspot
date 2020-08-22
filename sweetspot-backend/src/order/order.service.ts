@@ -5,10 +5,14 @@ import { DeleteResult } from 'typeorm';
 import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { Order } from './order.entity';
 import { OrderRepository } from './order.repository';
+import { ItemRepository } from '../item/item.repository';
 
 @Injectable()
 export class OrdersService {
-  constructor(@InjectRepository(OrderRepository) private readonly orderRepository: OrderRepository) {}
+  constructor(
+    @InjectRepository(OrderRepository) private readonly orderRepository: OrderRepository,
+    @InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository,
+  ) {}
 
   async getAllOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     return this.orderRepository.getOrders(getOrdersFilterDto);
@@ -21,14 +25,15 @@ export class OrdersService {
   }
 
   async createOrder(createOrderDto: OrderDto): Promise<Order> {
-    return this.orderRepository.createOrder(createOrderDto);
+    const itemsForOrder = await this.itemRepository.findByIds(createOrderDto.items, { relations: ['ingredients', 'orders'] });
+    return this.orderRepository.createOrder(createOrderDto, itemsForOrder);
   }
 
   async updateOrder(id: number, updateOrderDto: OrderDto): Promise<Order> {
     const oldOrder = await this.getOrder(id);
+    const itemsForOrder = await this.itemRepository.findByIds(updateOrderDto.items, { relations: ['ingredients', 'orders'] });
     if (!oldOrder) throw new NotFoundException();
-    const updatedOrder = this.orderRepository.updateOrder(updateOrderDto, id);
-    return this.orderRepository.save(updatedOrder);
+    return this.orderRepository.updateOrder(oldOrder, updateOrderDto, itemsForOrder);
   }
 
   async deleteOrderById(id: number): Promise<DeleteResult> {

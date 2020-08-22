@@ -1,16 +1,12 @@
+import { NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { Order } from './order.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ItemRepository } from 'src/item/item.repository';
+import { Item } from '../item/item.entity';
 
 @EntityRepository(Order)
 export class OrderRepository extends Repository<Order> {
-  constructor(@InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository) {
-    super();
-  }
-
   async getOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     const { name, email } = getOrdersFilterDto;
     const query = this.createQueryBuilder('order').leftJoinAndSelect('order.items', 'items');
@@ -20,24 +16,27 @@ export class OrderRepository extends Repository<Order> {
     return order;
   }
 
-  async createOrder(createOrderDto: OrderDto): Promise<Order> {
-    const { name, phone, email, price, delivery, items } = createOrderDto;
+  async createOrder(createOrderDto: OrderDto, items: Item[]): Promise<Order> {
+    const { name, phone, email, price, delivery } = createOrderDto;
     const address = `${createOrderDto.address.postalCode} ${createOrderDto.address.settlement}, ${createOrderDto.address.street}; ${createOrderDto.address.country}`;
-    const itemsForOrder = await this.itemRepository.findByIds(items);
-    const order = new Order({ name, phone, email, address, price, delivery, items: itemsForOrder });
+    const order = new Order({ name, phone, email, address, price, delivery, items });
     return await order.save();
   }
 
-  updateOrder(updateOrderDto: OrderDto, id: number): Order {
-    return {
-      id,
-      name: updateOrderDto.name,
-      phone: updateOrderDto.phone,
-      email: updateOrderDto.email,
-      address: `${updateOrderDto.address.postalCode} ${updateOrderDto.address.settlement}, ${updateOrderDto.address.street}; ${updateOrderDto.address.country}`,
-      price: updateOrderDto.price,
-      delivery: updateOrderDto.delivery,
-      items: [],
-    } as Order;
+  async updateOrder(order: Order, updateOrderDto: OrderDto, items: Item[]): Promise<Order> {
+    const { name, phone, email, price, delivery } = updateOrderDto;
+    const address = `${updateOrderDto.address.postalCode} ${updateOrderDto.address.settlement}, ${updateOrderDto.address.street}; ${updateOrderDto.address.country}`;
+    if (updateOrderDto.items.length === items.length) {
+      order.name = name;
+      order.phone = phone;
+      order.email = email;
+      order.address = address;
+      order.price = price;
+      order.delivery = delivery;
+      order.items = items;
+      return order.save();
+    } else {
+      throw new NotFoundException('Could not find all the items!');
+    }
   }
 }

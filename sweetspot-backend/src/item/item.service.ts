@@ -5,37 +5,27 @@ import { DeleteResult } from 'typeorm';
 import { ItemDto } from './item.dto';
 import { Item } from './item.entity';
 import { ItemRepository } from './item.repository';
-import { IngredientRepository } from 'src/ingredient/ingredient.repository';
 
 @Injectable()
 export class ItemService {
-  constructor(
-    @InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository,
-    @InjectRepository(IngredientRepository) private readonly ingredientRepository: IngredientRepository,
-  ) {}
+  constructor(@InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository) {}
 
   async getAllItems(): Promise<Item[]> {
-    return this.itemRepository.find({ relations: ['ingredients'] });
+    return this.itemRepository.find({ relations: ['ingredients', 'orders'] });
   }
 
   async getItem(id: number): Promise<Item> {
-    return this.itemRepository.findOne(id, { relations: ['ingredients'] });
+    return this.itemRepository.findOne(id, { relations: ['ingredients', 'orders'] });
   }
 
   async createItem(createItemDto: ItemDto): Promise<Item> {
-    const { title, picture, glutenfree, sugarfree, allergens, ingredients } = createItemDto;
-    const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
-    if (ingredientsForItem.length === ingredients.length) {
-      const item = new Item({ title, picture, glutenfree, sugarfree, allergens, ingredients: ingredientsForItem });
-      return this.itemRepository.save(item);
-    } else {
-      throw new NotFoundException('Could not find all the ingredients!');
-    }
+    return this.itemRepository.createItem(createItemDto);
   }
 
   async updateItem(id: number, updateItemDto: ItemDto): Promise<Item> {
-    const item = await this.getItem(id);
-    return this.itemRepository.save(item);
+    const oldItem = await this.itemRepository.findOne(id);
+    if (!oldItem) throw new NotFoundException();
+    return this.itemRepository.updateItem(oldItem, updateItemDto);
   }
 
   async deleteItem(id: number): Promise<DeleteResult> {

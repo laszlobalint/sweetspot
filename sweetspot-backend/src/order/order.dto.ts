@@ -22,6 +22,13 @@ export enum Delivery {
   PICK_UP = 'PICK_UP',
 }
 
+export interface Address {
+  street: string;
+  settlement: string;
+  postalCode: number;
+  country: Country;
+}
+
 export class OrderDto {
   @IsOptional()
   @IsNotEmpty()
@@ -68,11 +75,4 @@ export class GetOrdersFilterDto {
   @MinLength(3)
   @MaxLength(40)
   email?: string;
-}
-
-export interface Address {
-  street: string;
-  settlement: string;
-  postalCode: number;
-  country: Country;
 }
