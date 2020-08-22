@@ -8,6 +8,7 @@ import { FrontendMiddleware } from './config/frontend.middleware';
 import { AuthModule } from './auth/auth.module';
 import { OrdersModule } from './order/order.module';
 import { IngredientModule } from './ingredient/ingredient.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { IngredientModule } from './ingredient/ingredient.module';
     AuthModule,
     OrdersModule,
     IngredientModule,
+    ItemModule,
   ],
   controllers: [],
   providers: [
