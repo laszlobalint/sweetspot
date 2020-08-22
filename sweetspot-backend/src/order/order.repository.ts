@@ -13,7 +13,7 @@ export class OrderRepository extends Repository<Order> {
 
   async getOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     const { name, email } = getOrdersFilterDto;
-    const query = this.createQueryBuilder('order');
+    const query = this.createQueryBuilder('order').leftJoinAndSelect('order.items', 'items');
     if (name) query.andWhere('order.name LIKE :name', { name: `%${name}%` });
     if (email) query.andWhere('order.email LIKE :email', { email: `%${email}%` });
     const order = await query.getMany();

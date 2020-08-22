@@ -15,7 +15,7 @@ export class IngredientService {
   }
 
   async getIngredient(id: number): Promise<Ingredient> {
-    return this.ingredientRepository.findOne(id);
+    return this.ingredientRepository.findOne(id, { relations: ['items'] });
   }
 
   async createIngredient(createIngredientDto: IngredientDto): Promise<Ingredient> {
