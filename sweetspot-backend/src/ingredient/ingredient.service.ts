@@ -21,8 +21,6 @@ export class IngredientService {
   async createIngredient(createIngredientDto: IngredientDto): Promise<Ingredient> {
     const { name } = createIngredientDto;
     const ingredient = new Ingredient({ name, items: [] });
-    ingredient.name = name;
-    ingredient.items = [];
     return this.ingredientRepository.save(ingredient);
   }
 
