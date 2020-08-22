@@ -12,8 +12,6 @@ import {
   Max,
 } from 'class-validator';
 
-import { ItemDto } from '../item/item.dto';
-
 export enum Country {
   HUNGARY = 'HUNGARY',
   SERBIA = 'SERBIA',
@@ -24,7 +22,11 @@ export enum Delivery {
   PICK_UP = 'PICK_UP',
 }
 
-export class CreateOrderDto {
+export class OrderDto {
+  @IsOptional()
+  @IsNotEmpty()
+  id: string;
+
   @IsString()
   @MinLength(8)
   @MaxLength(30)
@@ -51,15 +53,7 @@ export class CreateOrderDto {
   delivery: Delivery;
 
   @IsArray()
-  items: ItemDto[];
-}
-
-export class UpdateOrderDto extends CreateOrderDto {}
-
-export class GetOrderDto extends CreateOrderDto {
-  @IsOptional()
-  @IsNotEmpty()
-  id: string;
+  items: number[];
 }
 
 export class GetOrdersFilterDto {

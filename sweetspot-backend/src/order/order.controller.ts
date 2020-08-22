@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Put, Query, UsePipes, Valid
 import { DeleteResult } from 'typeorm';
 
 import { GetUser } from '../auth/jwt/jwt.get-user.decorator';
-import { CreateOrderDto, UpdateOrderDto, GetOrdersFilterDto } from './order.dto';
+import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { User } from '../auth/auth.entity';
 import { Order } from './order.entity';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
@@ -16,32 +16,31 @@ export class OrderController {
   @Get()
   @UseGuards(JwtGuard)
   getAllOrders(@Query() getOrdersFilterDto: GetOrdersFilterDto, @GetUser() user: User): Promise<Order[]> {
-    console.log(user);
     return this.orderService.getAllOrders(getOrdersFilterDto);
   }
 
   @Get('/:id')
   @UseGuards(JwtGuard)
   getOrderById(@Param('id', ParseIntPipe) id: number): Promise<Order> {
-    return this.orderService.getOrderById(id);
+    return this.orderService.getOrder(id);
   }
 
   @Post()
   @UsePipes(ValidationPipe)
-  createOrder(@Body(OrderValidationPipe) createTaskDto: CreateOrderDto): Promise<Order> {
+  createOrder(@Body(OrderValidationPipe) createTaskDto: OrderDto): Promise<Order> {
     return this.orderService.createOrder(createTaskDto);
   }
 
   @Put('/:id')
   @UseGuards(JwtGuard)
   @UsePipes(ValidationPipe)
-  updateOrderById(@Param('id', ParseIntPipe) id: number, @Body(OrderValidationPipe) updateOrder: UpdateOrderDto): Promise<Order> {
-    return this.orderService.updateOrder(id, updateOrder);
+  updateOrder(@Param('id', ParseIntPipe) id: number, @Body(OrderValidationPipe) updateOrderDto: OrderDto): Promise<Order> {
+    return this.orderService.updateOrder(id, updateOrderDto);
   }
 
   @Delete('/:id')
   @UseGuards(JwtGuard)
-  deleteOrderById(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+  deleteOrder(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
     return this.orderService.deleteOrderById(id);
   }
 }

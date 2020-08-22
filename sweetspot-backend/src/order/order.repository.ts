@@ -1,10 +1,16 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import { CreateOrderDto, GetOrdersFilterDto, UpdateOrderDto } from './order.dto';
+import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { Order } from './order.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ItemRepository } from 'src/item/item.repository';
 
 @EntityRepository(Order)
 export class OrderRepository extends Repository<Order> {
+  constructor(@InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository) {
+    super();
+  }
+
   async getOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     const { name, email } = getOrdersFilterDto;
     const query = this.createQueryBuilder('order');
@@ -14,21 +20,15 @@ export class OrderRepository extends Repository<Order> {
     return order;
   }
 
-  async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
-    const order = new Order();
-    order.name = createOrderDto.name;
-    order.phone = createOrderDto.phone;
-    order.email = createOrderDto.email;
-    order.address = `${createOrderDto.address.postalCode} ${createOrderDto.address.settlement}, ${createOrderDto.address.street}; ${createOrderDto.address.country}`;
-    order.price = createOrderDto.price;
-    order.delivery = createOrderDto.delivery;
-    // TO-DO: Find and add items!
-    order.items = [];
-    await order.save();
-    return order;
+  async createOrder(createOrderDto: OrderDto): Promise<Order> {
+    const { name, phone, email, price, delivery, items } = createOrderDto;
+    const address = `${createOrderDto.address.postalCode} ${createOrderDto.address.settlement}, ${createOrderDto.address.street}; ${createOrderDto.address.country}`;
+    const itemsForOrder = await this.itemRepository.findByIds(items);
+    const order = new Order({ name, phone, email, address, price, delivery, items: itemsForOrder });
+    return await order.save();
   }
 
-  updateOrder(updateOrderDto: UpdateOrderDto, id: number): Order {
+  updateOrder(updateOrderDto: OrderDto, id: number): Order {
     return {
       id,
       name: updateOrderDto.name,

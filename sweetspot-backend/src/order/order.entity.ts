@@ -43,4 +43,9 @@ export class Order extends BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamptz' })
   updateDate: Date;
+
+  constructor(partial: Partial<Order>) {
+    super();
+    Object.assign(this, partial);
+  }
 }

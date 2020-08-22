@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
 
 import { Order } from '../order/order.entity';
 import { Ingredient } from '../ingredient/ingredient.entity';
@@ -21,13 +21,12 @@ export class Item extends BaseEntity {
   @Column({ type: 'boolean' })
   sugarfree: boolean;
 
-  @Column({ type: 'simple-array' })
-  allergens: string[];
+  @Column({ type: 'boolean' })
+  allergens: boolean;
 
-  @OneToMany(
+  @ManyToMany(
     _type => Ingredient,
-    ingredient => ingredient.item,
-    { eager: true },
+    ingredient => ingredient.items,
   )
   ingredients: Ingredient[];
 
@@ -38,12 +37,14 @@ export class Item extends BaseEntity {
   )
   order: Order;
 
-  @Column({ type: 'number', width: 200 })
-  orderId: number;
-
   @CreateDateColumn({ type: 'timestamptz' })
   createdDate: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
   updateDate: Date;
+
+  constructor(partial: Partial<Item>) {
+    super();
+    Object.assign(this, partial);
+  }
 }

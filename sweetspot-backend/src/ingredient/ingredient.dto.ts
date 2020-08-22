@@ -5,5 +5,5 @@ export class IngredientDto {
   @IsString()
   @MinLength(1)
   @MaxLength(50)
-  title: string;
+  name: string;
 }

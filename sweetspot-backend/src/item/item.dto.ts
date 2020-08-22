@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsBoolean, IsArray, IsOptional, IsString, MinLength, MaxLength } from 'class-validator';
+import { IsBoolean, IsArray, IsString, MinLength, MaxLength } from 'class-validator';
 
 export class ItemDto {
   @IsString()
@@ -6,7 +6,6 @@ export class ItemDto {
   @MaxLength(50)
   title: string;
 
-  @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(50)
@@ -18,11 +17,9 @@ export class ItemDto {
   @IsBoolean()
   sugarfree: boolean;
 
-  @IsOptional()
-  @IsArray()
-  ingredients?: string[];
+  @IsBoolean()
+  allergens: boolean;
 
-  @IsOptional()
   @IsArray()
-  allergens?: string[];
+  ingredients: number[];
 }
