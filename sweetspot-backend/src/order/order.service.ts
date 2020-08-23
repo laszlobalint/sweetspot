@@ -25,13 +25,13 @@ export class OrdersService {
   }
 
   async createOrder(createOrderDto: OrderDto): Promise<Order> {
-    const itemsForOrder = await this.itemRepository.findByIds(createOrderDto.items, { relations: ['ingredients', 'orders'] });
+    const itemsForOrder = await this.itemRepository.findByIds(createOrderDto.items, { relations: ['ingredients'] });
     return this.orderRepository.createOrder(createOrderDto, itemsForOrder);
   }
 
   async updateOrder(id: number, updateOrderDto: OrderDto): Promise<Order> {
     const oldOrder = await this.getOrder(id);
-    const itemsForOrder = await this.itemRepository.findByIds(updateOrderDto.items, { relations: ['ingredients', 'orders'] });
+    const itemsForOrder = await this.itemRepository.findByIds(updateOrderDto.items, { relations: ['ingredients'] });
     if (!oldOrder) throw new NotFoundException();
     return this.orderRepository.updateOrder(oldOrder, updateOrderDto, itemsForOrder);
   }

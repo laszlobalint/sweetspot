@@ -1,9 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, Query, UsePipes, ValidationPipe, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
 
-import { GetUser } from '../auth/jwt/jwt.get-user.decorator';
 import { OrderDto, GetOrdersFilterDto } from './order.dto';
-import { User } from '../auth/auth.entity';
 import { Order } from './order.entity';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
 import { OrderValidationPipe } from './order.pipe';
@@ -15,7 +13,7 @@ export class OrderController {
 
   @Get()
   @UseGuards(JwtGuard)
-  getAllOrders(@Query() getOrdersFilterDto: GetOrdersFilterDto, @GetUser() user: User): Promise<Order[]> {
+  getAllOrders(@Query() getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     return this.orderService.getAllOrders(getOrdersFilterDto);
   }
 

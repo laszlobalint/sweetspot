@@ -1,4 +1,4 @@
-describe('example test', () => {
+describe('primary test', () => {
   it('returns true', () => {
     expect(true).toEqual(true);
   });

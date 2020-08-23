@@ -19,15 +19,12 @@ export class IngredientService {
   }
 
   async createIngredient(createIngredientDto: IngredientDto): Promise<Ingredient> {
-    const { name } = createIngredientDto;
-    const ingredient = new Ingredient({ name, items: [] });
-    return this.ingredientRepository.save(ingredient);
+    return this.ingredientRepository.createIngredient(createIngredientDto);
   }
 
   async updateIngredient(id: number, updateIngredientDto: IngredientDto): Promise<Ingredient> {
-    const { name } = updateIngredientDto;
     const ingredient = await this.getIngredient(id);
-    ingredient.name = name;
+    ingredient.name = updateIngredientDto.name;
     return this.ingredientRepository.save(ingredient);
   }
 
