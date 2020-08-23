@@ -13,3 +13,18 @@ jwt:
 mode:
   development: 'development'
   production: 'production'
+
+mail:
+  name: 'SweetSpot'
+  email: 'sweetspot.subotica@gmail.com'
+  username: 'sweetspot.subotica'
+  host: 'smtp.gmail.com'
+  port: 465
+  conn: 'smtp'
+  secure: true
+
+limiter:
+  points: 200
+  duration: 60
+  keyPrefix: 'global'
+  type: 'Memory'

@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult } from 'typeorm';
 
 import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { Order } from './order.entity';
+import { EmailService } from 'src/email/email.service';
 import { OrderRepository } from './order.repository';
 import { ItemRepository } from '../item/item.repository';
 
@@ -12,6 +13,7 @@ export class OrdersService {
   constructor(
     @InjectRepository(OrderRepository) private readonly orderRepository: OrderRepository,
     @InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository,
+    private readonly emailService: EmailService,
   ) {}
 
   async getAllOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
@@ -26,7 +28,9 @@ export class OrdersService {
 
   async createOrder(createOrderDto: OrderDto): Promise<Order> {
     const itemsForOrder = await this.itemRepository.findByIds(createOrderDto.items, { relations: ['ingredients'] });
-    return this.orderRepository.createOrder(createOrderDto, itemsForOrder);
+    const order = await this.orderRepository.createOrder(createOrderDto, itemsForOrder);
+    if (!order) throw new UnprocessableEntityException('Could not save the order');
+    return await this.emailService.sendEmail(createOrderDto.email, order);
   }
 
   async updateOrder(id: number, updateOrderDto: OrderDto): Promise<Order> {
