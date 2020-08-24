@@ -23,10 +23,13 @@ describe('JwtStrategy', () => {
   });
 
   describe('validate', () => {
-    it('validates and returns the user based on JWT payload', async () => {
-      const user = new User();
-      user.username = 'TestUser';
+    const user = new User();
+    user.id = 1;
+    user.username = 'TestUser';
+    user.password = 'TestPassword';
+    user.salt = 'TestSalt';
 
+    it('validates and returns the user based on JWT payload', async () => {
       userRepository.findOne.mockResolvedValue(user);
       const result = await jwtStrategy.validate({ username: user.username });
       expect(userRepository.findOne).toHaveBeenCalledWith({ username: user.username });
