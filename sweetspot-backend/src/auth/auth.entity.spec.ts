@@ -1,5 +1,6 @@
-import { User } from './auth.entity';
 import * as bcrypt from 'bcryptjs';
+
+import { User } from './auth.entity';
 
 describe('AuthEntity', () => {
   let user;
