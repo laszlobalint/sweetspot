@@ -4,19 +4,19 @@ import { DeleteResult } from 'typeorm';
 
 import { OrderDto, GetOrdersFilterDto } from './order.dto';
 import { Order } from './order.entity';
-import { EmailService } from 'src/email/email.service';
+import { EmailService } from '../email/email.service';
 import { OrderRepository } from './order.repository';
 import { ItemRepository } from '../item/item.repository';
 
 @Injectable()
-export class OrdersService {
+export class OrderService {
   constructor(
     @InjectRepository(OrderRepository) private readonly orderRepository: OrderRepository,
     @InjectRepository(ItemRepository) private readonly itemRepository: ItemRepository,
     private readonly emailService: EmailService,
   ) {}
 
-  async getAllOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
+  async getOrders(getOrdersFilterDto: GetOrdersFilterDto): Promise<Order[]> {
     return this.orderRepository.getOrders(getOrdersFilterDto);
   }
 
@@ -40,7 +40,7 @@ export class OrdersService {
     return this.orderRepository.updateOrder(oldOrder, updateOrderDto, itemsForOrder);
   }
 
-  async deleteOrderById(id: number): Promise<DeleteResult> {
+  async deleteOrder(id: number): Promise<DeleteResult> {
     const deleteResult = await this.orderRepository.delete(id);
     if (!deleteResult.affected) throw new NotFoundException();
     return deleteResult;

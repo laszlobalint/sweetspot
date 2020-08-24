@@ -9,7 +9,7 @@ import { User } from './auth.entity';
 export class UserRepository extends Repository<User> {
   async register(authDto: AuthDto): Promise<User> {
     const { username, password } = authDto;
-    const user = new User();
+    const user = this.create();
     user.username = username;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password, user.salt);
