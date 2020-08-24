@@ -3,8 +3,8 @@ import { NestMiddleware } from '@nestjs/common';
 import * as path from 'path';
 
 const API_ROUTE_PREFIX = 'api';
-const ALLOWED_EXTENSIONS = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.ttf', '.svg'];
-const resolvePath = (file: string) => path.resolve(`./public/${file}`);
+const ALLOWED_EXTENSIONS = ['.js', '.ico', '.css', '.png', '.jpg', '.jpeg', '.woff2', '.woff', '.ttf', '.svg'];
+const resolvePath = (file: string) => path.resolve(`./assets/${file}`);
 
 export class FrontendMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void): any {
