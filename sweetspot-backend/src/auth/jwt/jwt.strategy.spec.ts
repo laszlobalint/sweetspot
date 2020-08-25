@@ -38,7 +38,11 @@ describe('JwtStrategy', () => {
 
     it('throws an unauthorized exception as user cannot be found', () => {
       userRepository.findOne.mockResolvedValue(null);
-      expect(jwtStrategy.validate({ username: user.username })).rejects.toThrow(UnauthorizedException);
+
+      const action = async () => {
+        await jwtStrategy.validate({ username: user.username });
+      };
+      expect(action()).rejects.toThrow(UnauthorizedException);
     });
   });
 });

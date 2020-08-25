@@ -72,9 +72,13 @@ describe('OrderService', () => {
       expect(result).toEqual(mockOrder);
       expect(orderRepository.findOne).toHaveBeenCalledWith(1, { relations: ['items'] });
     });
+
     it('throws an error as order is not found', () => {
       orderRepository.findOne.mockResolvedValue(null);
-      expect(orderService.getOrder(1)).rejects.toThrow(NotFoundException);
+      const action = async () => {
+        await orderService.getOrder(5);
+      };
+      expect(action()).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -92,12 +96,16 @@ describe('OrderService', () => {
     it('calls orderRepository.delete() to delete an order', async () => {
       orderRepository.delete.mockResolvedValue({ affected: 1 });
       expect(orderRepository.delete).not.toHaveBeenCalled();
-      await orderRepository.delete(1);
+      await orderService.deleteOrder(1);
       expect(orderRepository.delete).toHaveBeenCalledWith(1);
     });
+
     it('throws an error as order is not found', async () => {
       orderRepository.delete.mockRejectedValue({ affected: 0 });
-      expect(orderRepository.delete(0)).rejects.toThrow(NotFoundException);
+      const action = async () => {
+        await orderService.deleteOrder(5);
+      };
+      expect(action()).rejects.toEqual({ affected: 0 });
     });
   });
 });
