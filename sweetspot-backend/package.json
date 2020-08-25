@@ -64,7 +64,7 @@
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
-    "jest": "26.0.1",
+    "jest": "^25.2.2",
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",
     "supertest": "^4.0.2",
