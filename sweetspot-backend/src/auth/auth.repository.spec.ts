@@ -27,15 +27,23 @@ describe('AuthRepository', () => {
 
     it('successfully registers the user', () => {
       save.mockResolvedValue(undefined);
-      expect(userRepository.register(mockCredentialsDto)).resolves.not.toThrow();
+      return expect(userRepository.register(mockCredentialsDto)).resolves.not.toThrow();
     });
+
     it('throws a conflict exception as username already exists', () => {
       save.mockRejectedValue({ code: '23505' });
-      expect(userRepository.register(mockCredentialsDto)).resolves.toThrow(ConflictException);
+      const action = async () => {
+        await userRepository.register(mockCredentialsDto);
+      };
+      return expect(action()).rejects.toThrow(ConflictException);
     });
+
     it('throws an internal server exception if some other error occurs', () => {
       save.mockRejectedValue({ code: '12345' });
-      expect(userRepository.register(mockCredentialsDto)).resolves.toThrow(InternalServerErrorException);
+      const action = async () => {
+        await userRepository.register(mockCredentialsDto);
+      };
+      return expect(action()).rejects.toThrow(InternalServerErrorException);
     });
   });
 
@@ -53,14 +61,14 @@ describe('AuthRepository', () => {
       userRepository.findOne.mockResolvedValue(user);
       user.validateUserPassword.mockResolvedValue(true);
       const result = await userRepository.validateUserPassword(mockCredentialsDto);
-      expect(result).toEqual(mockCredentialsDto.username);
+      return expect(result).toEqual(mockCredentialsDto.username);
     });
 
     it('returns null as a user cannot be found', async () => {
       userRepository.findOne.mockResolvedValue(null);
       const result = await userRepository.validateUserPassword(mockCredentialsDto);
       expect(user.validateUserPassword).not.toHaveBeenCalled();
-      expect(result).toBeNull();
+      return expect(result).toBeNull();
     });
 
     it('returns null as a user cannot be found', async () => {
@@ -68,7 +76,7 @@ describe('AuthRepository', () => {
       user.validateUserPassword.mockResolvedValue(false);
       const result = await userRepository.validateUserPassword(mockCredentialsDto);
       expect(user.validateUserPassword).toHaveBeenCalled();
-      expect(result).toBeNull();
+      return expect(result).toBeNull();
     });
   });
 });
