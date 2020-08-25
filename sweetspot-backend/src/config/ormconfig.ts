@@ -1,8 +1,8 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as config from 'config';
 
+const entitiesPath = [`${__dirname}/dist/**/*.entity.js`];
 const dbConfig = config.get('db');
-const entitiesPath = [`${__dirname}/dist/**/*.entity.js"`];
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: dbConfig.type,
