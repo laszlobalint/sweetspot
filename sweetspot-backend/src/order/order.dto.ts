@@ -10,6 +10,7 @@ import {
   MinLength,
   MaxLength,
   Max,
+  IsInt,
 } from 'class-validator';
 
 export enum Country {
@@ -52,12 +53,22 @@ export class OrderDto {
   @IsObject()
   address: Address;
 
+  @IsInt()
   @IsPositive()
   @Max(100000)
-  price: number;
+  grandTotal: number;
+
+  @IsString()
+  @MinLength(24)
+  @MaxLength(27)
+  deliveryDate: string;
 
   @IsEnum(Delivery)
   delivery: Delivery;
+
+  @IsOptional()
+  @IsString()
+  notes?: string;
 
   @IsArray()
   items: number[];

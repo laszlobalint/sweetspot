@@ -13,10 +13,10 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async createItem(createItemDto: ItemDto): Promise<Item> {
-    const { title, picture, glutenfree, sugarfree, allergens, ingredients } = createItemDto;
+    const { title, description, picture, glutenfree, sugarfree, allergens, ingredients } = createItemDto;
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
     if (ingredientsForItem.length === ingredients.length) {
-      const item = new Item({ title, picture, glutenfree, sugarfree, allergens, ingredients: ingredientsForItem, orders: [] });
+      const item = new Item({ title, description, picture, glutenfree, sugarfree, allergens, ingredients: ingredientsForItem, orders: [] });
       return item.save();
     } else {
       throw new NotFoundException('Could not find all the ingredients!');
@@ -24,11 +24,13 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async updateItem(item: Item, updateItemDto: ItemDto): Promise<Item> {
-    const { title, picture, glutenfree, sugarfree, allergens, ingredients } = updateItemDto;
+    const { title, description, picture, price, glutenfree, sugarfree, allergens, ingredients } = updateItemDto;
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
     if (ingredientsForItem.length === ingredients.length) {
       item.title = title;
+      item.description = description;
       item.picture = picture;
+      item.price = price;
       item.glutenfree = glutenfree;
       item.sugarfree = sugarfree;
       item.allergens = allergens;

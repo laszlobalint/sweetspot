@@ -9,11 +9,17 @@ export class Item extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', width: 200 })
+  @Column({ type: 'text' })
   title: string;
 
-  @Column({ type: 'varchar', width: 200 })
+  @Column({ type: 'text' })
+  description: string;
+
+  @Column({ type: 'text' })
   picture: string;
+
+  @Column({ type: 'integer' })
+  price: number;
 
   @Column({ type: 'boolean' })
   glutenfree: boolean;

@@ -9,20 +9,23 @@ export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', width: 100 })
+  @Column({ type: 'text' })
   name: string;
 
-  @Column({ type: 'varchar', width: 100 })
+  @Column({ type: 'text' })
   phone: string;
 
-  @Column({ type: 'varchar', width: 100 })
+  @Column({ type: 'text' })
   email: string;
 
-  @Column({ type: 'varchar', width: 200 })
+  @Column({ type: 'text' })
   address: string;
 
-  @Column({ type: 'int', width: 100 })
-  price: number;
+  @Column({ type: 'text' })
+  grandTotal: number;
+
+  @Column({ type: 'text' })
+  deliveryDate: string;
 
   @Column({
     type: 'enum',
@@ -30,6 +33,12 @@ export class Order extends BaseEntity {
     default: Delivery.SHIPPING,
   })
   delivery: Delivery;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  notes: string;
 
   @OneToMany(
     _type => Item,

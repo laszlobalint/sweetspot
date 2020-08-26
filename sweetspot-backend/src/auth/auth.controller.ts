@@ -33,7 +33,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @UsePipes(ValidationPipe)
   register(@Body() authDto: AuthDto): Promise<User> {
     return this.authService.register(authDto);
