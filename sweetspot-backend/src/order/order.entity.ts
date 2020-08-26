@@ -21,7 +21,7 @@ export class Order extends BaseEntity {
   @Column({ type: 'text' })
   address: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'integer' })
   grandTotal: number;
 
   @Column({ type: 'text' })

@@ -24,7 +24,6 @@ export class ItemController {
   @UseGuards(JwtGuard)
   @UsePipes(ValidationPipe)
   createItem(@Body() createItemDto: ItemDto): Promise<Item> {
-    console.log(createItemDto.description);
     return this.itemService.createItem(createItemDto);
   }
 
