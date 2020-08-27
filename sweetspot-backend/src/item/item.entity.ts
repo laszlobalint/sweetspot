@@ -33,6 +33,9 @@ export class Item extends BaseEntity {
   @ManyToMany(
     _type => Ingredient,
     ingredient => ingredient.items,
+    {
+      cascade: false,
+    },
   )
   ingredients: Ingredient[];
 
