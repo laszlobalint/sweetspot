@@ -1,0 +1,33 @@
+@import '../../index.css';
+
+.Toggler {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Toggler span,
+.Toggler span::before,
+.Toggler span::after {
+  display: block;
+  background: var(--blog-blue);
+  height: 3px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.Toggler span::before,
+.Toggler span::after {
+  content: '';
+  position: absolute;
+}
+
+.Toggler span::before {
+  top: 7px;
+}
+
+.Toggler span::after {
+  bottom: 7px;
+}
