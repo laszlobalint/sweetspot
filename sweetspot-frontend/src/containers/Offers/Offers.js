@@ -5,24 +5,40 @@ import classes from './Offers.module.css';
 import axios from '../../client/axios-client';
 import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Button/Spinner/Spinner';
+import Item from '../../components/Item/Item';
 
 const Offers = (props) => {
-  const { onFetchOrderItems } = props;
+  const { items, loading, onFetchOrderItems } = props;
 
   useEffect(() => {
     onFetchOrderItems();
   }, [onFetchOrderItems]);
 
-  let orderItems = <Spinner />;
-  if (!props.loading) orderItems = <div>ORDER ITEMS</div>;
+  let fetchedItems = <Spinner />;
 
-  return <article className={classes.Offers}>{orderItems}</article>;
+  if (!loading && items.length > 0) {
+    fetchedItems = items.map((item) => (
+      <Item
+        key={item.id}
+        title={item.title}
+        description={item.description}
+        price={item.price}
+        glutenfree={item.glutenfree}
+        sugarfree={item.sugarfree}
+        allergens={item.allergens}
+        picture={item.picture}
+      />
+    ));
+  }
+
+  return <article className={classes.Offers}>{fetchedItems}</article>;
 };
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.ordersReducer.loading,
+    items: state.ordersReducer.items,
     error: state.ordersReducer.error,
+    loading: state.ordersReducer.loading,
   };
 };
 

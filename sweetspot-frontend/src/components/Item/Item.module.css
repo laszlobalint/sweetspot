@@ -1,0 +1,28 @@
+.Item {
+  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Item div {
+  padding: 0.5rem;
+}
+
+.Item:hover {
+  box-shadow: 0 0.8rem 1.5rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.Item img {
+  width: 350px;
+  height: 350px;
+}
+
+@media (max-width: 600px) {
+  .Item img {
+    width: 200px;
+    height: 200px;
+  }
+}
