@@ -3,7 +3,7 @@
   --bg-dark: #282a2b;
   --bg-grey: #f1f7f3;
   --bg-light: #ffffff;
-  --font-dark: #333333;
+  --font-dark: #3d3d3d;
   --font-grey: #747474;
   --font-light: #f1f7f3;
 }
@@ -22,6 +22,11 @@
 @font-face {
   font-family: PTSansItalic;
   src: url('./assets//fonts/PTSans-Italic.ttf');
+}
+
+@font-face {
+  font-family: GreatVibes;
+  src: url('./assets//fonts/GreatVibes-Regular.ttf');
 }
 
 * {

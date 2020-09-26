@@ -1,0 +1,51 @@
+@import '../../index.css';
+
+.Header {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--bg-grey);
+}
+
+.Header ul {
+  display: flex;
+}
+
+.Header li {
+  list-style-type: none;
+  margin: 1rem 1rem;
+}
+
+.Header li a {
+  color: var(--font-dark);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.Header img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: GreatVibes, PTSansItalic, Arial;
+  font-size: 2.5rem;
+  line-height: 5rem;
+}
+
+@media (max-width: 500px) {
+  .Header {
+    justify-content: space-around;
+  }
+
+  .Title {
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+}
