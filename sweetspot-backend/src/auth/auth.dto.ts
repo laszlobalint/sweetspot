@@ -3,7 +3,7 @@ import { IsString, MinLength, MaxLength, Matches } from 'class-validator';
 export class AuthDto {
   @IsString()
   @MinLength(4)
-  @MaxLength(20)
+  @MaxLength(30)
   username: string;
 
   @IsString()
