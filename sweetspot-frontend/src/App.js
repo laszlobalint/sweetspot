@@ -4,6 +4,7 @@ import { Redirect, Switch, withRouter } from 'react-router-dom';
 import Aux from './hoc/Auxiliary/Auxiliary';
 import Layout from './hoc/Layout/Layout';
 import Header from './components/Header/Header';
+import Offers from './containers/Offers/Offers';
 
 const App = () => {
   let routes = (
@@ -16,6 +17,7 @@ const App = () => {
     <Aux>
       <Layout>
         <Header />
+        <Offers />
         <Suspense fallback={<p>SweetSpot Rendelés betöltése...</p>}>{routes}</Suspense>
       </Layout>
     </Aux>
