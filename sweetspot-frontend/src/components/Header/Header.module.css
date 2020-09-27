@@ -22,6 +22,12 @@
   color: var(--font-dark);
   text-decoration: none;
   text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.Header li a:hover {
+  opacity: 0.5;
+  font-size: larger;
 }
 
 .Header img {
