@@ -1,0 +1,23 @@
+@import '../../index.css';
+
+.Footer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  color: var(--font-light);
+  height: 18rem;
+  background-color: var(--bg-dark);
+  background-image: url('../../assets/footer-bg.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Footer img {
+  height: 14rem;
+  width: 14rem;
+  padding: 2rem;
+  border-left: 0.1rem solid var(--font-light);
+  border-right: 0.1rem solid var(--font-light);
+}

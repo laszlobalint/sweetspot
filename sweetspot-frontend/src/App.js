@@ -5,6 +5,7 @@ import Aux from './hoc/Auxiliary/Auxiliary';
 import Layout from './hoc/Layout/Layout';
 import Header from './components/Header/Header';
 import Offers from './containers/Offers/Offers';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   let routes = (
@@ -19,6 +20,7 @@ const App = () => {
         <Header />
         <Offers />
         <Suspense fallback={<p>SweetSpot Rendelés betöltése...</p>}>{routes}</Suspense>
+        <Footer />
       </Layout>
     </Aux>
   );
