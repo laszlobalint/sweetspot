@@ -25,4 +25,8 @@
     width: 200px;
     height: 200px;
   }
+
+  .Item div {
+    padding: 0 0 0 0.2rem;
+  }
 }

@@ -6,9 +6,21 @@ import logo from '../../assets/logos/sweetspot.png';
 const Footer = (props) => {
   return (
     <footer className={classes.Footer}>
-      <div>KAPCSOLAT</div>
+      <ul>
+        <li>KAPCSOLAT</li>
+        <li>24000 Szabadka, Radnóti Miklós utca 37.</li>
+        <li>Telefon: +381 63 769 3041</li>
+        <li>E-mail: sweetspot.subotica@gmail.com</li>
+        <li>Blog: https://sweetspot.rs/</li>
+      </ul>
       <img src={logo} alt="SweetSpot logo" />
-      <div>MŰHELY</div>
+      <ul>
+        <li>MŰHELY</li>
+        <li>A műhely nem rendelkezik állandó nyitvatartási idővel.</li>
+        <li>Nincsen minden napos kínálat, csak időszakosak.</li>
+        <li>A süteményeket csak elvitelre lehet megvásárolni.</li>
+        <li>A rendeléseket kiszállítással vagy személyes átvétellel intézzük.</li>
+      </ul>
     </footer>
   );
 };

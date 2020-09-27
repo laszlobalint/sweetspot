@@ -2,7 +2,7 @@
   display: grid;
   height: 100%;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 150px auto 70px;
+  grid-template-rows: auto auto auto;
 }
 
 .Layout header {

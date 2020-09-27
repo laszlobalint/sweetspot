@@ -7,11 +7,18 @@
   justify-content: space-evenly;
   color: var(--font-light);
   height: 18rem;
+  margin-top: 2rem;
   background-color: var(--bg-dark);
   background-image: url('../../assets/footer-bg.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.Footer ul li {
+  text-align: center;
+  margin: 1rem 0 1rem 0;
+  list-style: none;
 }
 
 .Footer img {
@@ -20,4 +27,22 @@
   padding: 2rem;
   border-left: 0.1rem solid var(--font-light);
   border-right: 0.1rem solid var(--font-light);
+}
+
+@media (max-width: 500px) {
+  .Footer {
+    flex-wrap: wrap;
+    height: 24rem;
+  }
+
+  .Footer ul li {
+    margin: 0;
+    list-style: none;
+  }
+
+  .Footer img {
+    height: 10rem;
+    width: 10rem;
+    border: 0;
+  }
 }
