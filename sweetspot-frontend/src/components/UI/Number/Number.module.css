@@ -1,0 +1,63 @@
+.Quantity {
+  display: flex;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.Quantity input {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  margin: 0;
+  padding-left: 8%;
+  border: 1px solid #eee;
+}
+
+.Quantity input:focus {
+  outline: 0;
+}
+
+.QuantityNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.QuantityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid #eee;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #333;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.QuantityButton.QuantityUp {
+  width: 1rem;
+  border: 1px solid #eee;
+}
+
+.QuantityButton.QuantityDown {
+  width: 1rem;
+  border: 1px solid #eee;
+}

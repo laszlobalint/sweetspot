@@ -10,13 +10,13 @@
 
 @font-face {
   font-family: PTSansRegular;
-  src: url('./assets//fonts/PTSans-Bold.ttf');
-  font-weight: bold;
+  src: url('./assets//fonts/PTSans-Regular.ttf');
 }
 
 @font-face {
   font-family: PTSansBold;
-  src: url('./assets//fonts/PTSans-Regular.ttf');
+  src: url('./assets//fonts/PTSans-Bold.ttf');
+  font-weight: bold;
 }
 
 @font-face {

@@ -1,10 +1,10 @@
 @import '../../../index.css';
 
 .Button {
+  display: inline;
   background-color: transparent;
   border: 1px solid #000000;
-  padding: 10px;
-  margin: 10px;
+  padding: 0 0.5rem 0 0.5rem;
   color: #333333;
   outline: none;
   cursor: pointer;

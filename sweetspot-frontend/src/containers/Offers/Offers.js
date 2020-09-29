@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classes from './Offers.module.css';
 import axios from '../../client/axios-client';
 import * as actions from '../../store/actions';
-import Spinner from '../../components/UI/Button/Spinner/Spinner';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import Item from '../../components/Item/Item';
 
 const Offers = (props) => {

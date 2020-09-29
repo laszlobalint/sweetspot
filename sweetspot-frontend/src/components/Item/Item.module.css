@@ -1,32 +1,96 @@
+@import '../../index.css';
+
 .Item {
-  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.3);
   transition: 0.3s;
-  padding: 1.2rem;
+  padding: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.Item div {
-  padding: 0.5rem;
+  flex-basis: 25%;
 }
 
 .Item:hover {
-  box-shadow: 0 0.8rem 1.5rem 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.8rem 1.5rem 0 rgba(0, 0, 0, 0.3);
+}
+
+.Item div,
+.Item div > img {
+  padding: 0.4rem;
 }
 
 .Item img {
-  width: 350px;
-  height: 350px;
+  position: relative;
+  width: 330px;
+  height: 330px;
+  border-radius: 10%;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.Title {
+  font-family: PTSansBold;
+  font-size: 1.2rem;
+}
+
+.Navigation {
+  display: flex;
+}
+
+.Content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  font-size: 2rem;
+  width: 330px;
+  height: 330px;
+  color: var(--font-light);
+  text-align: center;
+  transition: all 400ms ease-out;
+  -webkit-transition: all 400ms ease-out;
+  -moz-transition: all 400ms ease-out;
+  -o-transition: all 400ms ease-out;
+  -ms-transition: all 400ms ease-out;
+}
+
+.Item .Content:hover {
+  opacity: 1;
+}
+
+.Item .Content .Text {
+  height: 0;
+  opacity: 1;
+  transition-delay: 0s;
+  transition-duration: 0.4s;
+}
+
+.Item .Content:hover .Text {
+  opacity: 1;
+  transform: translateY(20vh);
+  -webkit-transform: translateY(20vh);
+  -moz-transform: translateY(20vh);
+  -o-transform: translateY(20vh);
+  -ms-transform: translateY(20vh);
 }
 
 @media (max-width: 600px) {
-  .Item img {
-    width: 200px;
-    height: 200px;
+  .Item {
+    margin: 1%;
   }
 
-  .Item div {
-    padding: 0 0 0 0.2rem;
+  .Item img,
+  .Item .Content {
+    width: 200px;
+    height: 200px;
+    font-size: 1.5rem;
+  }
+
+  .Item .Content:hover .Text {
+    transform: translateY(10vh);
+    -webkit-transform: translateY(10vh);
+    -moz-transform: translateY(10vh);
+    -o-transform: translateY(10vh);
+    -ms-transform: translateY(10vh);
   }
 }
