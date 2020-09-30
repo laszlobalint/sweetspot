@@ -5,6 +5,7 @@ import facebookLogo from '../../assets/logos/facebook.png';
 import instagramLogo from '../../assets/logos/instagram.png';
 import twitterLogo from '../../assets/logos/twitter.png';
 import whatsappLogo from '../../assets/logos/whatsapp.png';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
   return (
@@ -36,15 +37,14 @@ const Header = (props) => {
           <li>
             <a href="/">Rendelés</a>
           </li>
-          <li>
-            <a href="/">Kínálat</a>
-          </li>
+          <li>{<NavLink to="/offers">Kínálat</NavLink>}</li>
           <li>
             <a href="https://sweetspot.rs/">Blog</a>
           </li>
           <li>
             <a href="/">Kapcsolat</a>
           </li>
+          <li>{!props.authenticated ? <NavLink to="/auth">Admin</NavLink> : <NavLink to="/logout">Kijelentkezés</NavLink>}</li>
         </ul>
       </div>
       <p className={classes.Title}>Édes Pihenő - Leszállópálya az Édesszájúak bolygóján</p>

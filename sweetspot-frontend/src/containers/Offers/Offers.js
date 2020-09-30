@@ -7,7 +7,7 @@ import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Item from '../../components/Item/Item';
 
-const Offers = (props) => {
+const Offers = React.memo((props) => {
   const { items, loading, onFetchOrderItems } = props;
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Offers = (props) => {
   }
 
   return <article className={classes.Offers}>{fetchedItems}</article>;
-};
+});
 
 const mapStateToProps = (state) => {
   return {

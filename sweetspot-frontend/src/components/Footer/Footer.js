@@ -17,7 +17,7 @@ const Footer = (props) => {
       <ul>
         <li>MŰHELY</li>
         <li>A műhely nem rendelkezik állandó nyitvatartási idővel.</li>
-        <li>Nincsen minden napos kínálat, csak időszakosak.</li>
+        <li>Nincsenek mindennapos kínálatok, csak időszakosak.</li>
         <li>A süteményeket csak elvitelre lehet megvásárolni.</li>
         <li>A rendeléseket kiszállítással vagy személyes átvétellel intézzük.</li>
       </ul>

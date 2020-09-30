@@ -9,14 +9,14 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.AUTHENTICATE:
+    case actionTypes.AUTHENTICATE_INITIALIZED:
       return updateObject(state, { error: null, loading: true });
     case actionTypes.AUTHENTICATE_SUCCESS:
       return updateObject(state, { token: action.token, error: null, loading: false });
     case actionTypes.AUTHENTICATE_FAILURE:
       return updateObject(state, { error: action.error, loading: false });
     case actionTypes.AUTHENTICATE_LOGOUT:
-      return updateObject(state, { token: null });
+      return updateObject(state, { token: null, error: null, loading: false });
     default:
       return state;
   }

@@ -8,6 +8,12 @@ export const authenticate = (username, password) => {
   };
 };
 
+export const authenticateInitialized = () => {
+  return {
+    type: actionTypes.AUTHENTICATE_INITIALIZED,
+  };
+};
+
 export const authenticateSuccess = (token) => {
   return {
     type: actionTypes.AUTHENTICATE_SUCCESS,
@@ -22,7 +28,7 @@ export const authenticateFailure = (error) => {
   };
 };
 
-export const logout = () => {
+export const authenticateLogout = () => {
   return {
     type: actionTypes.AUTHENTICATE_LOGOUT,
   };

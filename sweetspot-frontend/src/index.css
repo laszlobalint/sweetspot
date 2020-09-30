@@ -42,3 +42,9 @@ body {
   font: 15px/22px PTSansRegular, Arial, Helvetica, sans-serif;
   color: var(--font-grey);
 }
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+}

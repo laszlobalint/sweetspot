@@ -28,10 +28,9 @@ const Item = (props) => {
         <div className={classes.Title}>{props.title}</div>
         <div>{props.description}</div>
         <div>{numberWithDots(props.price)} RSD</div>
-        <div>{props.glutenfree ? 'Gluténment' : 'Glutént tartalmaz'}</div>
+        <div>{props.glutenfree ? 'Gluténmentes' : 'Glutént tartalmaz'}</div>
         <div>{props.sugarfree ? 'Cukormentes' : 'Cukrot tartalmaz'}</div>
-        <div>{props.allergens ? 'Allergéneket tartalmaz' : 'Allergének nélküli'}</div>
-
+        <div>{props.allergens ? 'Allergéneket tartalmaz' : 'Allergénmentes'}</div>
         <div className={classes.Navigation}>
           <Button>Kosárba</Button>
           <Number onClickedMore={onIncreasedHandler} onClickedLess={onDecreasedHandler} value={quantity} onChanged={() => {}} />

@@ -21,3 +21,9 @@
   color: var(--bg-grey);
   cursor: not-allowed;
 }
+
+@media (max-width: 600px) {
+  .Button {
+    padding: 0 0.2rem 0 0.2rem;
+  }
+}
