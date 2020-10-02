@@ -40,7 +40,7 @@ const App = (props) => {
   return (
     <Aux>
       <Layout>
-        <Header authenticated={props.authenticated} />
+        <Header authenticated={props.authenticated} grandTotal={props.grandTotal} />
         <Suspense fallback={fallback}>{routes}</Suspense>
         <Footer />
       </Layout>
@@ -51,6 +51,7 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     authenticated: state.authReducer.token,
+    grandTotal: state.ordersReducer.grandTotal,
   };
 };
 

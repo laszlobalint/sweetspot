@@ -3,6 +3,8 @@ import { updateObject } from '../../shared/utility';
 
 const initialState = {
   items: [],
+  basket: [],
+  grandTotal: 0,
   error: null,
   loading: true,
 };
@@ -15,6 +17,11 @@ export const ordersReducer = (state = initialState, action) => {
       return updateObject(state, { items: action.items, error: null, loading: false });
     case actionTypes.FETCH_ORDER_ITEMS_FAILURE:
       return updateObject(state, { error: action.error, loading: false });
+    case actionTypes.ADD_ORDER_ITEMS:
+      return updateObject(state, {
+        grandTotal: state.grandTotal + action.price * action.quantity,
+        basket: [...state.basket, { id: action.id, quantity: action.quantity }],
+      });
     default:
       return state;
   }

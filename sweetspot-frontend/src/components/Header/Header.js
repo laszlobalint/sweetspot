@@ -1,11 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import classes from './Header.module.css';
+import { numberWithDots } from '../../shared/utility';
 import facebookLogo from '../../assets/logos/facebook.png';
 import instagramLogo from '../../assets/logos/instagram.png';
 import twitterLogo from '../../assets/logos/twitter.png';
 import whatsappLogo from '../../assets/logos/whatsapp.png';
-import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
   return (
@@ -46,6 +47,7 @@ const Header = (props) => {
           </li>
           <li>{!props.authenticated ? <NavLink to="/auth">Admin</NavLink> : <NavLink to="/logout">Kijelentkezés</NavLink>}</li>
         </ul>
+        <span className={classes.GrandTotal}>Kosár: {numberWithDots(props.grandTotal)} RSD</span>
       </div>
       <p className={classes.Title}>Édes Pihenő - Leszállópálya az Édesszájúak bolygóján</p>
     </header>

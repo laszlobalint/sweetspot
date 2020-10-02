@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import classes from './Layout.module.css';
 import Aux from '../Auxiliary/Auxiliary';
@@ -12,8 +11,4 @@ const Layout = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-export default connect(mapStateToProps)(Layout);
+export default Layout;

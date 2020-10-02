@@ -43,6 +43,12 @@
   margin: 2rem;
 }
 
+.GrandTotal {
+  font-family: PTSansBold;
+  font-size: larger;
+  text-shadow: 0.2rem 0.2rem 0.1rem rgba(150, 150, 150, 0.7);
+}
+
 @media (max-width: 600px) {
   .Header {
     justify-content: space-around;

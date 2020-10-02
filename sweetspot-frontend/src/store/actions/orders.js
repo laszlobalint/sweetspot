@@ -25,3 +25,19 @@ export const fetchOrderItemsFailure = (error) => {
     error,
   };
 };
+
+export const addOrderItems = (id, price, quantity) => {
+  return {
+    type: actionTypes.ADD_ORDER_ITEMS,
+    id,
+    price,
+    quantity,
+  };
+};
+
+export const removeOrderItems = (id) => {
+  return {
+    type: actionTypes.REMOVE_ORDER_ITEMS,
+    id,
+  };
+};
