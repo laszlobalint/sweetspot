@@ -13,7 +13,7 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async createItem(createItemDto: ItemDto): Promise<Item> {
-    const { title, description, picture, price, glutenfree, sugarfree, allergens, ingredients } = createItemDto;
+    const { title, description, picture, price, glutenfree, sugarfree, lactosefree, ingredients } = createItemDto;
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
     if (ingredientsForItem.length === ingredients.length) {
       const item = new Item({
@@ -23,7 +23,7 @@ export class ItemRepository extends Repository<Item> {
         price,
         glutenfree,
         sugarfree,
-        allergens,
+        lactosefree,
         ingredients: ingredientsForItem,
         orders: [],
       });
@@ -34,7 +34,7 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async updateItem(item: Item, updateItemDto: ItemDto): Promise<Item> {
-    const { title, description, picture, price, glutenfree, sugarfree, allergens, ingredients } = updateItemDto;
+    const { title, description, picture, price, glutenfree, sugarfree, lactosefree, ingredients } = updateItemDto;
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
     if (ingredientsForItem.length === ingredients.length) {
       item.title = title;
@@ -43,7 +43,7 @@ export class ItemRepository extends Repository<Item> {
       item.price = price;
       item.glutenfree = glutenfree;
       item.sugarfree = sugarfree;
-      item.allergens = allergens;
+      item.lactosefree = lactosefree;
       item.ingredients = ingredientsForItem;
       return item.save();
     } else {

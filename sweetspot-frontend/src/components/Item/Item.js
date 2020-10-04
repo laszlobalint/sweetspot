@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Item.module.css';
+import gluten from '../../assets/ingredients/gluten.png';
+import glutenfree from '../../assets/ingredients/glutenfree.png';
+import sugar from '../../assets/ingredients/sugar.png';
+import sugarfree from '../../assets/ingredients/sugarfree.png';
+import lactose from '../../assets/ingredients/lactose.png';
+import lactosefree from '../../assets/ingredients/lactosefree.png';
 import * as actions from '../../store/actions';
 import { numberWithDots } from '../../shared/utility';
 import Button from '../UI/Button/Button';
@@ -25,18 +31,33 @@ const Item = (props) => {
   return (
     <div className={classes.Item}>
       <div>
-        <img src={props.picture} alt={props.title} />
+        <img className={classes.Image} src={props.picture} alt={props.title} />
         <div className={classes.Content}>
           <div className={classes.Text}>{props.title}</div>
         </div>
+        <div className={classes.ImagePrice}>{numberWithDots(props.price)} RSD</div>
       </div>
       <div>
         <div className={classes.Title}>{props.title}</div>
-        <div>{props.description}</div>
-        <div>{numberWithDots(props.price)} RSD</div>
-        <div>{props.glutenfree ? 'Gluténmentes' : 'Glutént tartalmaz'}</div>
-        <div>{props.sugarfree ? 'Cukormentes' : 'Cukrot tartalmaz'}</div>
-        <div>{props.allergens ? 'Allergéneket tartalmaz' : 'Allergénmentes'}</div>
+        <div className={classes.Description}>{props.description}</div>
+        <div className={classes.Price}>{numberWithDots(props.price)} RSD</div>
+        <div className={classes.Icons}>
+          {props.glutenfree ? (
+            <img src={glutenfree} alt="Gluténmentes" title="Gluténmentes" />
+          ) : (
+            <img src={gluten} alt="Glutént tartalmaz" title="Glutént tartalmaz" />
+          )}
+          {props.sugarfree ? (
+            <img src={sugarfree} alt="Cukormentes" title="Cukormentes" />
+          ) : (
+            <img src={sugar} alt="Cukrot tartalmaz" title="Cukrot tartalmaz" />
+          )}
+          {props.lactosefree ? (
+            <img src={lactosefree} alt="Laktózmentes" title="Laktózmentes" />
+          ) : (
+            <img src={lactose} alt="Laktózt tartalmaz" title="Laktózt tartalmaz" />
+          )}
+        </div>
         <div className={classes.Navigation}>
           <Button onClick={onAddedOrderItemsHandler}>Kosárba</Button>
           <Number onClickedMore={onIncreasedHandler} onClickedLess={onDecreasedHandler} value={quantity} onChanged={() => {}} />

@@ -26,7 +26,7 @@ const Offers = React.memo((props) => {
         price={item.price}
         glutenfree={item.glutenfree}
         sugarfree={item.sugarfree}
-        allergens={item.allergens}
+        lactosefree={item.lactosefree}
         picture={item.picture}
       />
     ));

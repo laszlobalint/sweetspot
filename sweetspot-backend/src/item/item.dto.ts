@@ -27,7 +27,7 @@ export class ItemDto {
   sugarfree: boolean;
 
   @IsBoolean()
-  allergens: boolean;
+  lactosefree: boolean;
 
   @IsArray()
   ingredients: number[];

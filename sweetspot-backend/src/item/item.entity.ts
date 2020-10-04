@@ -28,7 +28,7 @@ export class Item extends BaseEntity {
   sugarfree: boolean;
 
   @Column({ type: 'boolean' })
-  allergens: boolean;
+  lactosefree: boolean;
 
   @ManyToMany(
     _type => Ingredient,
