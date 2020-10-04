@@ -1,18 +1,20 @@
 @import '../../index.css';
 
 .Item {
-  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.3);
-  border-radius: 3%;
-  transition: 0.3s;
-  padding: 1.3rem;
   display: flex;
+  flex-basis: 25%;
   align-items: center;
   justify-content: center;
-  flex-basis: 25%;
+  margin: 0.3rem 1rem 0.3rem 1rem;
+  padding: 1.3rem;
+  border-radius: 3%;
+  box-shadow: 0 0.3rem 0.7rem 0 rgba(0, 0, 0, 0.3);
+  background-color: var(--bg-light);
+  transition: 0.3s;
 }
 
 .Item:hover {
-  box-shadow: 0 0.8rem 1.5rem 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.8rem 1.5rem 0 rgba(0, 0, 0, 0.5);
 }
 
 .Item div,
@@ -24,9 +26,9 @@
   position: relative;
   width: 330px;
   height: 330px;
-  border-radius: 10%;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
+  border-radius: 10%;
 }
 
 .Item div:hover > img {
@@ -45,13 +47,12 @@
 
 .Content {
   position: absolute;
+  width: 330px;
+  height: 330px;
   top: 0;
   left: 0;
   opacity: 0;
-  font-size: 2rem;
-  font-family: PTSansBold;
-  width: 330px;
-  height: 330px;
+  font: bold 2.5rem GreatVibes;
   color: var(--font-light);
   text-align: center;
   transition: all 400ms ease-out;

@@ -1,26 +1,26 @@
 .Spinner {
   display: inline-block;
   position: relative;
-  margin: 0 auto;
   width: 80px;
   height: 80px;
+  margin: 0 auto;
   transform: rotate(45deg);
   transform-origin: 40px 40px;
 }
 .Spinner div {
-  top: 32px;
-  left: 32px;
   position: absolute;
   width: 32px;
   height: 32px;
+  top: 32px;
+  left: 32px;
   background: #cef;
   animation: Spinner 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .Spinner div:after,
 .Spinner div:before {
-  content: ' ';
-  position: absolute;
   display: block;
+  position: absolute;
+  content: ' ';
   width: 32px;
   height: 32px;
   background: #cef;

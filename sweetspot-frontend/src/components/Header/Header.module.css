@@ -1,11 +1,13 @@
 @import '../../index.css';
 
 .Header {
-  width: 100%;
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
+  width: 100%;
+  z-index: 999;
   background-color: var(--bg-grey);
 }
 
@@ -26,8 +28,8 @@
 }
 
 .Header li a:hover {
-  opacity: 0.5;
   font-size: larger;
+  opacity: 0.5;
 }
 
 .Header img {
@@ -36,11 +38,12 @@
 }
 
 .Title {
-  text-align: center;
   font-family: GreatVibes, PTSansItalic, Arial;
   font-size: 2.5rem;
-  line-height: 5rem;
-  margin: 2rem;
+  text-align: center;
+  line-height: 4rem;
+  color: var(--font-light);
+  margin-top: 4rem;
 }
 
 .GrandTotal {
@@ -50,13 +53,22 @@
 }
 
 @media (max-width: 600px) {
-  .Header {
-    justify-content: space-around;
+  .Header .Logos {
+    display: none;
+  }
+
+  .Header li {
+    list-style-type: none;
+    margin: 0.5rem;
+  }
+
+  .GrandTotal {
+    margin-bottom: 0.5rem;
   }
 
   .Title {
     font-size: 1.5rem;
     line-height: 3rem;
-    margin: 1rem;
+    margin-top: 5rem;
   }
 }

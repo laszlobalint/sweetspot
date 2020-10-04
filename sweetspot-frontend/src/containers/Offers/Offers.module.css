@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 0 5% 10% 5%;
+  margin: 0 5% 3% 5%;
 }
 
 @media (max-width: 600px) {

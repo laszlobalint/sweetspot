@@ -1,5 +1,6 @@
 :root {
   --blog-blue: #499faa;
+  --bg-brown: #ab9e8e;
   --bg-dark: #282a2b;
   --bg-grey: #f1f7f3;
   --bg-light: #ffffff;
@@ -30,17 +31,18 @@
 }
 
 * {
+  box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   position: relative;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 body {
   font: 15px/22px PTSansRegular, Arial, Helvetica, sans-serif;
   color: var(--font-grey);
+  background-image: linear-gradient(var(--bg-brown), var(--bg-grey));
 }
 
 @media (max-width: 600px) {

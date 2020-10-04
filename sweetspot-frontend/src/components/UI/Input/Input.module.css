@@ -5,20 +5,21 @@
 }
 
 .Label {
-  font-weight: bold;
   display: block;
+  font-weight: bold;
   margin-bottom: 0.6rem;
 }
 
 .InputElement {
-  width: 100%;
   display: block;
-  outline: none;
-  border: 1px solid #cccccc;
-  background-color: #ffffff;
+  width: 100%;
   font: inherit;
+  outline: none;
+  margin-bottom: 0.3rem;
   padding: 0.5rem 0.7rem;
+  border: 1px solid #cccccc;
   box-sizing: border-box;
+  background-color: #ffffff;
 }
 
 .InputElement:focus {

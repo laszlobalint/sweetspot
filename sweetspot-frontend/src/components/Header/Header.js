@@ -12,7 +12,7 @@ const Header = (props) => {
   return (
     <header>
       <div className={classes.Header}>
-        <ul>
+        <ul className={classes.Logos}>
           <li>
             <a href="https://www.facebook.com/sweetspot.lala/" target="_blank" rel="noopener noreferrer">
               {<img src={facebookLogo} alt="Facebook" />}
@@ -34,7 +34,7 @@ const Header = (props) => {
             </a>
           </li>
         </ul>
-        <ul>
+        <ul className={classes.Navigation}>
           <li>
             <a href="/">Rendelés</a>
           </li>

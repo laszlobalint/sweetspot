@@ -1,12 +1,16 @@
+@import '../../index.css';
+
 .Auth {
   font-size: larger;
   width: 25rem;
-  margin: 1.5rem auto;
-  padding: 0.8rem;
   text-align: center;
-  box-shadow: 0 2px 3px #cccccc;
-  box-sizing: border-box;
+  margin: 1.5rem auto;
+  padding: 1rem;
   border: 1px solid #eeeeee;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px #cccccc;
+  background-color: var(--bg-light);
 }
 
 .Error {
@@ -16,6 +20,6 @@
 @media (max-width: 600px) {
   .Auth {
     margin: 0.2rem;
-    width: 90%;
+    width: 100%;
   }
 }

@@ -15,8 +15,8 @@ input[type='number'] {
 .Quantity input {
   width: 3rem;
   height: 3rem;
-  padding: 0;
   margin: 0;
+  padding: 0;
   padding-left: 8%;
   border: 1px solid #eee;
 }
@@ -30,34 +30,30 @@ input[type='number'] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 .QuantityButton {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #333333;
   cursor: pointer;
-  border-left: 1px solid #eee;
-  padding: 0 !important;
   margin: 0 !important;
-  color: #333;
+  padding: 0 !important;
+  border-left: 1px solid #eee;
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
-  user-select: none;
 }
 
-.QuantityButton.QuantityUp {
-  width: 1rem;
-  border: 1px solid #eee;
-}
-
+.QuantityButton.QuantityUp,
 .QuantityButton.QuantityDown {
   width: 1rem;
-  border: 1px solid #eee;
+  border: 1px solid #eeeeee;
 }

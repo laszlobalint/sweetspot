@@ -2,14 +2,15 @@
 
 .Button {
   display: inline;
-  background-color: transparent;
-  border: 1px solid #000000;
-  padding: 0 0.5rem 0 0.5rem;
   color: #333333;
-  outline: none;
-  cursor: pointer;
   font: inherit;
   font-weight: bold;
+  cursor: pointer;
+  padding: 0 0.5rem 0 0.5rem;
+  outline: none;
+  border: 1px solid #000000;
+  border-radius: 1rem;
+  background-color: transparent;
   text-transform: uppercase;
 }
 
