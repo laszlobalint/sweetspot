@@ -5,11 +5,9 @@
   align-items: center;
   justify-content: center;
   width: 45rem;
-  margin: 0.5rem auto;
   padding: 0.5rem;
   list-style: none;
   border: 1px solid #eeeeee;
-  border-radius: 1rem;
   box-sizing: border-box;
   box-shadow: 0 2px 3px var(--bg-dark);
   background-color: var(--bg-light);
