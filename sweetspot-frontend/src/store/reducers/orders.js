@@ -18,10 +18,20 @@ export const ordersReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ORDER_ITEMS_FAILURE:
       return updateObject(state, { error: action.error, loading: false });
     case actionTypes.ADD_ORDER_ITEMS:
+      let item = state.basket.find((item) => action.id === item.id);
+      if (item) {
+        item.quantity += action.quantity;
+        return updateObject(state, {
+          grandTotal: state.grandTotal + action.price * action.quantity,
+          basket: [...state.basket.filter((i) => i.id !== item.id), item],
+        });
+      } else {
+      }
       return updateObject(state, {
         grandTotal: state.grandTotal + action.price * action.quantity,
         basket: [...state.basket, { id: action.id, quantity: action.quantity }],
       });
+
     default:
       return state;
   }

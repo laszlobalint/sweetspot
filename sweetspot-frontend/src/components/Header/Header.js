@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './Header.module.css';
 import { numberWithDots } from '../../shared/utility';
+import basketLogo from '../../assets/logos/basket.png';
 import facebookLogo from '../../assets/logos/facebook.png';
 import instagramLogo from '../../assets/logos/instagram.png';
 import twitterLogo from '../../assets/logos/twitter.png';
@@ -35,9 +36,7 @@ const Header = (props) => {
           </li>
         </ul>
         <ul className={classes.Navigation}>
-          <li>
-            <a href="/">Rendelés</a>
-          </li>
+          <li>{<NavLink to="/order">Rendelés</NavLink>}</li>
           <li>{<NavLink to="/offers">Kínálat</NavLink>}</li>
           <li>
             <a href="https://sweetspot.rs/">Blog</a>
@@ -47,7 +46,9 @@ const Header = (props) => {
           </li>
           <li>{!props.authenticated ? <NavLink to="/auth">Admin</NavLink> : <NavLink to="/logout">Kijelentkezés</NavLink>}</li>
         </ul>
-        <span className={classes.GrandTotal}>Kosár: {numberWithDots(props.grandTotal)} RSD</span>
+        <span className={classes.GrandTotal}>
+          {<img src={basketLogo} alt="Kosár" />} Kosár: {numberWithDots(props.grandTotal)} RSD
+        </span>
       </div>
       <p className={classes.Title}>Édes Pihenő - Leszállópálya az Édesszájúak bolygóján</p>
     </header>

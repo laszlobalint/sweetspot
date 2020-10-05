@@ -1,11 +1,13 @@
 @import '../../index.css';
 
-.Auth {
-  font-size: larger;
-  width: 28rem;
-  text-align: center;
-  margin: 1.5rem auto;
-  padding: 1rem;
+.Summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45rem;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  list-style: none;
   border: 1px solid #eeeeee;
   border-radius: 1rem;
   box-sizing: border-box;
@@ -13,12 +15,13 @@
   background-color: var(--bg-light);
 }
 
-.Error {
-  color: #cc0033;
+.Summary li {
+  flex-basis: 33%;
+  text-align: center;
 }
 
 @media (max-width: 600px) {
-  .Auth {
+  .Summary {
     margin: 0.2rem;
     width: 100%;
   }
