@@ -1,2 +1,18 @@
 .Order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.Order h2 {
+  margin: 1rem;
+}
+
+@media (max-width: 600px) {
+  .Order h2 {
+    font-size: medium;
+    margin: 0.5rem;
+  }
 }

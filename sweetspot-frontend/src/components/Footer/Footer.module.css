@@ -29,10 +29,12 @@
   border-right: 0.1rem solid var(--font-light);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .Footer {
-    flex-wrap: wrap;
-    height: 24rem;
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem 0 0.5rem 0;
+    font-size: smaller;
   }
 
   .Footer ul li {
@@ -41,8 +43,8 @@
   }
 
   .Footer img {
-    width: 8rem;
-    height: 8rem;
+    width: 6rem;
+    height: 6rem;
     padding: 0;
     border: 0;
   }

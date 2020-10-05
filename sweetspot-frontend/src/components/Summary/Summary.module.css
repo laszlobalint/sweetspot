@@ -18,9 +18,30 @@
   text-align: center;
 }
 
+.Summary .MinContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.Summary .DeleteIcon {
+  height: 1.5rem;
+  margin-left: 3rem;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .Summary {
-    margin: 0.2rem;
+    padding: 0.1rem 0 0.1rem 0;
     width: 100%;
+  }
+
+  .Summary .MinContainer {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Summary .DeleteIcon {
+    margin-left: 0.5rem;
   }
 }

@@ -31,7 +31,13 @@ export const ordersReducer = (state = initialState, action) => {
         grandTotal: state.grandTotal + action.price * action.quantity,
         basket: [...state.basket, { id: action.id, quantity: action.quantity }],
       });
-
+    case actionTypes.REMOVE_ORDER_ITEMS:
+      let price = state.items.find((item) => action.id === item.id).price;
+      let quantity = state.basket.find((item) => action.id === item.id).quantity;
+      return updateObject(state, {
+        grandTotal: state.grandTotal - price * quantity,
+        basket: state.basket.filter((item) => item.id !== action.id),
+      });
     default:
       return state;
   }

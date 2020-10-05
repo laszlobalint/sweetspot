@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import classes from './Summary.module.css';
+import deleteIcon from '../../assets/ingredients/delete.png';
 import { numberWithDots } from '../../shared/utility';
 
 const Summary = (props) => {
-  const { items, basket } = props;
+  const { items, basket, grandTotal } = props;
 
   const basketItems = [];
   basket.forEach((element) => {
@@ -26,9 +27,27 @@ const Summary = (props) => {
           </details>
         </li>
         <li>{numberWithDots(item.price)} RSD</li>
-        <li>{item.quantity} darab</li>
+        <li className={classes.MinContainer}>
+          <p>{item.quantity} darab</p>
+          <img className={classes.DeleteIcon} src={deleteIcon} alt="Törlés" onClick={() => props.onClickedDelete(item.id)} />
+        </li>
       </ul>
     ));
+
+    let grandTotalItem = (
+      <ul key={grandTotal} className={classes.Summary}>
+        <li>
+          <b>ÖSSZESEN:</b>
+        </li>
+        <li></li>
+        <li className={classes.MinContainer}>
+          <b>{numberWithDots(grandTotal)}</b>
+          <b>&nbsp;RSD</b>
+        </li>
+      </ul>
+    );
+
+    summary = [summary, grandTotalItem];
   }
 
   return summary;
@@ -38,6 +57,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.ordersReducer.items,
     basket: state.ordersReducer.basket,
+    grandTotal: state.ordersReducer.grandTotal,
   };
 };
 
