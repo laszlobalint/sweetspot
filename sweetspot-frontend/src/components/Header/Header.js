@@ -40,11 +40,21 @@ const Header = (props) => (
             Rendelés
           </NavigationLink>
         }
-        {<NavigationLink link="/offers">Kínálat</NavigationLink>}
-        <NavigationLink link="https://sweetspot.rs/">Blog</NavigationLink>
-        <NavigationLink link="/">Kapcsolat</NavigationLink>
+        {
+          <NavigationLink link="/offers" exact>
+            Kínálat
+          </NavigationLink>
+        }
+        <NavigationLink link="https://sweetspot.rs/" exact>
+          Blog
+        </NavigationLink>
+        <NavigationLink link="/contact" exact>
+          Kapcsolat
+        </NavigationLink>
         {!props.authenticated ? (
-          <NavigationLink link="/auth">Admin</NavigationLink>
+          <NavigationLink link="/auth" exact>
+            Admin
+          </NavigationLink>
         ) : (
           <NavigationLink link="/logout">Kijelentkezés</NavigationLink>
         )}
