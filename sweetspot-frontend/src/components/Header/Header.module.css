@@ -11,25 +11,17 @@
   background-color: var(--bg-grey);
 }
 
-.Header ul {
+.Header .Logos {
   display: flex;
-}
-
-.Header li {
+  align-items: center;
+  justify-content: space-between;
   list-style-type: none;
-  margin: 1rem 1rem;
+  width: 7rem;
+  margin: 0.5rem;
 }
 
-.Header li a {
-  color: var(--font-dark);
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: 0.3s;
-}
-
-.Header li a:hover {
-  font-size: larger;
-  opacity: 0.5;
+.Header .Navigation {
+  display: flex;
 }
 
 .Header img {
@@ -55,11 +47,6 @@
 @media (max-width: 600px) {
   .Header .Logos {
     display: none;
-  }
-
-  .Header li {
-    list-style-type: none;
-    margin: 0.5rem;
   }
 
   .GrandTotal {

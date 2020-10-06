@@ -10,6 +10,13 @@
   margin: 1rem;
 }
 
+.Order .Buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 15rem;
+  margin-top: 1rem;
+}
+
 @media (max-width: 600px) {
   .Order h2 {
     font-size: medium;
