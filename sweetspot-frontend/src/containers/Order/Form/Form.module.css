@@ -1,0 +1,48 @@
+@import '../../../index.css';
+
+.Form {
+  height: fit-content;
+  font-size: larger;
+  text-align: center;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border: 1px solid #eeeeee;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px var(--bg-dark);
+  background-color: var(--bg-light);
+}
+
+.Form > form {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.Form > form > *:nth-child(2n-1) {
+  justify-self: center;
+  text-align: center;
+}
+
+.Form > form > *:nth-child(2n-1):nth-last-of-type(2) {
+  grid-column: span 2;
+}
+
+.Form > form > *:nth-child(2n):nth-last-of-type(1) {
+  grid-column: span 2;
+}
+
+.Form > form > *:nth-child(2n):nth-last-of-type(1) > button {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.Error {
+  color: #cc0033;
+}
+
+@media (max-width: 600px) {
+  .Form {
+    margin: 0.2rem;
+    width: 100%;
+  }
+}

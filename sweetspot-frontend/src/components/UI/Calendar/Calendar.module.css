@@ -1,0 +1,12 @@
+.Calendar {
+  width: 100%;
+  padding: 0.8rem;
+  letter-spacing: 2px;
+}
+
+.Label {
+  display: block;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 0.6rem;
+}

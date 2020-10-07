@@ -1,6 +1,7 @@
 .Input {
   width: 100%;
   padding: 0.8rem;
+  letter-spacing: 2px;
   box-sizing: border-box;
 }
 
@@ -30,6 +31,13 @@
 .Invalid {
   border: 1px solid#cc0033;
   background-color: #e4caca;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 15rem;
+  margin-top: 1rem;
 }
 
 .ValidationError {

@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import './index.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import App from './App';
 import { authReducer, ordersReducer } from './store/reducers';
 import { watchAuth, watchOrders } from './store/sagas';
