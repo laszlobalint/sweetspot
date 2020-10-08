@@ -35,18 +35,18 @@ export class EmailService {
               cellpadding="0"
               cellspacing="0"
               style="
-                border-spacing: 0;
-                font-family: gt-eesti, ArialMT, Helvetica, Arial, sans-serif;
-                margin: 0 auto;
-                padding: 24px;
-                width: 100%;
-                max-width: 800px;
-              "
+                  border-spacing: 0;
+                  font-family: gt-eesti, ArialMT, Helvetica, Arial, sans-serif;
+                  margin: 0 auto;
+                  padding: 24px;
+                  width: 100%;
+                  max-width: 1100px;
+                "
             >
               <tbody>
                 <tr>
                   <td>
-                    <table style="margin-bottom: 40px; width: 100%" width="100%">
+                    <table style="margin-bottom: 20px; width: 100%">
                       <tbody>
                         <tr>
                           <td>
@@ -55,8 +55,8 @@ export class EmailService {
                                 src="https://sweetspot.rs/sites/all/themes/ss/images/logo.png"
                                 style="display: block; margin: auto"
                                 alt="SweetSpot"
-                                width="200"
-                                height="200"
+                                width="150"
+                                height="150"
                               />
                             </a>
                           </td>
@@ -67,7 +67,7 @@ export class EmailService {
                 </tr>
                 <tr>
                   <td style="text-align: justify; word-break: break-word">
-                    <table style="margin-bottom: 20px; width: 100%" width="100%">
+                    <table style="margin-bottom: 20px; width: 100%">
                       <tbody>
                         <tr>
                           <td>
@@ -98,35 +98,55 @@ export class EmailService {
                                 <tbody>
                                   <tr
                                     style="
-                                      background-color: #00aff5;
-                                      color: #fff;
-                                      text-align: center;
-                                      border-radius: 48px;
-                                      padding: 16px 24px;
-                                      border-color: transparent;
-                                      font-weight: bold;
-                                      font-size: 16px;
-                                      line-height: 1;
-                                    "
+                                        background-color: #00aff5;
+                                        color: #fff;
+                                        text-align: center;
+                                        border-radius: 48px;
+                                        padding: 16px 24px;
+                                        border-color: transparent;
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        line-height: 1.5;
+                                      "
                                   >
-                                    <th>Név</th>
-                                    <th>Telefon</th>
-                                    <th>E-mail</th>
-                                    <th>Cím</th>
-                                    <th>Végösszeg</th>
-                                    <th>Kézbesítés</th>
-                                    <th>Átvétel</th>
-                                    <th>Megjegyzés</th>
+                                    <th width="200px">Név</th>
+                                    <th width="120px">Telefon</th>
+                                    <th width="150px">E-mail</th>
+                                    <th width="150px">Végösszeg</th>
+                                    <th width="150px">Dátum</th>
+                                    <th width="150px">Átvétel</th>
                                   </tr>
-                                  <tr>
+                                  <tr
+                                    style="
+                                        width: 400px;
+                                        line-height: 1.5;"
+                                  >
                                     <td>${name}</td>
                                     <td>${phone}</td>
                                     <td>${email}</td>
-                                    <td>${address}</td>
-                                    <td>${grandTotal}</td>
+                                    <td>${grandTotal} RSD</td>
                                     <td>${deliveryDate}</td>
                                     <td>${delivery}</td>
-                                    <td>${notes}</td>
+                                  </tr>
+                                  <tr
+                                    style="
+                                        background-color: #00aff5;
+                                        color: #fff;
+                                        text-align: center;
+                                        border-radius: 48px;
+                                        padding: 16px 24px;
+                                        border-color: transparent;
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        line-height: 1.5;
+                                      "
+                                  >
+                                    <th colspan="3">Lakcím</th>
+                                    <th colspan="3">Megjegyzés</th>
+                                  </tr>
+                                  <tr style="line-height: 1.5;">
+                                    <td colspan="3">${address}</td>
+                                    <td colspan="3">${notes}</td>
                                   </tr>
                                 </tbody>
                               </table>
