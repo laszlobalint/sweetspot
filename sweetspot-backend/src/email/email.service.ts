@@ -125,7 +125,7 @@ export class EmailService {
                                     <td>${phone}</td>
                                     <td>${email}</td>
                                     <td>${grandTotal} RSD</td>
-                                    <td>${deliveryDate}</td>
+                                    <td>${this.formatDate(deliveryDate)}</td>
                                     <td>${delivery}</td>
                                   </tr>
                                   <tr
@@ -218,4 +218,9 @@ export class EmailService {
   </table>
   `;
   }
+
+  formatDate = (dateString: string): string => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('hu-HU', options);
+  };
 }
