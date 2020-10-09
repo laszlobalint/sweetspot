@@ -12,6 +12,7 @@ import { updateObject, checkValidity } from '../../../shared/utility';
 const Forms = (props) => {
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);
+  const [isValid, setIsValid] = useState(false);
 
   const checkoutCancelledHandler = () => {
     props.history.push('/order');
@@ -46,7 +47,13 @@ const Forms = (props) => {
         touched: true,
       }),
     });
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedControls) formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+    formIsValid = date && formIsValid;
+
     setControls(updatedControls);
+    setIsValid(formIsValid);
   };
 
   const createItemsFromBasket = () => {
@@ -83,7 +90,7 @@ const Forms = (props) => {
       <Button key="backButton" onClick={checkoutCancelledHandler}>
         Vissza
       </Button>
-      <Button key="continueButton" onClick={checkoutContinuedHandler}>
+      <Button key="continueButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
         Folytatás
       </Button>
     </div>,

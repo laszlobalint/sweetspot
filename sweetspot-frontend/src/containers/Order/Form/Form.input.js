@@ -44,7 +44,7 @@ export const formControls = {
       minLength: 3,
       maxLength: 40,
     },
-    valid: true,
+    valid: false,
     touched: false,
   },
   street: {
@@ -100,16 +100,17 @@ export const formControls = {
     elementType: 'select',
     elementConfig: {
       options: [
+        { value: '', displayValue: '' },
         { value: 'SHIPPING', displayValue: 'Házhozszállítás' },
         { value: 'PICK_UP', displayValue: 'Személyes átvétel' },
       ],
     },
-    value: 'SHIPPING',
-    label: 'Átvétel módja',
+    value: '',
+    label: 'Átvétel (kötelező)',
     validation: {
-      required: false,
+      required: true,
     },
-    valid: true,
+    valid: false,
     touched: false,
   },
   notes: {
