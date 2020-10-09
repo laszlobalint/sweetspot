@@ -24,5 +24,7 @@ export const checkValidity = (value, rules) => {
     isValid = pattern.test(value) && isValid;
   }
 
+  if (rules.isPostalcode) isValid = parseInt(value) >= 11000 && parseInt(value) <= 38999 && isValid;
+
   return isValid;
 };

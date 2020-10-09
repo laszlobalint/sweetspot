@@ -51,7 +51,7 @@ export const formControls = {
     elementType: 'input',
     elementConfig: {
       type: 'text',
-      placeholder: 'Írja be a közterületet és házszámot...',
+      placeholder: 'Írja be a lakcímét...',
     },
     value: '',
     label: 'Közterülete neve és száma',
@@ -84,14 +84,15 @@ export const formControls = {
     elementConfig: {
       type: 'number',
       placeholder: 'Írja be az irányítószámot...',
-      min: 11000,
-      max: 38999,
-      step: 1,
+      min: '11000',
+      max: '38999',
+      step: '1',
     },
     value: '',
     label: 'Irányítószám',
     validation: {
       required: false,
+      isPostalcode: true,
     },
     valid: true,
     touched: false,
@@ -110,13 +111,13 @@ export const formControls = {
     validation: {
       required: true,
     },
-    valid: false,
+    valid: true,
     touched: false,
   },
   notes: {
     elementType: 'textarea',
     elementConfig: {
-      placeholder: 'Díszítés, szín és egyéb kérés leírása...',
+      placeholder: 'Díszítés, szín és egyéb kérések leírása...',
       rows: 4,
       cols: 36,
     },

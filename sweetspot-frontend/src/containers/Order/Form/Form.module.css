@@ -42,7 +42,13 @@
 
 @media (max-width: 600px) {
   .Form {
-    margin: 0.2rem;
+    font-size: small;
     width: 100%;
+  }
+
+  .Form > form {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
   }
 }

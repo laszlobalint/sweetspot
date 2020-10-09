@@ -42,5 +42,6 @@
 
 .ValidationError {
   color: #cc0033;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
+  letter-spacing: normal;
 }

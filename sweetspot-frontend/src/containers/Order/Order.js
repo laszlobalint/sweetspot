@@ -27,7 +27,7 @@ const Order = (props) => {
           <Button onClick={onContinuedHandler}>Tovább</Button>
         </div>
       )}
-      <Route path={`${props.match.path}/form`} component={Form} />,
+      <Route path={`${props.match.path}/form`} component={Form} />
     </div>
   );
 };
