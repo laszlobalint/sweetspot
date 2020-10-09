@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import classes from './Form.module.css';
 import Button from '../../../components/UI/Button/Button';
@@ -10,6 +11,7 @@ import { updateObject, checkValidity } from '../../../shared/utility';
 
 const Forms = (props) => {
   const [controls, setControls] = useState(formControls);
+  const [date, setDate] = useState(null);
 
   const checkoutCancelledHandler = () => {
     props.history.push('/order');
@@ -17,6 +19,23 @@ const Forms = (props) => {
 
   const checkoutContinuedHandler = (event) => {
     event.preventDefault();
+    const order = {
+      name: controls.name.value,
+      phone: controls.phone.value,
+      email: controls.email.value,
+      address: {
+        street: controls.street.value,
+        settlement: controls.settlement.value,
+        postalCode: parseInt(controls.postalCode.value),
+        country: 'SERBIA',
+      },
+      grandTotal: Number(props.grandTotal),
+      deliveryDate: date.toISOString(),
+      delivery: controls.delivery.value,
+      notes: controls.notes.value,
+      items: createItemsFromBasket(),
+    };
+    console.log(order);
   };
 
   const inputChangedHandler = (event, controlName) => {
@@ -30,10 +49,23 @@ const Forms = (props) => {
     setControls(updatedControls);
   };
 
+  const createItemsFromBasket = () => {
+    const orderItems = [];
+    props.basket.forEach((item) => {
+      if (item.quantity > 1) {
+        for (let i = 0; i < item.quantity; i++) orderItems.push(item.id);
+      } else {
+        orderItems.push(item.id);
+      }
+    });
+
+    return orderItems.map((id) => parseInt(id));
+  };
+
   const formElements = [];
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
   let form = [
-    <Calendar key="calendar" label="Átvétel ideje (kötelező)" />,
+    <Calendar key="calendar" label="Átvétel ideje (kötelező)" onDateChangedHandler={(newDate) => setDate(newDate)} />,
     formElements.map((element) => (
       <Input
         key={element.id}
@@ -70,4 +102,11 @@ const Forms = (props) => {
   );
 };
 
-export default Forms;
+const mapStateToProps = (props) => {
+  return {
+    basket: props.ordersReducer.basket,
+    grandTotal: props.ordersReducer.grandTotal,
+  };
+};
+
+export default connect(mapStateToProps)(Forms);

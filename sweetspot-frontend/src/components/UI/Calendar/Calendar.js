@@ -7,8 +7,14 @@ import classes from '../Input/Input.module.css';
 
 registerLocale('hu', hu);
 
-const Calendar = (props) => {
+const Calendar = React.memo((props) => {
   const [date, setDate] = useState(null);
+
+  const dateChangedHandler = (newDate) => {
+    setDate(newDate);
+    props.onDateChangedHandler(newDate);
+  };
+
   return (
     <div className={classes.Input}>
       <label className={classes.Label}>{props.label}</label>
@@ -20,12 +26,12 @@ const Calendar = (props) => {
         locale="hu"
         dateFormat="yyyy. MMMM d."
         dateFormatCalendar={'yyyy. MMMM'}
-        onChange={(newDate) => setDate(newDate)}
+        onChange={(newDate) => dateChangedHandler(newDate)}
         monthsShown={2}
         placeholderText="Válasszon dátumot..."
       />
     </div>
   );
-};
+});
 
 export default Calendar;
