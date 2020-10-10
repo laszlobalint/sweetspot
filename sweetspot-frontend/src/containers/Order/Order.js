@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 
 import classes from './Order.module.css';
 import * as actions from '../../store/actions';
@@ -9,6 +10,11 @@ import Summary from '../../components/Summary/Summary';
 import Form from './Form/Form';
 
 const Order = (props) => {
+  const removeOrderItemsHandler = (id) => {
+    props.onRemoveOrderItems(id);
+    toastr.info('Rendelés', 'Termék törölve a kosárból.', { timeOut: 1500 });
+  };
+
   const onCancelledHandler = () => {
     props.history.push('/');
   };
@@ -20,7 +26,7 @@ const Order = (props) => {
   return (
     <div className={classes.Order}>
       <h2>Kosár tartalma - Rendelési összegző</h2>
-      <Summary onClickedDelete={(id) => props.onRemoveOrderItems(id)} />
+      <Summary onClickedDelete={(id) => removeOrderItemsHandler(id)} />
       {props.history.location.pathname === '/order' && (
         <div className={classes.Buttons}>
           <Button onClick={onCancelledHandler}>Mégsem</Button>

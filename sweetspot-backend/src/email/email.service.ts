@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 import { Order } from '../order/order.entity';
@@ -7,7 +7,7 @@ import { Order } from '../order/order.entity';
 export class EmailService {
   constructor(private readonly mailerService: MailerService) {}
 
-  async sendEmail(to: string, order: Order): Promise<Order> {
+  async sendEmail(to: string, order: Order): Promise<null> {
     return this.mailerService
       .sendMail({
         to,
@@ -15,11 +15,10 @@ export class EmailService {
         html: this.getHtml(order),
       })
       .then(() => {
-        return order;
+        return null;
       })
       .catch(error => {
-        console.log(error);
-        throw new BadRequestException('Could not send the confirmation email!');
+        return error;
       });
   }
 
@@ -109,24 +108,25 @@ export class EmailService {
                                         line-height: 1.5;
                                       "
                                   >
-                                    <th width="200px">Név</th>
+                                    <th width="180px">Név</th>
                                     <th width="120px">Telefon</th>
-                                    <th width="150px">E-mail</th>
-                                    <th width="150px">Végösszeg</th>
-                                    <th width="150px">Dátum</th>
-                                    <th width="150px">Átvétel</th>
+                                    <th width="210px">E-mail</th>
+                                    <th width="110px">Végösszeg</th>
+                                    <th width="120px">Dátum</th>
+                                    <th width="120px">Átvétel</th>
                                   </tr>
                                   <tr
                                     style="
                                         width: 400px;
+                                        text-align: center;
                                         line-height: 1.5;"
                                   >
                                     <td>${name}</td>
                                     <td>${phone}</td>
                                     <td>${email}</td>
-                                    <td>${grandTotal} RSD</td>
+                                    <td>${this.formatGrandTotal(grandTotal)}</td>
                                     <td>${this.formatDate(deliveryDate)}</td>
-                                    <td>${delivery}</td>
+                                    <td>${this.formatDelivery(delivery)}</td>
                                   </tr>
                                   <tr
                                     style="
@@ -144,8 +144,8 @@ export class EmailService {
                                     <th colspan="3">Lakcím</th>
                                     <th colspan="3">Megjegyzés</th>
                                   </tr>
-                                  <tr style="line-height: 1.5;">
-                                    <td colspan="3">${address}</td>
+                                  <tr style="line-height: 1.5;  text-align: center;">
+                                    <td colspan="3">${address.split(';')[0]}</td>
                                     <td colspan="3">${notes}</td>
                                   </tr>
                                 </tbody>
@@ -220,7 +220,13 @@ export class EmailService {
   }
 
   formatDate = (dateString: string): string => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString('hu-HU', options);
+  };
+
+  formatDelivery = (delivery: string): string => (delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel');
+
+  formatGrandTotal = (number: number): string => {
+    return `${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} RSD (dinár)`;
   };
 }

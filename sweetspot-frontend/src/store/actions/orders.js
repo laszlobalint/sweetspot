@@ -41,3 +41,30 @@ export const removeOrderItems = (id) => {
     id,
   };
 };
+
+export const saveOrder = (order) => {
+  return {
+    type: actionTypes.SAVE_ORDER,
+    order,
+  };
+};
+
+export const saveOrderInitialized = () => {
+  return {
+    type: actionTypes.SAVE_ORDER_INITIALIZED,
+  };
+};
+
+export const saveOrderSuccess = (order) => {
+  return {
+    type: actionTypes.SAVE_ORDER_SUCCESS,
+    order,
+  };
+};
+
+export const saveOrderFailure = (error) => {
+  return {
+    type: actionTypes.SAVE_ORDER_FAILURE,
+    error,
+  };
+};

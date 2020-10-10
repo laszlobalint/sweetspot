@@ -111,7 +111,7 @@ export const formControls = {
     validation: {
       required: true,
     },
-    valid: true,
+    valid: false,
     touched: false,
   },
   notes: {

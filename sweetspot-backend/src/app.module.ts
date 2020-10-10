@@ -31,7 +31,7 @@ const mailConf = config.get('mail');
         port: mailConf.port,
         secure: mailConf.secure,
         auth: {
-          user: mailConf.username,
+          user: mailConf.email,
           pass: process.env.EMAIL,
         },
       },

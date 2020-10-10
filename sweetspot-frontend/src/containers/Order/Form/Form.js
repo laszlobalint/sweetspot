@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Form.module.css';
+import * as actions from '../../../store/actions';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -36,7 +37,7 @@ const Forms = (props) => {
       notes: controls.notes.value,
       items: createItemsFromBasket(),
     };
-    console.log(order);
+    props.onSaveOrder(order);
   };
 
   const inputChangedHandler = (event, controlName) => {
@@ -90,8 +91,8 @@ const Forms = (props) => {
       <Button key="backButton" onClick={checkoutCancelledHandler}>
         Vissza
       </Button>
-      <Button key="continueButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
-        Folytatás
+      <Button key="orderButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
+        Rendelés
       </Button>
     </div>,
   ];
@@ -116,4 +117,10 @@ const mapStateToProps = (props) => {
   };
 };
 
-export default connect(mapStateToProps)(Forms);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSaveOrder: (order) => dispatch(actions.saveOrder(order)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Forms);

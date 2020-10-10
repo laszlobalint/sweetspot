@@ -25,8 +25,8 @@ export class OrderController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createOrder(@Body(OrderValidationPipe) createTaskDto: OrderDto): Promise<Order> {
-    return this.orderService.createOrder(createTaskDto);
+  createOrder(@Body(OrderValidationPipe) createOrderDto: OrderDto): Promise<Order> {
+    return this.orderService.createOrder(createOrderDto);
   }
 
   @Put('/:id')

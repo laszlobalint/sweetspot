@@ -6,4 +6,8 @@ export {
   fetchOrderItemsFailure,
   addOrderItems,
   removeOrderItems,
+  saveOrder,
+  saveOrderInitialized,
+  saveOrderSuccess,
+  saveOrderFailure,
 } from './orders';

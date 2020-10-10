@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { toastr } from 'react-redux-toastr';
 
 import classes from './Item.module.css';
 import gluten from '../../assets/ingredients/gluten.png';
@@ -26,6 +27,7 @@ const Item = (props) => {
 
   const onAddedOrderItemsHandler = () => {
     props.onAddedItems(props.id, props.price, quantity);
+    toastr.info('Rendelés', 'Termék a kosárhoz adva.', { timeOut: 1500 });
   };
 
   return (
