@@ -41,6 +41,7 @@ export const formControls = {
     label: 'E-mail cím (kötelező)',
     validation: {
       required: true,
+      isEmail: true,
       minLength: 3,
       maxLength: 40,
     },
