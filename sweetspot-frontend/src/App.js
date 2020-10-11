@@ -9,6 +9,9 @@ import Footer from './components/Footer/Footer';
 import Logout from './containers/Auth/Logout/Logout';
 import Order from './containers/Order/Order';
 
+const Admin = React.lazy(() => {
+  return import('./containers/Admin/Admin');
+});
 const Auth = React.lazy(() => {
   return import('./containers/Auth/Auth');
 });
@@ -32,6 +35,7 @@ const App = (props) => {
     routes = (
       <Switch>
         <Route path="/logout" component={Logout} />
+        <Route path="/admin" render={(props) => <Admin {...props} />} />
         <Route path="/offers" render={(props) => <Offers {...props} />} />
         <Route path="/" exact component={Offers} />
         <Redirect to="/" />

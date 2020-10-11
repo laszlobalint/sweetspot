@@ -1,0 +1,36 @@
+@import '../../index.css';
+
+.Orders {
+  font-size: larger;
+  width: 28rem;
+  text-align: center;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border: 1px solid #eeeeee;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px var(--bg-dark);
+  background-color: var(--bg-light);
+}
+
+.Orders tr:last-child > td {
+  border-bottom: 0;
+}
+
+.Orders th,
+td {
+  padding: 0.5rem;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.Orders th:last-child,
+td:last-child {
+  border-right: 0;
+}
+
+.Orders th {
+  background: var(--bg-dark);
+  color: white;
+  font-weight: bold;
+}

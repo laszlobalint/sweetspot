@@ -21,7 +21,7 @@ export function* authenticateSaga(action) {
 
 export function* authenticateLogoutSaga(action) {
   try {
-    yield axios.post(`${URL}logout`, { username: action.username, password: action.password });
+    yield axios.post(`${URL}logout`);
     yield call([localStorage, 'clear']);
   } catch (error) {
     yield call([localStorage, 'clear']);

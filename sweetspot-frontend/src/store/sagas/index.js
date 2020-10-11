@@ -1,8 +1,13 @@
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as actionTypes from '../actions/action-types';
+import { fetchOrdersAdminSaga } from './admin';
 import { authenticateSaga, authenticateLogoutSaga } from './auth';
 import { fetchOrderItemsSaga, saveOrderSaga } from './orders';
+
+export function* watchAdmin() {
+  yield all([takeEvery(actionTypes.FETCH_ORDERS_ADMIN, fetchOrdersAdminSaga)]);
+}
 
 export function* watchAuth() {
   yield all([takeEvery(actionTypes.AUTHENTICATE, authenticateSaga), takeEvery(actionTypes.AUTHENTICATE_LOGOUT, authenticateLogoutSaga)]);

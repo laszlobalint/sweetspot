@@ -12,17 +12,18 @@ import './index.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import App from './App';
-import { authReducer, ordersReducer } from './store/reducers';
-import { watchAuth, watchOrders } from './store/sagas';
+import { adminReducer, authReducer, ordersReducer } from './store/reducers';
+import { watchAdmin, watchAuth, watchOrders } from './store/sagas';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
-const rootReducer = combineReducers({ authReducer, ordersReducer, toastrReducer });
+const rootReducer = combineReducers({ adminReducer, authReducer, ordersReducer, toastrReducer });
 
 const saga = createSagaMiddleware();
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, saga)));
 
+saga.run(watchAdmin);
 saga.run(watchAuth);
 saga.run(watchOrders);
 

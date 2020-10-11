@@ -56,7 +56,14 @@ const Header = (props) => (
             Admin
           </NavigationLink>
         ) : (
-          <NavigationLink link="/logout">Kijelentkezés</NavigationLink>
+          [
+            <NavigationLink link="/admin" key="admin" exact>
+              Admin
+            </NavigationLink>,
+            <NavigationLink link="/logout" key="logout">
+              Kijelentkezés
+            </NavigationLink>,
+          ]
         )}
       </ul>
       <span className={[classes.GrandTotal]}>

@@ -5,8 +5,17 @@ export const updateObject = (oldObject, updatedProperties) => {
   };
 };
 
+export const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'long', day: '2-digit' };
+  return new Date(dateString).toLocaleDateString('hu-HU', options);
+};
+
 export const numberWithDots = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
+export const deliveryString = (delivery) => {
+  return delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel';
 };
 
 export const checkValidity = (value, rules) => {
