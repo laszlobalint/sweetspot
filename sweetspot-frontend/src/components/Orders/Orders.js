@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useTable } from 'react-table';
+import { useTable, useSortBy, useBlockLayout } from 'react-table';
 
 import classes from './Orders.module.css';
 import { formatDate, deliveryString, numberWithDots } from '../../shared/utility';
@@ -11,34 +11,35 @@ const Orders = (props) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'ID',
-        accessor: 'id',
-      },
-      {
         Header: 'Név',
         accessor: 'name',
       },
       {
         Header: 'Telefonszám',
         accessor: 'phone',
+        width: 120,
       },
       {
         Header: 'E-mail cím',
         accessor: 'email',
+        width: 250,
       },
       {
-        Header: 'Lakcím / Kézbesítési cím',
+        Header: 'Lakcím',
         accessor: 'address',
+        width: 250,
         Cell: (props) => <div>{props.value.split(';')[0]}</div>,
       },
       {
         Header: 'Végösszeg',
         accessor: 'grandTotal',
+        width: 100,
         Cell: (props) => <div>{numberWithDots(props.value)} RSD</div>,
       },
       {
         Header: 'Átveli dátum',
         accessor: 'deliveryDate',
+        width: 100,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
@@ -49,54 +50,69 @@ const Orders = (props) => {
       {
         Header: 'Megjegyzések',
         accessor: 'notes',
+        width: 280,
       },
       {
         Header: 'Rendelés kelte',
         accessor: 'createdDate',
-        Cell: (props) => <div>{formatDate(props.value)}</div>,
-      },
-      {
-        Header: 'Rendelés módosítva',
-        accessor: 'updateDate',
+        width: 100,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
         Header: 'Termékek',
         accessor: 'items',
+        width: 350,
         Cell: (props) => {
-          return <div>{props.data[parseInt(props.row.id)]['items'].map((item) => item.title).join(', ')}</div>;
+          const fullString = props.data[parseInt(props.row.id)]['items'].map((item) => item.title).join(', ');
+          let result = '';
+          props.data[parseInt(props.row.id)]['items'].forEach((e) => {
+            if (!result.includes(e.title)) result += `${e.title} (${fullString.match(new RegExp(e.title, 'g')).length}), `;
+          });
+          return <div>{result.slice(0, -2)}</div>;
         },
       },
     ],
     [],
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    {
+      columns,
+      data,
+    },
+    useBlockLayout,
+    useSortBy,
+  );
 
   return (
-    <table {...getTableProps()} className={classes.Orders}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-              })}
+    <div className={classes.Orders}>
+      <table {...getTableProps()} className={classes.Orders}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                </th>
+              ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
