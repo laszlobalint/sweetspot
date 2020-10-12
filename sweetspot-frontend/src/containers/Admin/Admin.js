@@ -16,10 +16,8 @@ const Admin = (props) => {
 
   return (
     <div className={classes.Admin}>
-      <div className={classes.Switcher}>
-        <NavigationLink link={`${props.match.path}/orders`}>Rendelések</NavigationLink>
-        <NavigationLink link={`${props.match.path}/items`}>Kínálat</NavigationLink>
-      </div>
+      <NavigationLink link={`${props.match.path}/orders`}>Rendelések</NavigationLink>
+      <NavigationLink link={`${props.match.path}/items`}>Kínálat</NavigationLink>
       <Route path={`${props.match.path}/orders`} component={Orders} />
     </div>
   );

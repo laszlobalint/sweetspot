@@ -33,3 +33,10 @@ export const authenticateLogout = () => {
     type: actionTypes.AUTHENTICATE_LOGOUT,
   };
 };
+
+export const authenticateReload = (token) => {
+  return {
+    type: actionTypes.AUTHENTICATE_RELOAD,
+    token,
+  };
+};

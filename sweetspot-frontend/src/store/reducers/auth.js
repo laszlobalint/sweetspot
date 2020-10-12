@@ -17,6 +17,8 @@ export const authReducer = (state = initialState, action) => {
       return updateObject(state, { error: action.error, loading: false });
     case actionTypes.AUTHENTICATE_LOGOUT:
       return updateObject(state, { token: null, error: null, loading: false });
+    case actionTypes.AUTHENTICATE_RELOAD:
+      return updateObject(state, { token: action.token });
     default:
       return state;
   }

@@ -12,6 +12,14 @@ export function* fetchOrderItemsSaga(action) {
   try {
     const response = yield axios.get(URL_ITEMS);
     yield put(actions.fetchOrderItemsSuccess(response.data));
+    toastr.message(
+      'RENDELÉS MENETE',
+      'Tegye a termékeket a kosárba (a megadott mennyiségben), majd kattinton a fenti "Rendelés" menüpontra a folytatáshoz. Kellemes válogatást!',
+      {
+        timeOut: 15000,
+        attention: true,
+      },
+    );
   } catch (error) {
     yield put(actions.fetchOrderItemsFailure(error));
   }

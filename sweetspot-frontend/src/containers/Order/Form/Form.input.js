@@ -18,8 +18,8 @@ export const formControls = {
   phone: {
     elementType: 'input',
     elementConfig: {
-      type: 'text',
-      placeholder: 'Írja be a telefonszámát...',
+      type: 'tel',
+      placeholder: '+381 - (  ) /_ _ _ _ - _ _ _',
     },
     value: '',
     label: 'Telefonszám (kötelező)',
@@ -44,6 +44,23 @@ export const formControls = {
       isEmail: true,
       minLength: 3,
       maxLength: 40,
+    },
+    valid: false,
+    touched: false,
+  },
+  delivery: {
+    elementType: 'select',
+    elementConfig: {
+      options: [
+        { value: '', displayValue: '' },
+        { value: 'SHIPPING', displayValue: 'Házhozszállítás' },
+        { value: 'PICK_UP', displayValue: 'Személyes átvétel' },
+      ],
+    },
+    value: '',
+    label: 'Átvétel módja (kötelező)',
+    validation: {
+      required: true,
     },
     valid: false,
     touched: false,
@@ -96,23 +113,6 @@ export const formControls = {
       isPostalcode: true,
     },
     valid: true,
-    touched: false,
-  },
-  delivery: {
-    elementType: 'select',
-    elementConfig: {
-      options: [
-        { value: '', displayValue: '' },
-        { value: 'SHIPPING', displayValue: 'Házhozszállítás' },
-        { value: 'PICK_UP', displayValue: 'Személyes átvétel' },
-      ],
-    },
-    value: '',
-    label: 'Átvétel (kötelező)',
-    validation: {
-      required: true,
-    },
-    valid: false,
     touched: false,
   },
   notes: {

@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 Item.propTypes = {
-  quantity: PropTypes.number.isRequired,
+  quantity: PropTypes.number,
 };
 
 export default connect(null, mapDispatchToProps)(Item);

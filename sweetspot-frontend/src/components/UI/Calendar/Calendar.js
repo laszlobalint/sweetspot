@@ -10,6 +10,11 @@ registerLocale('hu', hu);
 const Calendar = React.memo((props) => {
   const [date, setDate] = useState(null);
 
+  const isWeekend = (date) => {
+    const day = date.getDay();
+    return day === 0 || day === 5 || day === 6;
+  };
+
   const dateChangedHandler = (newDate) => {
     setDate(newDate);
     props.onDateChangedHandler(newDate);
@@ -21,8 +26,9 @@ const Calendar = React.memo((props) => {
       <DatePicker
         className={classes.InputElement}
         selected={date}
+        filterDate={isWeekend}
         minDate={new Date()}
-        maxDate={addYears(new Date(), 2)}
+        maxDate={addYears(new Date(), 1)}
         locale="hu"
         dateFormat="yyyy. MMMM d."
         dateFormatCalendar={'yyyy. MMMM'}
