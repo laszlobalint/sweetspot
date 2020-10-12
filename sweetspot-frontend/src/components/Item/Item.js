@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
+import PropTypes from 'prop-types';
 
 import classes from './Item.module.css';
 import gluten from '../../assets/ingredients/gluten.png';
@@ -73,6 +74,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAddedItems: (id, price, quantity) => dispatch(actions.addOrderItems(id, price, quantity)),
   };
+};
+
+Item.propTypes = {
+  quantity: PropTypes.number.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Item);

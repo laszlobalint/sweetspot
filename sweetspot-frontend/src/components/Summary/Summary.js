@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import classes from './Summary.module.css';
 import deleteIcon from '../../assets/ingredients/delete.png';
@@ -59,6 +60,12 @@ const mapStateToProps = (state) => {
     basket: state.ordersReducer.basket,
     grandTotal: state.ordersReducer.grandTotal,
   };
+};
+
+Summary.propTypes = {
+  items: PropTypes.array,
+  basket: PropTypes.array,
+  grandTotal: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Summary);

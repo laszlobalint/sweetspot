@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useTable, useSortBy, useBlockLayout } from 'react-table';
+import PropTypes from 'prop-types';
 
 import classes from './Orders.module.css';
 import { formatDate, deliveryString, numberWithDots } from '../../shared/utility';
@@ -120,6 +121,10 @@ const mapStateToProps = (state) => {
   return {
     data: state.adminReducer.orders,
   };
+};
+
+Orders.propTypes = {
+  data: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps)(Orders);
