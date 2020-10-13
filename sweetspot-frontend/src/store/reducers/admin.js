@@ -15,7 +15,7 @@ export const adminReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ORDERS_ADMIN_SUCCESS:
       return updateObject(state, { orders: filterOrders(action.orders), error: null, loading: false });
     case actionTypes.FETCH_ORDERS_ADMIN_FAILURE:
-      return updateObject(state, { error: action.error, loading: false });
+      return updateObject(state, { error: action.error.message, loading: false });
     default:
       return state;
   }

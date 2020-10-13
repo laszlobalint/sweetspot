@@ -7,19 +7,15 @@ import { Order } from '../order/order.entity';
 export class EmailService {
   constructor(private readonly mailerService: MailerService) {}
 
-  async sendEmail(to: string, order: Order): Promise<null> {
+  async sendEmail(to: string, order: Order): Promise<Order> {
     return this.mailerService
       .sendMail({
         to,
         subject: 'Sikeres rendelés a SweetSpot oldalon - Összegző',
         html: this.getHtml(order),
       })
-      .then(() => {
-        return null;
-      })
-      .catch(error => {
-        return error;
-      });
+      .then(() => order)
+      .catch(error => error);
   }
 
   private getHtml(order: Order): string {
@@ -117,9 +113,8 @@ export class EmailService {
                                   </tr>
                                   <tr
                                     style="
-                                        width: 400px;
                                         text-align: center;
-                                        line-height: 1.5;"
+                                        line-height: 4;"
                                   >
                                     <td>${name}</td>
                                     <td>${phone}</td>
@@ -144,8 +139,8 @@ export class EmailService {
                                     <th colspan="3">Lakcím</th>
                                     <th colspan="3">Megjegyzés</th>
                                   </tr>
-                                  <tr style="line-height: 1.5;  text-align: center;">
-                                    <td colspan="3">${address.split(';')[0]}</td>
+                                  <tr style="line-height: 4; text-align: center;">
+                                    <td colspan="3">${this.formatAddress(address)}</td>
                                     <td colspan="3">${notes}</td>
                                   </tr>
                                 </tbody>
@@ -219,14 +214,12 @@ export class EmailService {
   `;
   }
 
-  formatDate = (dateString: string): string => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    return new Date(dateString).toLocaleDateString('hu-HU', options);
-  };
+  formatDate = (dateString: string): string =>
+    new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+  formatAddress = (address: string): string => address.split(';')[0].replace('null ,', '');
 
   formatDelivery = (delivery: string): string => (delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel');
 
-  formatGrandTotal = (number: number): string => {
-    return `${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} RSD (dinár)`;
-  };
+  formatGrandTotal = (number: number): string => `${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} RSD (dinár)`;
 }

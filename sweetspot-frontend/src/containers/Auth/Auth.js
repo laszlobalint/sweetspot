@@ -11,6 +11,8 @@ import { formControls } from './Auth.input';
 import { updateObject, checkValidity } from '../../shared/utility';
 
 const Auth = (props) => {
+  const { authenticated, error, loading, onAuthenticate } = props;
+
   const [controls, setControls] = useState(formControls);
 
   const inputChangedHandler = (event, controlName) => {
@@ -26,7 +28,7 @@ const Auth = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onAuthenticate(controls.username.value, controls.password.value);
+    onAuthenticate(controls.username.value, controls.password.value);
   };
 
   const formElements = [];
@@ -48,18 +50,18 @@ const Auth = (props) => {
     <Button key="loginButton">Bejelentkezés</Button>,
   ];
 
-  if (props.loading) form = <Spinner />;
+  if (loading) form = <Spinner />;
 
-  let error = null;
-  if (props.error) error = <p className={classes.Error}>{props.error}</p>;
+  let errorMessage = null;
+  if (error) errorMessage = <p className={classes.Error}>{error}</p>;
 
   let redirect = null;
-  if (props.authenticated) redirect = <Redirect to="/" />;
+  if (authenticated) redirect = <Redirect to="/" />;
 
   return (
     <article className={classes.Auth}>
       {redirect}
-      {error}
+      {errorMessage}
       <form onSubmit={submitHandler}>{form}</form>
     </article>
   );

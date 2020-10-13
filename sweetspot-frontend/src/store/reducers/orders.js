@@ -16,7 +16,7 @@ export const ordersReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ORDER_ITEMS_SUCCESS:
       return updateObject(state, { items: action.items, error: null, loading: false });
     case actionTypes.FETCH_ORDER_ITEMS_FAILURE:
-      return updateObject(state, { error: action.error, loading: false });
+      return updateObject(state, { error: action.error.message, loading: false });
     case actionTypes.ADD_ORDER_ITEMS:
       return addOrderItems(state, action);
     case actionTypes.REMOVE_ORDER_ITEMS:
@@ -26,7 +26,7 @@ export const ordersReducer = (state = initialState, action) => {
     case actionTypes.SAVE_ORDER_SUCCESS:
       return updateObject(state, { basket: [], grandTotal: 0, error: null, loading: false });
     case actionTypes.SAVE_ORDER_FAILURE:
-      return updateObject(state, { error: action.error, loading: false });
+      return updateObject(state, { error: action.error.message, loading: false });
     default:
       return state;
   }

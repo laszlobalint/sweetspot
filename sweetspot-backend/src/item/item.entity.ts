@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
 
 import { Order } from '../order/order.entity';
 import { Ingredient } from '../ingredient/ingredient.entity';
@@ -39,10 +39,12 @@ export class Item extends BaseEntity {
   )
   ingredients: Ingredient[];
 
-  @ManyToOne(
+  @ManyToMany(
     _type => Order,
     order => order.items,
-    { eager: false },
+    {
+      cascade: false,
+    },
   )
   orders: Order[];
 

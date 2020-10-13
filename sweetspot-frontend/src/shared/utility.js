@@ -5,18 +5,14 @@ export const updateObject = (oldObject, updatedProperties) => {
   };
 };
 
-export const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: '2-digit' };
-  return new Date(dateString).toLocaleDateString('hu-HU', options);
-};
+export const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-export const numberWithDots = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-};
+export const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: '2-digit' });
 
-export const deliveryString = (delivery) => {
-  return delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel';
-};
+export const formatDelivery = (delivery) => (delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel');
+
+export const formatAddress = (address) => address.split(';')[0].replace('null ,', '');
 
 export const checkValidity = (value, rules) => {
   let isValid = true;

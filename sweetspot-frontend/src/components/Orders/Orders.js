@@ -4,7 +4,7 @@ import { useTable, useSortBy, useBlockLayout } from 'react-table';
 import PropTypes from 'prop-types';
 
 import classes from './Orders.module.css';
-import { formatDate, deliveryString, numberWithDots } from '../../shared/utility';
+import { formatDate, formatDelivery, formatAddress, numberWithDots } from '../../shared/utility';
 
 const Orders = (props) => {
   const { data } = props;
@@ -18,7 +18,7 @@ const Orders = (props) => {
       {
         Header: 'Telefonszám',
         accessor: 'phone',
-        width: 120,
+        width: 130,
       },
       {
         Header: 'E-mail cím',
@@ -28,8 +28,8 @@ const Orders = (props) => {
       {
         Header: 'Lakcím',
         accessor: 'address',
-        width: 250,
-        Cell: (props) => <div>{props.value.split(';')[0]}</div>,
+        width: 220,
+        Cell: (props) => <div>{formatAddress(props.value)}</div>,
       },
       {
         Header: 'Végösszeg',
@@ -40,13 +40,13 @@ const Orders = (props) => {
       {
         Header: 'Átveli dátum',
         accessor: 'deliveryDate',
-        width: 100,
+        width: 130,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
         Header: 'Átvetel',
         accessor: 'delivery',
-        Cell: (props) => <div>{deliveryString(props.value)}</div>,
+        Cell: (props) => <div>{formatDelivery(props.value)}</div>,
       },
       {
         Header: 'Megjegyzések',
@@ -56,20 +56,26 @@ const Orders = (props) => {
       {
         Header: 'Rendelés kelte',
         accessor: 'createdDate',
-        width: 100,
+        width: 130,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
         Header: 'Termékek',
         accessor: 'items',
-        width: 350,
+        width: 330,
         Cell: (props) => {
-          const fullString = props.data[parseInt(props.row.id)]['items'].map((item) => item.title).join(', ');
+          const items = props.data[parseInt(props.row.id)]['items'];
+          const fullString = items.map((item) => item.title).join(', ');
           let result = '';
-          props.data[parseInt(props.row.id)]['items'].forEach((e) => {
+          items.forEach((e) => {
             if (!result.includes(e.title)) result += `${e.title} (${fullString.match(new RegExp(e.title, 'g')).length}), `;
           });
-          return <div>{result.slice(0, -2)}</div>;
+          return (
+            <details>
+              <summary>Rendelt elemek ({items.length}):</summary>
+              {result.slice(0, -2)}
+            </details>
+          );
         },
       },
     ],

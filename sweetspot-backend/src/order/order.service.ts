@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable, NotFoundException, ServiceUnavailableException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult } from 'typeorm';
 
@@ -30,7 +30,9 @@ export class OrderService {
     const itemsForOrder = await this.itemRepository.findByIds(createOrderDto.items, { relations: ['ingredients'] });
     const order = await this.orderRepository.createOrder(createOrderDto, itemsForOrder);
     if (!order) throw new UnprocessableEntityException('Could not save the order');
-    return await this.emailService.sendEmail(createOrderDto.email, order);
+    const result = await this.emailService.sendEmail(createOrderDto.email, order);
+    if (result instanceof Order) return result;
+    else throw new ServiceUnavailableException('Email could not be sent');
   }
 
   async updateOrder(id: number, updateOrderDto: OrderDto): Promise<Order> {

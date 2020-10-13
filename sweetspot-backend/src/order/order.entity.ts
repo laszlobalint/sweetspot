@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinTable, ManyToMany } from 'typeorm';
 
 import { Delivery } from './order.dto';
 import { Item } from '../item/item.entity';
@@ -40,11 +40,14 @@ export class Order extends BaseEntity {
   })
   notes: string;
 
-  @OneToMany(
+  @ManyToMany(
     _type => Item,
     item => item.orders,
-    { eager: true },
+    {
+      cascade: true,
+    },
   )
+  @JoinTable()
   items: Item[];
 
   @CreateDateColumn({ type: 'timestamptz' })

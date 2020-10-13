@@ -31,12 +31,12 @@ export function* saveOrderSaga(action) {
     const response = yield axios.post(URL_ORDERS, action.order);
     yield put(actions.saveOrderSuccess(response.data));
     toastr.success('SIKERES RENDELÉS!', 'Köszönjük! Kérjük, ellenőrizze a megadott e-mail fiókjába érkezett rendelésösszesítőt.', {
-      timeOut: 8000,
+      timeOut: 10000,
     });
   } catch (error) {
     yield put(actions.saveOrderFailure(error));
     toastr.error('HIBA LÉPETT FEL!', 'A rendelés során hiba merült fel. Kérjük, próbálja újra vagy vegye fel a kapcsolatot velünk.', {
-      timeOut: 8000,
+      timeOut: 10000,
     });
   }
 }

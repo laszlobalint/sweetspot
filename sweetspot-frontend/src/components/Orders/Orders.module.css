@@ -1,18 +1,10 @@
 @import '../../index.css';
 
-.Orders {
-  width: 100%;
-  font-size: smaller;
-}
-
 .Orders table {
   display: inline-block;
-  width: 100%;
-  font-size: larger;
   text-align: center;
-  margin: 1.5rem auto;
-  padding: 1rem;
-  border: 1px solid #eeeeee;
+  padding: 0.3rem;
+  border: 1px solid #e0e0e0;
   border-radius: 1rem;
   border-spacing: 0;
   box-sizing: border-box;
@@ -26,9 +18,14 @@
 
 .Orders table th,
 td {
+  font-size: smaller;
   padding: 0.5rem;
   border-bottom: 1px solid black;
   border-right: 1px solid black;
+}
+
+.Orders table tr:nth-child(even) {
+  background-color: #dbd7d7;
 }
 
 .Orders table th:last-child,
