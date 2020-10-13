@@ -11,12 +11,14 @@ import { formControls } from './Form.input';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
 const Forms = (props) => {
+  const { history, basket, grandTotal, error, loading, onSaveOrder } = props;
+
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);
   const [isValid, setIsValid] = useState(false);
 
   const checkoutCancelledHandler = () => {
-    props.history.push('/order');
+    history.push('/order');
   };
 
   const checkoutContinuedHandler = (event) => {
@@ -31,13 +33,13 @@ const Forms = (props) => {
         postalCode: parseInt(controls.postalCode.value),
         country: 'SERBIA',
       },
-      grandTotal: Number(props.grandTotal),
+      grandTotal: Number(grandTotal),
       deliveryDate: date.toISOString(),
       delivery: controls.delivery.value,
       notes: controls.notes.value,
       items: createItemsFromBasket(),
     };
-    props.onSaveOrder(order);
+    onSaveOrder(order);
   };
 
   const inputChangedHandler = (event, controlName) => {
@@ -59,7 +61,7 @@ const Forms = (props) => {
 
   const createItemsFromBasket = () => {
     const orderItems = [];
-    props.basket.forEach((item) => {
+    basket.forEach((item) => {
       if (item.quantity > 1) {
         for (let i = 0; i < item.quantity; i++) orderItems.push(item.id);
       } else {
@@ -72,40 +74,48 @@ const Forms = (props) => {
 
   const formElements = [];
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
-  let form = [
-    <Calendar key="calendar" label="Átvétel ideje (kötelező)" onDateChangedHandler={(newDate) => setDate(newDate)} />,
-    formElements.map((element) => (
-      <Input
-        key={element.id}
-        elementType={element.config.elementType}
-        elementConfig={element.config.elementConfig}
-        value={element.config.value}
-        label={element.config.label}
-        invalid={!element.config.valid}
-        validate={element.config.validation}
-        touched={element.config.touched}
-        changed={(event) => inputChangedHandler(event, element.id)}
-      />
-    )),
-    <div key="formButton" className={classes.Buttons}>
-      <Button key="backButton" onClick={checkoutCancelledHandler}>
-        Vissza
-      </Button>
-      <Button key="orderButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
-        Rendelés
-      </Button>
-    </div>,
-  ];
+  let form = (
+    <form>
+      <Calendar key="calendar" label="Átvétel ideje (kötelező)" onDateChangedHandler={(newDate) => setDate(newDate)} />
+      {formElements.map((element) => (
+        <Input
+          key={element.id}
+          elementType={element.config.elementType}
+          elementConfig={element.config.elementConfig}
+          value={element.config.value}
+          label={element.config.label}
+          invalid={!element.config.valid}
+          validate={element.config.validation}
+          touched={element.config.touched}
+          changed={(event) => inputChangedHandler(event, element.id)}
+        />
+      ))}
+      <div key="formButton" className={classes.Buttons}>
+        <Button key="backButton" onClick={checkoutCancelledHandler}>
+          Vissza
+        </Button>
+        <Button key="orderButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
+          Rendelés
+        </Button>
+      </div>
+    </form>
+  );
 
-  if (props.loading) form = <Spinner />;
+  if (loading)
+    form = (
+      <div>
+        <Spinner />
+        <div>Rendelés folyamatban...</div>
+      </div>
+    );
 
-  let error = null;
-  if (props.error) error = <p className={classes.Error}>{props.error}</p>;
+  let errorMessage = null;
+  if (error) errorMessage = <p className={classes.Error}>{error}</p>;
 
   return (
     <article className={classes.Form}>
-      {error}
-      <form>{form}</form>
+      {errorMessage}
+      {form}
     </article>
   );
 };
@@ -114,6 +124,8 @@ const mapStateToProps = (props) => {
   return {
     basket: props.ordersReducer.basket,
     grandTotal: props.ordersReducer.grandTotal,
+    error: props.ordersReducer.error,
+    loading: props.ordersReducer.loading,
   };
 };
 

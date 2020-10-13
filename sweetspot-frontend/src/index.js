@@ -32,7 +32,7 @@ const app = (
     <BrowserRouter>
       <React.StrictMode>
         <App />
-        <ReduxToastr getState={(state) => state.toastrReducer} />
+        <ReduxToastr getState={(state) => state.toastrReducer} preventDuplicates />
       </React.StrictMode>
     </BrowserRouter>
   </Provider>

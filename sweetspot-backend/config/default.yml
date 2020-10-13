@@ -8,7 +8,7 @@ db:
 
 jwt:
   strategyName: 'jwt'
-  expiresIn: 36000
+  expiresIn: 259200
 
 mode:
   development: 'development'
