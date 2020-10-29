@@ -72,13 +72,16 @@
 
 .Content {
   position: absolute;
-  width: 280px;
-  height: 280px;
-  top: 0;
-  left: 0;
+  width: 270px;
+  height: 270px;
+  top: 3%;
+  left: 3%;
   opacity: 0;
+  padding: 0.3rem;
   font: bold 1.6rem GreatVibes;
   color: var(--font-light);
+  border-radius: 10%;
+  background: rgba(0, 0, 0, 0.5);
   text-decoration-line: underline;
   text-align: center;
   transition: all 400ms ease-out;
