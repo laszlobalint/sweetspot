@@ -11,23 +11,23 @@
 
 @font-face {
   font-family: PTSansRegular;
-  src: url('./assets//fonts/PTSans-Regular.ttf');
+  src: url(./assets//fonts/PTSans-Regular.ttf);
 }
 
 @font-face {
   font-family: PTSansBold;
-  src: url('./assets//fonts/PTSans-Bold.ttf');
+  src: url(./assets//fonts/PTSans-Bold.ttf);
   font-weight: bold;
 }
 
 @font-face {
   font-family: PTSansItalic;
-  src: url('./assets//fonts/PTSans-Italic.ttf');
+  src: url(./assets//fonts/PTSans-Italic.ttf);
 }
 
 @font-face {
   font-family: GreatVibes;
-  src: url('./assets//fonts/GreatVibes-Regular.ttf');
+  src: url(./assets//fonts/GreatVibes-Regular.ttf);
 }
 
 * {

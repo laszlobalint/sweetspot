@@ -12,7 +12,7 @@ const Footer = (props) => (
       <li>E-mail: sweetspot.subotica@gmail.com</li>
       <li>Blog: https://sweetspot.rs/</li>
     </ul>
-    <img src={logo} alt="SweetSpot logo" />
+    <img src={logo} alt="SweetSpot" />
     <ul>
       <li>MŰHELY</li>
       <li>A műhely nem rendelkezik állandó nyitvatartási idővel.</li>

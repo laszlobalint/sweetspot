@@ -1,38 +1,24 @@
 import React from 'react';
+import { toastr } from 'react-redux-toastr';
 
 import classes from './Header.module.css';
+import navClasses from '../UI/NavigationLink/NavigationLink.module.css';
 import { numberWithDots } from '../../shared/utility';
-import basketLogo from '../../assets/logos/basket.png';
-import facebookLogo from '../../assets/logos/facebook.png';
-import instagramLogo from '../../assets/logos/instagram.png';
-import twitterLogo from '../../assets/logos/twitter.png';
-import whatsappLogo from '../../assets/logos/whatsapp.png';
 import NavigationLink from '../UI/NavigationLink/NavigationLink';
+import basketLogo from '../../assets/logos/basket.png';
+import { socialLogos } from './Header.logos';
 
 const Header = (props) => (
-  <header>
+  <header id="top">
     <div className={classes.Header}>
       <ul className={classes.Logos}>
-        <li>
-          <a href="https://www.facebook.com/sweetspot.lala/" target="_blank" rel="noopener noreferrer">
-            {<img src={facebookLogo} alt="Facebook" />}
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/sweetspotlala/" target="_blank" rel="noopener noreferrer">
-            {<img src={instagramLogo} alt="Instagram" />}
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-            {<img src={twitterLogo} alt="Twitter" />}
-          </a>
-        </li>
-        <li>
-          <a href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">
-            {<img src={whatsappLogo} alt="Whatsapp" />}
-          </a>
-        </li>
+        {socialLogos.map((logo) => (
+          <li key={logo.alt}>
+            <a href={logo.href} target="_blank" rel="noopener noreferrer">
+              {<img src={logo.src} alt={logo.alt} />}
+            </a>
+          </li>
+        ))}
       </ul>
       <ul className={classes.Navigation}>
         {
@@ -45,9 +31,19 @@ const Header = (props) => (
             Kínálat
           </NavigationLink>
         }
-        <NavigationLink link="https://sweetspot.rs/" exact>
-          Blog
-        </NavigationLink>
+        <li className={navClasses.NavigationLink}>
+          <a
+            href="#top"
+            onClick={() =>
+              toastr.info(
+                'RENDELÉS MENETE',
+                'Tegye a termékeket a kosárba (a megadott mennyiségben), majd kattinton a fenti "Rendelés" menüpontra a folytatáshoz. Kellemes válogatást!',
+              )
+            }
+          >
+            Infók
+          </a>
+        </li>
         <NavigationLink link="/contact" exact>
           Kapcsolat
         </NavigationLink>
@@ -67,7 +63,7 @@ const Header = (props) => (
         )}
       </ul>
       <span className={[classes.GrandTotal]}>
-        {<img src={basketLogo} alt="Kosár" />} Kosár: {numberWithDots(props.grandTotal)} RSD
+        {<img src={basketLogo} alt={'Kosár tartalma'} />} Kosár: {numberWithDots(props.grandTotal)} RSD
       </span>
     </div>
     <p className={classes.Title}>Édes Pihenő - Leszállópálya az Édesszájúak bolygóján</p>

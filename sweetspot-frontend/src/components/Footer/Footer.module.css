@@ -9,7 +9,7 @@
   height: 18rem;
   margin-top: 2rem;
   background-color: var(--bg-dark);
-  background-image: url('../../assets/footer-bg.png');
+  background-image: url(../../assets/footer-bg.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

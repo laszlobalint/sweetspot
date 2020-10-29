@@ -4,13 +4,8 @@ import { toastr } from 'react-redux-toastr';
 import PropTypes from 'prop-types';
 
 import classes from './Item.module.css';
-import gluten from '../../assets/ingredients/gluten.png';
-import glutenfree from '../../assets/ingredients/glutenfree.png';
-import sugar from '../../assets/ingredients/sugar.png';
-import sugarfree from '../../assets/ingredients/sugarfree.png';
-import lactose from '../../assets/ingredients/lactose.png';
-import lactosefree from '../../assets/ingredients/lactosefree.png';
 import * as actions from '../../store/actions';
+import { ingredientsLogos } from './Item.logos';
 import { numberWithDots } from '../../shared/utility';
 import Button from '../UI/Button/Button';
 import Number from '../UI/Number/Number';
@@ -46,19 +41,27 @@ const Item = (props) => {
         <div className={classes.Price}>{numberWithDots(props.price)} RSD</div>
         <div className={classes.Icons}>
           {props.glutenfree ? (
-            <img src={glutenfree} alt="Gluténmentes" title="Gluténmentes" />
+            <img src={ingredientsLogos.glutenfree.logo} alt={ingredientsLogos.glutenfree.title} title={ingredientsLogos.glutenfree.title} />
           ) : (
-            <img src={gluten} alt="Glutént tartalmaz" title="Glutént tartalmaz" />
+            <img src={ingredientsLogos.gluten.logo} alt={ingredientsLogos.gluten.title} title={ingredientsLogos.gluten.title} />
           )}
           {props.sugarfree ? (
-            <img src={sugarfree} alt="Cukormentes" title="Cukormentes" />
+            <img src={ingredientsLogos.sugarfree.logo} alt={ingredientsLogos.sugarfree.title} title={ingredientsLogos.sugarfree.title} />
           ) : (
-            <img src={sugar} alt="Cukrot tartalmaz" title="Cukrot tartalmaz" />
+            <img src={ingredientsLogos.sugar.logo} alt={ingredientsLogos.sugar.title} title={ingredientsLogos.sugar.title} />
           )}
           {props.lactosefree ? (
-            <img src={lactosefree} alt="Laktózmentes" title="Laktózmentes" />
+            <img
+              src={ingredientsLogos.lactosefree.logo}
+              alt={ingredientsLogos.lactosefree.title}
+              title={ingredientsLogos.lactosefree.title}
+            />
           ) : (
-            <img src={lactose} alt="Laktózt tartalmaz" title="Laktózt tartalmaz" />
+            <img
+              src={ingredientsLogos.lactosefree.logo}
+              alt={ingredientsLogos.lactosefree.title}
+              title={ingredientsLogos.lactosefree.title}
+            />
           )}
         </div>
         <div className={classes.Navigation}>

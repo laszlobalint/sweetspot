@@ -27,7 +27,7 @@ saga.run(watchAdmin);
 saga.run(watchAuth);
 saga.run(watchOrders);
 
-const app = (
+const APP = (
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
@@ -38,4 +38,4 @@ const app = (
   </Provider>
 );
 
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(APP, document.getElementById('root'));

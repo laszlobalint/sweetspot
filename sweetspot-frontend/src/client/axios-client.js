@@ -11,10 +11,13 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   config.headers.Authorization = token && `Bearer ${token}`;
+
   if (token && isTokenExpired(token)) {
     history.push('/logout');
+    localStorage.clear();
     toastr.warning('INAKTIVITÁS', 'Kérlek, jelentkezz be újra adminisztrátorként!', { timeOut: 8000 });
   }
+
   return config;
 });
 
