@@ -1,6 +1,24 @@
-import { Controller, Get, Post, Put, Delete, ParseIntPipe, Param, UseGuards, Body, ValidationPipe, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Res,
+  ParseIntPipe,
+  Param,
+  UseGuards,
+  Body,
+  ValidationPipe,
+  UsePipes,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
+import { imageFileFilter, editFileName } from '../file/file';
 import { ItemDto } from './item.dto';
 import { Item } from './item.entity';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
@@ -9,6 +27,31 @@ import { ItemService } from './item.service';
 @Controller('api/items')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
+
+  @Get('/upload/:image')
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  fetchUploadedFile(@Param('image') image: string, @Res() res: any): any {
+    return res.sendFile(image, { root: './assets' });
+  }
+
+  @Post('/upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './assets',
+        filename: editFileName,
+      }),
+      fileFilter: imageFileFilter,
+    }),
+  )
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  uploadFile(@UploadedFile() file: any): any {
+    const response = {
+      originalname: file.originalname,
+      filename: file.filename,
+    };
+    return response;
+  }
 
   @Get()
   getAllItems(): Promise<Item[]> {

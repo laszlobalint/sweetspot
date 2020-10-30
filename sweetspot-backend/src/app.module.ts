@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 import { RateLimiterInterceptor, RateLimiterModule } from 'nestjs-rate-limiter';
+import { MulterModule } from '@nestjs/platform-express';
 import * as config from 'config';
 
 import { typeOrmConfig } from './config/ormconfig';
@@ -45,6 +46,9 @@ const mailConf = config.get('mail');
           strict: true,
         },
       },
+    }),
+    MulterModule.register({
+      dest: './assets',
     }),
     AuthModule,
     OrdersModule,
