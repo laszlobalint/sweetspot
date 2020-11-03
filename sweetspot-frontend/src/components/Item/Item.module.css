@@ -104,11 +104,11 @@
 
 .Item .Content:hover .Text {
   opacity: 1;
-  transform: translateY(20vh);
-  -webkit-transform: translateY(20vh);
-  -moz-transform: translateY(20vh);
-  -o-transform: translateY(20vh);
-  -ms-transform: translateY(20vh);
+  transform: translateY(17vh);
+  -webkit-transform: translateY(17vh);
+  -moz-transform: translateY(17vh);
+  -o-transform: translateY(17vh);
+  -ms-transform: translateY(17vh);
 }
 
 .Price {
