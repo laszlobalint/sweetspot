@@ -31,5 +31,9 @@ export const checkValidity = (value, rules) => {
 
   if (rules.isPostalcode) isValid = parseInt(value) >= 11000 && parseInt(value) <= 38999 && isValid;
 
+  if (rules.isPositive) isValid = parseInt(value) > 0 && isValid;
+
+  if (rules.isBoolean) isValid = 'boolean' === typeof value && isValid;
+
   return isValid;
 };

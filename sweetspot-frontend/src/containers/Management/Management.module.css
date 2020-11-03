@@ -1,0 +1,36 @@
+@import '../../index.css';
+
+.Form {
+  width: 40%;
+  height: fit-content;
+  font-size: larger;
+  text-align: center;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border: 1px solid #eeeeee;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px var(--bg-dark);
+  background-color: var(--bg-light);
+}
+
+.Error {
+  color: #cc0033;
+}
+
+.Buttons > button {
+  padding: 0 1rem 0 1rem;
+}
+
+@media (max-width: 600px) {
+  .Form {
+    font-size: small;
+    width: 100%;
+  }
+
+  .Form > form {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+  }
+}
