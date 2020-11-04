@@ -30,3 +30,16 @@ export function* saveNewItemImageSaga(action) {
     toastr.error('HIBA LÉPETT FEL!', 'Nem sikerült a képet elmenteni. Próbáld újra.');
   }
 }
+
+export function* saveNewItemSaga(action) {
+  yield put(actions.saveNewItemInitialized());
+  try {
+    const response = yield axios.post(`${URL_ITEMS}`, action.item);
+    console.log(response.data);
+    yield put(actions.saveNewItemSuccess(response.data));
+    toastr.success('SIKERES TERMÉKFELTÖLTÉS!', 'Ellenőrizd le a terméklistát.');
+  } catch (error) {
+    yield put(actions.saveNewItemFailure(error.message));
+    toastr.error('HIBA LÉPETT FEL!', 'Nem sikerült a termékfeltöltés. Próbáld újra.');
+  }
+}

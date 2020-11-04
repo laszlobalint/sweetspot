@@ -3,7 +3,7 @@ export const managementControls = {
     elementType: 'input',
     elementConfig: {
       type: 'text',
-      placeholder: 'Írd be a megnevezését...',
+      placeholder: 'Add meg a termék elnevezését...',
     },
     label: 'Termék címe',
     value: '',
@@ -19,7 +19,7 @@ export const managementControls = {
   description: {
     elementType: 'textarea',
     elementConfig: {
-      placeholder: 'Írd le a termék leírását...',
+      placeholder: 'Add meg a termék leírását...',
       rows: 2,
       cols: 36,
     },
@@ -38,7 +38,6 @@ export const managementControls = {
     elementType: 'input',
     elementConfig: {
       type: 'number',
-      placeholder: 'Add meg a termék árát...',
     },
     value: 0,
     label: 'Termék ára (RSD)',

@@ -23,6 +23,12 @@ export const adminReducer = (state = initialState, action) => {
       return updateObject(state, { picture: action.fileData.filename, error: null, loading: false });
     case actionTypes.SAVE_ITEM_IMAGE_FAILURE:
       return updateObject(state, { picture: null, error: action.error.message, loading: false });
+    case actionTypes.SAVE_NEW_ITEM_INITIZALITED:
+      return updateObject(state, { error: null, loading: true });
+    case actionTypes.SAVE_NEW_ITEM_SUCCESS:
+      return updateObject(state, { error: null, loading: false, picture: null });
+    case actionTypes.SAVE_NEW_ITEM_FAILURE:
+      return updateObject(state, { error: action.error.message, loading: false, picture: null });
     default:
       return state;
   }

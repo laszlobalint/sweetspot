@@ -27,6 +27,8 @@ export const ordersReducer = (state = initialState, action) => {
       return updateObject(state, { basket: [], grandTotal: 0, error: null, loading: false });
     case actionTypes.SAVE_ORDER_FAILURE:
       return updateObject(state, { error: action.error.message, loading: false });
+    case actionTypes.SAVE_NEW_ITEM_SUCCESS:
+      return updateObject(state, { items: [...state.items, action.item], error: null, loading: false });
     default:
       return state;
   }

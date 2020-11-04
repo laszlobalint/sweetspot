@@ -12,8 +12,8 @@ export class ItemDto {
   description: string;
 
   @IsString()
-  @MinLength(4)
-  @MaxLength(50)
+  @MinLength(3)
+  @MaxLength(100)
   picture: string;
 
   @IsInt()

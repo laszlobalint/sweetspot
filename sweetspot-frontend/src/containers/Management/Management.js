@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Management.module.css';
+import * as actions from '../../store/actions';
 import { checkValidity, updateObject } from '../../shared/utility';
 import { managementControls } from './Management.input';
 import Input from '../../components/UI/Input/Input';
@@ -10,7 +11,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Cropper from '../../components/Cropper/Cropper';
 
 const Management = (props) => {
-  const { picture, loading, error } = props;
+  const { picture, loading, error, onSaveNewItem } = props;
 
   const [controls, setControls] = useState(managementControls);
   const [isValid, setIsValid] = useState(false);
@@ -62,8 +63,10 @@ const Management = (props) => {
       glutenfree: controls.glutenfree.value,
       sugarfree: controls.sugarfree.value,
       lactosefree: controls.lactosefree.value,
+      ingredients: [],
     };
-    console.log(item);
+
+    onSaveNewItem(item);
   };
 
   const formElements = [];
@@ -127,7 +130,9 @@ const mapStateToProps = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onSaveNewItem: (item) => dispatch(actions.saveNewItem(item)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Management);
