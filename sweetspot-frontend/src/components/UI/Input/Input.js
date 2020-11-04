@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './Input.module.css';
 
 const Input = (props) => {
-  const { elementConfig, elementType, value, changed, invalid, validate, touched, label } = props;
+  const { elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label } = props;
 
   let inputElement = null;
   let validationError = null;
@@ -17,7 +17,7 @@ const Input = (props) => {
 
   switch (elementType) {
     case 'input':
-      inputElement = <input className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} />;
+      inputElement = <input className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} disabled={disabled} />;
       break;
     case 'textarea':
       inputElement = <textarea className={inputClasses.join(' ')} {...elementConfig} value={value} onChange={changed} />;

@@ -1,21 +1,26 @@
 import React, { useState, useCallback, useRef } from 'react';
+import { connect } from 'react-redux';
 import ReactCrop from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
-import Aux from '../../hoc/Auxiliary/Auxiliary';
+import classes from './Cropper.module.css';
+import * as actions from '../../store/actions';
+import { generateFilename } from '../../shared/utility';
 import Button from '../UI/Button/Button';
 
 const Cropper = (props) => {
-  const [uploadedImage, setUploadedImage] = useState();
-  const imageRef = useRef(null);
-  const [crop, setCrop] = useState({ unit: '%', width: 70, aspect: 1 / 1 });
-  const [completedCrop, setCompletedCrop] = useState(null);
+  const { alt, onSaveItemImage } = props;
 
-  const onSelectFile = (event) => {
-    if (event.target.files && event.target.files.length > 0) {
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [crop, setCrop] = useState({ unit: '%', width: 50, height: 50, x: 25, y: 25, aspect: 1 / 1 });
+  const [completedCrop, setCompletedCrop] = useState(null);
+  const imageRef = useRef(null);
+
+  const onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener('load', () => setUploadedImage(reader.result));
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
@@ -23,24 +28,77 @@ const Cropper = (props) => {
     imageRef.current = img;
   }, []);
 
-  const uploadImageHandler = (event) => {
+  const onSendUploadableImage = (image, cropValues, event) => {
     event.preventDefault();
-    console.log(completedCrop);
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = cropValues.width;
+    canvas.height = cropValues.height;
+
+    ctx.drawImage(
+      image,
+      cropValues.x * scaleX,
+      cropValues.y * scaleY,
+      cropValues.width * scaleX,
+      cropValues.height * scaleY,
+      0,
+      0,
+      cropValues.width,
+      cropValues.height,
+    );
+
+    canvas.toBlob(
+      async (blob) => {
+        const file = new File([blob], generateFilename(alt), { lastModified: new Date() });
+        const formData = new FormData();
+        formData.append('file', file);
+
+        onSaveItemImage(formData);
+        setUploadedImage(null);
+        setCompletedCrop(null);
+      },
+      'image/png',
+      1,
+    );
   };
 
   return (
-    <Aux>
-      <input type="file" accept="image/*" onChange={onSelectFile} />
+    <div className={classes.Cropper}>
+      <div>
+        <input type="file" accept="image/*" onChange={onSelectFile} />
+      </div>
       <ReactCrop
         src={uploadedImage}
         onImageLoaded={onImageLoaded}
         crop={crop}
-        onChange={(cropped) => setCrop(cropped)}
-        onComplete={(cropped) => setCompletedCrop(cropped)}
+        onChange={(c) => setCrop(c)}
+        onComplete={(c) => setCompletedCrop(c)}
       />
-      <Button clicked={uploadImageHandler}>Képfeltöltés</Button>
-    </Aux>
+      <Button
+        onClick={(event) => onSendUploadableImage(imageRef.current, completedCrop, event)}
+        disabled={!completedCrop?.width || !completedCrop?.height || !alt}
+      >
+        Képfeltöltés
+      </Button>
+    </div>
   );
 };
 
-export default Cropper;
+const mapStateToProps = (props) => {
+  return {
+    picture: props.adminReducer.picture,
+    error: props.adminReducer.error,
+    loading: props.adminReducer.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSaveItemImage: (file) => dispatch(actions.saveItemImage(file)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cropper);

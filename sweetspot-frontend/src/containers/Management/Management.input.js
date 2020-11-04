@@ -13,6 +13,7 @@ export const managementControls = {
       maxLength: 50,
     },
     valid: false,
+    disabled: false,
     touched: false,
   },
   description: {
@@ -32,21 +33,7 @@ export const managementControls = {
     valid: false,
     touched: false,
   },
-  picture: {
-    elementType: 'input',
-    elementConfig: {
-      type: 'file',
-    },
-    value: '',
-    label: 'Kép URL-je',
-    validation: {
-      required: true,
-      minLength: 4,
-      maxLength: 50,
-    },
-    valid: false,
-    touched: true,
-  },
+
   price: {
     elementType: 'input',
     elementConfig: {
@@ -60,6 +47,7 @@ export const managementControls = {
       isPositive: true,
     },
     valid: false,
+    disabled: false,
     touched: false,
   },
   glutenfree: {
@@ -73,6 +61,7 @@ export const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    disabled: false,
     touched: false,
   },
   sugarfree: {
@@ -86,6 +75,7 @@ export const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    disabled: false,
     touched: false,
   },
   lactosefree: {
@@ -99,6 +89,23 @@ export const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    disabled: false,
+    touched: false,
+  },
+  picture: {
+    elementType: 'input',
+    elementConfig: {
+      type: 'text',
+    },
+    value: '',
+    label: 'Feltöltött fájlnév',
+    validation: {
+      required: true,
+      minLength: 3,
+      maxLength: 100,
+    },
+    valid: false,
+    disabled: true,
     touched: false,
   },
 };

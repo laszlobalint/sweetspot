@@ -4,6 +4,7 @@ import { updateObject } from '../../shared/utility';
 const initialState = {
   orders: [],
   items: [],
+  picture: null,
   error: null,
   loading: false,
 };
@@ -16,6 +17,12 @@ export const adminReducer = (state = initialState, action) => {
       return updateObject(state, { orders: filterOrders(action.orders), error: null, loading: false });
     case actionTypes.FETCH_ORDERS_ADMIN_FAILURE:
       return updateObject(state, { error: action.error.message, loading: false });
+    case actionTypes.SAVE_ITEM_IMAGE_INITIZALITED:
+      return updateObject(state, { error: null, loading: true });
+    case actionTypes.SAVE_ITEM_IMAGE_SUCCESS:
+      return updateObject(state, { picture: action.fileData.filename, error: null, loading: false });
+    case actionTypes.SAVE_ITEM_IMAGE_FAILURE:
+      return updateObject(state, { picture: null, error: action.error.message, loading: false });
     default:
       return state;
   }

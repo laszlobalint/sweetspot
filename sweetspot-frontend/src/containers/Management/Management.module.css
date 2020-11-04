@@ -1,5 +1,10 @@
 @import '../../index.css';
 
+.Management {
+  width: 100%;
+  height: auto;
+}
+
 .Form {
   width: 40%;
   height: fit-content;
@@ -18,7 +23,9 @@
   color: #cc0033;
 }
 
-.Buttons > button {
+.Buttons > button,
+.Management button {
+  margin: 1rem;
   padding: 0 1rem 0 1rem;
 }
 
@@ -31,6 +38,6 @@
   .Form > form {
     margin: 0;
     padding: 0;
-    line-height: 1;
+    line-height: 0.8;
   }
 }

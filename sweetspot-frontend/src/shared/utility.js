@@ -37,3 +37,12 @@ export const checkValidity = (value, rules) => {
 
   return isValid;
 };
+
+export const generateFilename = (title) => {
+  return `${title
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\s/g, '_')
+    .replace(/[\u0300-\u036f]/g, '')}.png`;
+};

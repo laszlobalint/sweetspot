@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {
   Controller,
   Get,
@@ -23,17 +24,18 @@ import { ItemDto } from './item.dto';
 import { Item } from './item.entity';
 import { JwtGuard } from '../auth/jwt/jwt.guard';
 import { ItemService } from './item.service';
+import { FileDto } from '../file/file.dto';
 
 @Controller('api/items')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Get('/upload/:image')
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   fetchUploadedFile(@Param('image') image: string, @Res() res: any): any {
     return res.sendFile(image, { root: './assets' });
   }
 
+  @UseGuards(JwtGuard)
   @Post('/upload')
   @UseInterceptors(
     FileInterceptor('file', {
@@ -44,13 +46,11 @@ export class ItemController {
       fileFilter: imageFileFilter,
     }),
   )
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  uploadFile(@UploadedFile() file: any): any {
-    const response = {
-      originalname: file.originalname,
+  uploadFile(@UploadedFile() file: any): FileDto {
+    return {
+      originalName: file.originalname,
       filename: file.filename,
-    };
-    return response;
+    } as FileDto;
   }
 
   @Get()

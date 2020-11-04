@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Management.module.css';
@@ -10,24 +10,28 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Cropper from '../../components/Cropper/Cropper';
 
 const Management = (props) => {
-  const { loading, error } = props;
+  const { picture, loading, error } = props;
 
   const [controls, setControls] = useState(managementControls);
   const [isValid, setIsValid] = useState(false);
 
-  const itemSaveHandler = (event) => {
-    event.preventDefault();
-    const item = {
-      title: controls.title.value,
-      description: controls.description.value,
-      picture: controls.picture.value,
-      price: Number(controls.price.value),
-      glutenfree: controls.glutenfree.value,
-      sugarfree: controls.sugarfree.value,
-      lactosefree: controls.lactosefree.value,
-    };
-    console.log(item);
-  };
+  useEffect(() => {
+    if (picture && !controls.picture.value) {
+      const updatedControls = updateObject(controls, {
+        picture: updateObject(controls['picture'], {
+          value: `http://localhost:3333/${picture}`,
+          valid: checkValidity(picture, controls['picture'].validation),
+          touched: true,
+        }),
+      });
+
+      let formIsValid = true;
+      for (let inputIdentifier in updatedControls) formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+
+      setControls(updatedControls);
+      setIsValid(formIsValid);
+    }
+  }, [picture, controls]);
 
   const inputChangedHandler = (event, controlName) => {
     const updatedControls = updateObject(controls, {
@@ -48,6 +52,20 @@ const Management = (props) => {
     setIsValid(formIsValid);
   };
 
+  const itemSaveHandler = (event) => {
+    event.preventDefault();
+    const item = {
+      title: controls.title.value,
+      description: controls.description.value,
+      picture: controls.picture.value,
+      price: Number(controls.price.value),
+      glutenfree: controls.glutenfree.value,
+      sugarfree: controls.sugarfree.value,
+      lactosefree: controls.lactosefree.value,
+    };
+    console.log(item);
+  };
+
   const formElements = [];
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
   let form = (
@@ -62,10 +80,10 @@ const Management = (props) => {
           invalid={!element.config.valid}
           validate={element.config.validation}
           touched={element.config.touched}
+          disabled={element.config.disabled}
           changed={(event) => inputChangedHandler(event, element.id)}
         />
       ))}
-      <Cropper path={managementControls.picture.value} alt={managementControls.title.value} />
       <div className={classes.Buttons}>
         <Button disabled={!isValid} onClick={itemSaveHandler}>
           Mentés
@@ -86,19 +104,25 @@ const Management = (props) => {
   if (error) errorMessage = <p className={classes.Error}>{error}</p>;
 
   return (
-    <article className={classes.Form}>
-      {errorMessage}
-      {form}
-    </article>
+    <div className={classes.Management}>
+      <article className={classes.Form}>
+        <p>
+          Előbb add meg a termék elnevezését, majd utána tölts fel egy képet, melyet négyzet formában körülvágsz. A sikeres feltöltés után
+          add meg a további adatokat, és mentsd el az új terméket.
+        </p>
+        {errorMessage}
+        {form}
+      </article>
+      <Cropper alt={controls.title.value} />
+    </div>
   );
 };
 
 const mapStateToProps = (props) => {
   return {
-    basket: props.ordersReducer.basket,
-    grandTotal: props.ordersReducer.grandTotal,
-    error: props.ordersReducer.error,
-    loading: props.ordersReducer.loading,
+    picture: props.adminReducer.picture,
+    error: props.adminReducer.error,
+    loading: props.adminReducer.loading,
   };
 };
 
@@ -107,7 +131,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Management);
-
-// https://www.npmjs.com/package/react-image-crop
 
 // <input value={props.row.values.name} onBlur={() => clicked(props.row.values)} />
