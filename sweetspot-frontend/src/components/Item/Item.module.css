@@ -20,6 +20,7 @@
 
 .Item div,
 .Item div > .Image {
+  cursor: pointer;
   padding: 0.3rem;
 }
 

@@ -3,7 +3,6 @@ import { updateObject } from '../../shared/utility';
 
 const initialState = {
   orders: [],
-  items: [],
   picture: null,
   error: null,
   loading: false,
@@ -28,6 +27,18 @@ export const adminReducer = (state = initialState, action) => {
     case actionTypes.SAVE_NEW_ITEM_SUCCESS:
       return updateObject(state, { error: null, loading: false, picture: null });
     case actionTypes.SAVE_NEW_ITEM_FAILURE:
+      return updateObject(state, { error: action.error.message, loading: false, picture: null });
+    case actionTypes.EDIT_ITEM_INITIZALITED:
+      return updateObject(state, { error: null, loading: true });
+    case actionTypes.EDIT_ITEM_SUCCESS:
+      return updateObject(state, { error: null, loading: false, picture: null });
+    case actionTypes.EDIT_ITEM_FAILURE:
+      return updateObject(state, { error: action.error.message, loading: false, picture: null });
+    case actionTypes.DELETE_ITEM_INITIALIZED:
+      return updateObject(state, { error: null, loading: true });
+    case actionTypes.DELETE_ITEM_SUCCESS:
+      return updateObject(state, { error: null, loading: false, picture: null });
+    case actionTypes.DELETE_ITEM_FAILURE:
       return updateObject(state, { error: action.error.message, loading: false, picture: null });
     default:
       return state;

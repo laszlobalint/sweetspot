@@ -1,6 +1,7 @@
 .Layout {
   display: grid;
   height: 100%;
+  min-height: 100vh;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto auto;
 }

@@ -6,6 +6,10 @@
   margin: 0 5% 3% 5%;
 }
 
+.Hide {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .Offers {
     margin: 0;

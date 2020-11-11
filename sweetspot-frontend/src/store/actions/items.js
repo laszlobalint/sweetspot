@@ -53,3 +53,57 @@ export const saveNewItemFailure = (error) => {
     error,
   };
 };
+
+export const editItem = (item) => {
+  return {
+    type: actionTypes.EDIT_ITEM,
+    item,
+  };
+};
+
+export const editItemInitialized = () => {
+  return {
+    type: actionTypes.EDIT_ITEM_INITIZALITED,
+  };
+};
+
+export const editItemSuccess = (item) => {
+  return {
+    type: actionTypes.EDIT_ITEM_SUCCESS,
+    item,
+  };
+};
+
+export const editItemFailure = (error) => {
+  return {
+    type: actionTypes.EDIT_ITEM_FAILURE,
+    error,
+  };
+};
+
+export const deleteItem = (id) => {
+  return {
+    type: actionTypes.DELETE_ITEM,
+    id,
+  };
+};
+
+export const deleteItemInitialized = () => {
+  return {
+    type: actionTypes.DELETE_ITEM_INITIALIZED,
+  };
+};
+
+export const deleteItemSuccess = (id) => {
+  return {
+    type: actionTypes.DELETE_ITEM_SUCCESS,
+    id,
+  };
+};
+
+export const deletetItemFailure = (error) => {
+  return {
+    type: actionTypes.DELETE_ITEM_FAILURE,
+    error,
+  };
+};

@@ -1,4 +1,4 @@
-export const managementControls = {
+export const uploadControls = {
   title: {
     elementType: 'input',
     elementConfig: {
@@ -33,6 +33,7 @@ export const managementControls = {
     valid: false,
     touched: false,
   },
+
   price: {
     elementType: 'input',
     elementConfig: {

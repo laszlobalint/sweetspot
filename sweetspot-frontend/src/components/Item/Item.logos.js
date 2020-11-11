@@ -10,6 +10,6 @@ export const ingredientsLogos = {
   glutenfree: { title: 'Gluténmentes', logo: glutenfreeLogo },
   sugar: { title: 'Cuktor tartalmaz', logo: sugarLogo },
   sugarfree: { title: 'Cukormentes', logo: sugarfreeLogo },
-  lactoseo: { title: 'Laktózt tartalmaz', logo: lactoseLogo },
-  lactosefree: { title: 'Laktózt tartalmaz', logo: lactosefreeLogo },
+  lactose: { title: 'Laktózt tartalmaz', logo: lactoseLogo },
+  lactosefree: { title: 'Laktózmentes', logo: lactosefreeLogo },
 };

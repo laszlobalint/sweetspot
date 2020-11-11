@@ -1,50 +1,38 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import classes from './Management.module.css';
+import classes from './Upload.module.css';
 import * as actions from '../../store/actions';
 import { checkValidity, updateObject } from '../../shared/utility';
-import { managementControls } from './Management.input';
+import { uploadControls } from './Upload.input';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Cropper from '../../components/Cropper/Cropper';
 
-const Management = (props) => {
-  const { picture, loading, error, onEditItem, onDeleteItem, location } = props;
+const Upload = (props) => {
+  const { picture, loading, error, onSaveNewItem } = props;
 
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-  const [controls, setControls] = useState(managementControls);
+  const [controls, setControls] = useState(uploadControls);
   const [isValid, setIsValid] = useState(false);
-  const ref = useRef(null);
-
-  const setInputValues = useCallback(() => {
-    if (location.state) {
-      controls.title.value = location.state.title;
-      controls.description.value = location.state.description;
-      controls.price.value = location.state.price;
-      controls.picture.value = location.state.picture;
-      controls.glutenfree.value = location.state.glutenfree;
-      controls.sugarfree.value = location.state.sugarfree;
-      controls.lactosefree.value = location.state.lactosefree;
-      controls.glutenfree.elementConfig.defaultChecked = location.state.glutenfree;
-      controls.sugarfree.elementConfig.defaultChecked = location.state.sugarfree;
-      controls.lactosefree.elementConfig.defaultChecked = location.state.lactosefree;
-      setIsValid(true);
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const checkPictureChange = useCallback(() => {
-    if (picture && picture !== controls.picture.value) controls.picture.value = picture;
-  }, [picture, controls]);
 
   useEffect(() => {
-    ref.current.scrollIntoView();
-    setInputValues();
-    checkPictureChange();
-    forceUpdate();
-  }, [checkPictureChange, setInputValues, forceUpdate]);
+    if (picture && !controls.picture.value) {
+      const updatedControls = updateObject(controls, {
+        picture: updateObject(controls['picture'], {
+          value: `http://localhost:3333/${picture}`,
+          valid: checkValidity(picture, controls['picture'].validation),
+          touched: true,
+        }),
+      });
+
+      let formIsValid = true;
+      for (let inputIdentifier in updatedControls) formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+
+      setControls(updatedControls);
+      setIsValid(formIsValid);
+    }
+  }, [picture, controls]);
 
   const inputChangedHandler = (event, controlName) => {
     const updatedControls = updateObject(controls, {
@@ -65,7 +53,7 @@ const Management = (props) => {
     setIsValid(formIsValid);
   };
 
-  const editItemHandler = (event) => {
+  const itemSaveHandler = (event) => {
     event.preventDefault();
     const item = {
       title: controls.title.value,
@@ -78,14 +66,11 @@ const Management = (props) => {
       ingredients: [],
     };
 
-    onEditItem(item);
+    onSaveNewItem(item);
   };
-
-  const deleteItemHandler = (id) => onDeleteItem(id);
 
   const formElements = [];
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
-
   let form = (
     <form>
       {formElements.map((element) => (
@@ -103,11 +88,8 @@ const Management = (props) => {
         />
       ))}
       <div className={classes.Buttons}>
-        <Button disabled={!isValid} onClick={editItemHandler}>
+        <Button disabled={!isValid} onClick={itemSaveHandler}>
           Mentés
-        </Button>
-        <Button type={'Warning'} disabled={!isValid} onClick={(element) => deleteItemHandler(element.id)}>
-          Törlés
         </Button>
       </div>
     </form>
@@ -125,9 +107,12 @@ const Management = (props) => {
   if (error) errorMessage = <p className={classes.Error}>{error}</p>;
 
   return (
-    <div ref={ref} className={classes.Management}>
+    <div className={classes.Upload}>
       <article className={classes.Form}>
-        <p>Lehetőséged van az adatok módosításra a már feltöltött terméknél. Vigyázz, hogy az adatok pontosak és egyértelműek legyenek.</p>
+        <p>
+          Előbb add meg a termék elnevezését, majd utána tölts fel egy képet, melyet négyzet formában körülvágsz. A sikeres feltöltés után
+          add meg a további adatokat, és mentsd el az új terméket.
+        </p>
         {errorMessage}
         {form}
       </article>
@@ -146,9 +131,8 @@ const mapStateToProps = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onEditItem: (item) => dispatch(actions.editItem(item)),
-    onDeleteItem: (id) => dispatch(actions.deleteItem(id)),
+    onSaveNewItem: (item) => dispatch(actions.saveNewItem(item)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Management);
+export default connect(mapStateToProps, mapDispatchToProps)(Upload);

@@ -23,6 +23,10 @@
   cursor: not-allowed;
 }
 
+.Warning {
+  color: #cc0033;
+}
+
 @media (max-width: 600px) {
   .Button {
     padding: 0 0.2rem 0 0.2rem;

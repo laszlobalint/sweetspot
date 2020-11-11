@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Offers.module.css';
@@ -10,9 +10,13 @@ import Item from '../../components/Item/Item';
 const Offers = React.memo((props) => {
   const { items, loading, onFetchOrderItems } = props;
 
+  const [isSelectedItem, setIsSelectedItem] = useState(false);
+
   useEffect(() => {
     onFetchOrderItems();
   }, [onFetchOrderItems]);
+
+  const onSelectedItemHandler = () => setIsSelectedItem(true);
 
   let fetchedItems = <Spinner />;
 
@@ -28,11 +32,12 @@ const Offers = React.memo((props) => {
         sugarfree={item.sugarfree}
         lactosefree={item.lactosefree}
         picture={item.picture}
+        onSelectedItem={onSelectedItemHandler}
       />
     ));
   }
 
-  return <article className={classes.Offers}>{fetchedItems}</article>;
+  return <article className={[classes.Offers, isSelectedItem && classes.Hide].join(' ')}>{fetchedItems}</article>;
 });
 
 const mapStateToProps = (state) => {

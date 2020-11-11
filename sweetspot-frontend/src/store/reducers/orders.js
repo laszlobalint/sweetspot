@@ -29,6 +29,10 @@ export const ordersReducer = (state = initialState, action) => {
       return updateObject(state, { error: action.error.message, loading: false });
     case actionTypes.SAVE_NEW_ITEM_SUCCESS:
       return updateObject(state, { items: [...state.items, action.item], error: null, loading: false });
+    case actionTypes.EDIT_ITEM_SUCCESS:
+      return updateObject(state, { items: [...state.items.filter((item) => item.id !== action.item.id), action.item] });
+    case actionTypes.DELETE_ITEM_SUCCESS:
+      return updateObject(state, { items: state.items.filter((item) => item.id !== action.id) });
     default:
       return state;
   }
