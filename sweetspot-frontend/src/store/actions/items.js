@@ -101,7 +101,7 @@ export const deleteItemSuccess = (id) => {
   };
 };
 
-export const deletetItemFailure = (error) => {
+export const deleteItemFailure = (error) => {
   return {
     type: actionTypes.DELETE_ITEM_FAILURE,
     error,

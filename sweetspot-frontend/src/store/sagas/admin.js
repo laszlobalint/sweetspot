@@ -3,6 +3,7 @@ import { toastr } from 'react-redux-toastr';
 
 import * as actions from '../actions';
 import axios from '../../client/axios-client';
+import history from '../../client/history';
 
 const URL_ITEMS = `api/items`;
 const URL_ORDERS = `api/orders`;
@@ -35,11 +36,46 @@ export function* saveNewItemSaga(action) {
   yield put(actions.saveNewItemInitialized());
   try {
     const response = yield axios.post(`${URL_ITEMS}`, action.item);
-    console.log(response.data);
     yield put(actions.saveNewItemSuccess(response.data));
     toastr.success('SIKERES TERMÉKFELTÖLTÉS!', 'Ellenőrizd le a terméklistát.');
+    setTimeout(() => {
+      history.push('/');
+      history.go(0);
+    }, 3000);
   } catch (error) {
     yield put(actions.saveNewItemFailure(error.message));
     toastr.error('HIBA LÉPETT FEL!', 'Nem sikerült a termékfeltöltés. Próbáld újra.');
+  }
+}
+
+export function* editItemSaga(action) {
+  yield put(actions.editItemInitialized());
+  try {
+    const response = yield axios.put(`${URL_ITEMS}/${action.item.id}`, action.item);
+    yield put(actions.editItemSuccess(response.data));
+    toastr.success('SIKERES TERMÉKMÓDOSÍTÁS!', 'Ellenőrizd le a terméklistát.');
+    setTimeout(() => {
+      history.push('/');
+      history.go(0);
+    }, 3000);
+  } catch (error) {
+    yield put(actions.editItemFailure(error.message));
+    toastr.error('HIBA LÉPETT FEL!', 'Nem sikerült a termékmódosítás. Próbáld újra.');
+  }
+}
+
+export function* deleteItemSaga(action) {
+  yield put(actions.deleteItemInitialized());
+  try {
+    const response = yield axios.delete(`${URL_ITEMS}/${action.id}`);
+    yield put(actions.deleteItemSuccess(response.data));
+    toastr.success('SIKERES TERMÉKTÖRLÉS!', 'Ellenőrizd le a terméklistát.');
+    setTimeout(() => {
+      history.push('/');
+      history.go(0);
+    }, 3000);
+  } catch (error) {
+    yield put(actions.deleteItemFailure(error.message));
+    toastr.error('HIBA LÉPETT FEL!', 'Nem sikerült a terméktörlés. Próbáld újra.');
   }
 }

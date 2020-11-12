@@ -1,7 +1,7 @@
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as actionTypes from '../actions/action-types';
-import { fetchOrdersAdminSaga, saveNewItemImageSaga, saveNewItemSaga } from './admin';
+import { fetchOrdersAdminSaga, saveNewItemImageSaga, saveNewItemSaga, editItemSaga, deleteItemSaga } from './admin';
 import { authenticateSaga, authenticateLogoutSaga } from './auth';
 import { fetchOrderItemsSaga, saveOrderSaga } from './orders';
 
@@ -10,6 +10,8 @@ export function* watchAdmin() {
     takeEvery(actionTypes.FETCH_ORDERS_ADMIN, fetchOrdersAdminSaga),
     takeEvery(actionTypes.SAVE_ITEM_IMAGE, saveNewItemImageSaga),
     takeLatest(actionTypes.SAVE_NEW_ITEM, saveNewItemSaga),
+    takeLatest(actionTypes.EDIT_ITEM, editItemSaga),
+    takeLatest(actionTypes.DELETE_ITEM, deleteItemSaga),
   ]);
 }
 

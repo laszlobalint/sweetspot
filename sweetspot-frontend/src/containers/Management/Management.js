@@ -21,6 +21,7 @@ const Management = (props) => {
 
   const setInputValues = useCallback(() => {
     if (location.state) {
+      controls.id.value = location.state.id;
       controls.title.value = location.state.title;
       controls.description.value = location.state.description;
       controls.price.value = location.state.price;
@@ -68,6 +69,7 @@ const Management = (props) => {
   const editItemHandler = (event) => {
     event.preventDefault();
     const item = {
+      id: controls.id.value,
       title: controls.title.value,
       description: controls.description.value,
       picture: controls.picture.value,
@@ -81,7 +83,10 @@ const Management = (props) => {
     onEditItem(item);
   };
 
-  const deleteItemHandler = (id) => onDeleteItem(id);
+  const deleteItemHandler = (event) => {
+    event.preventDefault();
+    onDeleteItem(controls.id.value);
+  };
 
   const formElements = [];
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
@@ -106,7 +111,7 @@ const Management = (props) => {
         <Button disabled={!isValid} onClick={editItemHandler}>
           Mentés
         </Button>
-        <Button type={'Warning'} disabled={!isValid} onClick={(element) => deleteItemHandler(element.id)}>
+        <Button type={'Warning'} onClick={deleteItemHandler}>
           Törlés
         </Button>
       </div>

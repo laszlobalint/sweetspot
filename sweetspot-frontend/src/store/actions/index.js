@@ -35,5 +35,5 @@ export {
   deleteItem,
   deleteItemInitialized,
   deleteItemSuccess,
-  deletetItemFailure,
+  deleteItemFailure,
 } from './items';

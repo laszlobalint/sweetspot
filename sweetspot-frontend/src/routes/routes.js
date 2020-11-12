@@ -25,7 +25,7 @@ const getRoutes = (authenticated) => {
       <Switch>
         <Route path="/admin" render={(props) => <Admin {...props} />} />
         <Route path="/offers" render={(props) => <Offers {...props} />} />
-        <Route path="/logout" render={(props) => <Logout {...props} />} />
+        <Route path="/logout" render={(props) => <Logout {...props} />} />z
         <Route path="/" exact component={Offers} />
         <Redirect to="/" />
       </Switch>

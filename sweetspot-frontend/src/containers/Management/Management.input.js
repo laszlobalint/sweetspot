@@ -1,4 +1,17 @@
 export const managementControls = {
+  id: {
+    elementType: 'input',
+    elementConfig: {
+      type: 'hidden',
+    },
+    value: 0,
+    validation: {
+      required: true,
+    },
+    valid: true,
+    disabled: true,
+    touched: true,
+  },
   title: {
     elementType: 'input',
     elementConfig: {

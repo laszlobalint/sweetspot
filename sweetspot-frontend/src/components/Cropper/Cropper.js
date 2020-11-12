@@ -12,7 +12,7 @@ const Cropper = (props) => {
   const { alt, onSaveItemImage } = props;
 
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [crop, setCrop] = useState({ unit: '%', width: 50, height: 50, x: 25, y: 25, aspect: 1 / 1 });
+  const [crop, setCrop] = useState({ unit: '%', aspect: 1 / 1 });
   const [completedCrop, setCompletedCrop] = useState(null);
   const imageRef = useRef(null);
 
