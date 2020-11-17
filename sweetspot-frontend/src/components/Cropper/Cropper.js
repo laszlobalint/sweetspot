@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import ReactCrop from 'react-image-crop';
+import { useTranslation } from 'react-i18next';
 
 import 'react-image-crop/dist/ReactCrop.css';
 import classes from './Cropper.module.css';
@@ -10,6 +11,8 @@ import Button from '../UI/Button/Button';
 
 const Cropper = (props) => {
   const { alt, onSaveItemImage } = props;
+
+  const { t } = useTranslation();
 
   const [uploadedImage, setUploadedImage] = useState(null);
   const [crop, setCrop] = useState({ unit: '%', aspect: 1 / 1 });
@@ -55,7 +58,6 @@ const Cropper = (props) => {
         const file = new File([blob], generateFilename(alt), { lastModified: new Date() });
         const formData = new FormData();
         formData.append('file', file);
-
         onSaveItemImage(formData);
         setUploadedImage(null);
         setCompletedCrop(null);
@@ -81,7 +83,7 @@ const Cropper = (props) => {
         onClick={(event) => onSendUploadableImage(imageRef.current, completedCrop, event)}
         disabled={!completedCrop?.width || !completedCrop?.height || !alt}
       >
-        Képfeltöltés
+        {t('picture-upload')}
       </Button>
     </div>
   );

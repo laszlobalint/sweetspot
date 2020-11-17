@@ -6,6 +6,7 @@
   font: inherit;
   font-weight: bold;
   cursor: pointer;
+  min-width: 80px;
   padding: 0 0.5rem 0 0.5rem;
   outline: none;
   border: 1px solid #000000;

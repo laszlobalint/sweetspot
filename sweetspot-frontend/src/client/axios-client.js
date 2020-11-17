@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { toastr } from 'react-redux-toastr';
 
 import history from './history';
 
@@ -15,7 +14,10 @@ instance.interceptors.request.use((config) => {
   if (token && isTokenExpired(token)) {
     history.push('/logout');
     localStorage.clear();
-    toastr.warning('INAKTIVITÁS', 'Kérlek, jelentkezz be újra adminisztrátorként!', { timeOut: 8000 });
+    setTimeout(() => {
+      history.push('/');
+      history.go(0);
+    }, 3000);
   }
 
   return config;

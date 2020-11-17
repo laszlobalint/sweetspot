@@ -1,0 +1,15 @@
+.LanguageSelector [type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.LanguageSelector [type='radio'] + img {
+  cursor: pointer;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.LanguageSelector [type='radio']:checked + img {
+  outline: 1px solid #000000;
+}

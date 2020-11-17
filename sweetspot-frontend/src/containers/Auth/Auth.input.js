@@ -1,4 +1,6 @@
-export const formControls = {
+import i18n from '../../shared/i18n';
+
+const formControls = {
   username: {
     elementType: 'input',
     elementConfig: {
@@ -32,3 +34,16 @@ export const formControls = {
     touched: false,
   },
 };
+
+const translate = () => {
+  formControls.username.elementConfig.placeholder = i18n.t('username-placeholder');
+  formControls.username.label = i18n.t('username');
+  formControls.password.elementConfig.placeholder = i18n.t('password-placeholder');
+  formControls.password.label = i18n.t('password');
+};
+
+translate();
+
+i18n.on('languageChanged init', () => translate());
+
+export default formControls;

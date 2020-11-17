@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './Input.module.css';
@@ -6,13 +7,15 @@ import classes from './Input.module.css';
 const Input = (props) => {
   const { elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label } = props;
 
+  const { t } = useTranslation();
+
   let inputElement = null;
   let validationError = null;
   const inputClasses = [classes.InputElement];
 
   if (invalid && validate && touched) {
     inputClasses.push(classes.Invalid);
-    validationError = <p className={classes.ValidationError}>Kérem, töltse ki a mezőt megfelelően!</p>;
+    validationError = <p className={classes.ValidationError}>{t('fill-properly')}</p>;
   }
 
   switch (elementType) {

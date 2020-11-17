@@ -1,4 +1,6 @@
-export const formControls = {
+import i18n from '../../../shared/i18n';
+
+const formControls = {
   name: {
     elementType: 'input',
     elementConfig: {
@@ -131,3 +133,28 @@ export const formControls = {
     touched: false,
   },
 };
+
+const translate = () => {
+  formControls.name.elementConfig.placeholder = `${i18n.t('full-name')} ${i18n.t('mandatory')}`;
+  formControls.name.label = i18n.t('name-placeholder');
+  formControls.phone.label = `${i18n.t('phone-number')} ${i18n.t('mandatory')}`;
+  formControls.email.elementConfig.placeholder = i18n.t('email-placeholder');
+  formControls.email.label = `${i18n.t('email-address')} ${i18n.t('mandatory')}`;
+  formControls.street.elementConfig.placeholder = i18n.t('street-placeholder');
+  formControls.street.label = `${i18n.t('street')}?`;
+  formControls.settlement.elementConfig.placeholder = `${i18n.t('settlement-placeholder')}?`;
+  formControls.settlement.label = `${i18n.t('settlement')}?`;
+  formControls.postalCode.elementConfig.placeholder = `${i18n.t('postal-code-placeholder')}?`;
+  formControls.postalCode.label = `${i18n.t('postal-code')}?`;
+  formControls.notes.elementConfig.placeholder = `${i18n.t('notes-placeholder')}?`;
+  formControls.notes.label = `${i18n.t('notes')}?`;
+  formControls.delivery.label = `${i18n.t('delivery')} ${i18n.t('mandatory')}`;
+  formControls.delivery.elementConfig.options[1].displayValue = `${i18n.t('home-delivery')}?`;
+  formControls.delivery.elementConfig.options[2].displayValue = `${i18n.t('pick-up')}?`;
+};
+
+translate();
+
+i18n.on('languageChanged init', () => translate());
+
+export default formControls;

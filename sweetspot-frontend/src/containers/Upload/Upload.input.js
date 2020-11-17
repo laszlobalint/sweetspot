@@ -1,4 +1,6 @@
-export const uploadControls = {
+import i18n from '../../shared/i18n';
+
+const uploadControls = {
   title: {
     elementType: 'input',
     elementConfig: {
@@ -108,3 +110,21 @@ export const uploadControls = {
     touched: false,
   },
 };
+
+const translate = () => {
+  uploadControls.title.elementConfig.placeholder = i18n.t('title-placeholder');
+  uploadControls.title.label = i18n.t('title');
+  uploadControls.description.elementConfig.placeholder = i18n.t('description-placeholder');
+  uploadControls.description.label = i18n.t('description');
+  uploadControls.price.label = i18n.t('price');
+  uploadControls.glutenfree.label = `${i18n.t('glutenfree')}?`;
+  uploadControls.sugarfree.label = `${i18n.t('sugarfree')}?`;
+  uploadControls.lactosefree.label = `${i18n.t('lactosefree')}?`;
+  uploadControls.picture.label = i18n.t('picture');
+};
+
+translate();
+
+i18n.on('languageChanged init', () => translate());
+
+export default uploadControls;

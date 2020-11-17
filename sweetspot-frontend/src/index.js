@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import ReduxToastr from 'react-redux-toastr';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 
+import './shared/i18n';
 import './index.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import 'react-datepicker/dist/react-datepicker.css';

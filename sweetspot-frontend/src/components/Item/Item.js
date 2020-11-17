@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './Item.module.css';
 import * as actions from '../../store/actions';
-import { ingredientsLogos } from './Item.logos';
+import ingredientsLogos from './Item.logos';
 import { numberWithDots } from '../../shared/utility';
 import Button from '../UI/Button/Button';
 import Number from '../UI/Number/Number';
@@ -14,6 +15,8 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 const Item = (props) => {
   const { id, title, description, picture, price, glutenfree, sugarfree, lactosefree, onAddedItems, authenticated, onSelectedItem } = props;
+
+  const { t } = useTranslation();
 
   const [quantity, setQuantity] = useState(1);
   const [isSelected, setIsSelected] = useState(false);
@@ -28,7 +31,7 @@ const Item = (props) => {
 
   const onAddedOrderItemsHandler = () => {
     onAddedItems(id, price, quantity);
-    toastr.info('Rendelés', 'Termék a kosárhoz adva.', { timeOut: 1500 });
+    toastr.info(t('ordering'), t('item-added'), { timeOut: 1500 });
   };
 
   const onItemSelectedHandler = () => {
@@ -51,12 +54,16 @@ const Item = (props) => {
           <div className={classes.Content}>
             <div className={classes.Text}>{title}</div>
           </div>
-          <div className={classes.ImagePrice}>{numberWithDots(price)} RSD</div>
+          <div className={classes.ImagePrice}>
+            {numberWithDots(price)} {t('currency')}
+          </div>
         </div>
         <div>
           <div className={classes.Title}>{title}</div>
           <div className={classes.Description}>{description}</div>
-          <div className={classes.Price}>{numberWithDots(price)} RSD</div>
+          <div className={classes.Price}>
+            {numberWithDots(price)} {t('currency')}
+          </div>
           <div className={classes.Icons}>
             {glutenfree ? (
               <img
@@ -83,7 +90,7 @@ const Item = (props) => {
             )}
           </div>
           <div className={classes.Navigation}>
-            <Button onClick={onAddedOrderItemsHandler}>Kosárba</Button>
+            <Button onClick={onAddedOrderItemsHandler}>{t('to-basket')}</Button>
             <Number onClickedMore={onIncreasedHandler} onClickedLess={onDecreasedHandler} value={quantity} onChanged={() => {}} />
           </div>
         </div>

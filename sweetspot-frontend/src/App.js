@@ -16,14 +16,16 @@ const App = (props) => {
     if (localStorage.getItem('token')) onAuthenticateReload(localStorage.getItem('token'));
   }, [onAuthenticateReload]);
 
-  const fallback = <article style={{ textAlign: 'center' }}>SweetSpot Rendelés betöltése...</article>;
+  const fallback = <article style={{ textAlign: 'center' }}>... | SweetSpot | ...</article>;
 
   return (
     <Aux>
       <Layout>
-        <Header authenticated={authenticated} grandTotal={grandTotal} />
-        <Suspense fallback={fallback}>{getRoutes(authenticated)}</Suspense>
-        <Footer />
+        <Suspense fallback={fallback}>
+          <Header authenticated={authenticated} grandTotal={grandTotal} />
+          {getRoutes(authenticated)}
+          <Footer />
+        </Suspense>
       </Layout>
     </Aux>
   );

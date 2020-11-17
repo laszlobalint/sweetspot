@@ -1,66 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useTable, useSortBy, useBlockLayout } from 'react-table';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './Orders.module.css';
-import { formatDate, formatDelivery, formatAddress, numberWithDots } from '../../shared/utility';
+import { formatDate, formatAddress, numberWithDots } from '../../shared/utility';
 
 const Orders = (props) => {
   const { data } = props;
 
+  const { t } = useTranslation();
+
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Név',
+        Header: t('name'),
         accessor: 'name',
       },
       {
-        Header: 'Telefonszám',
+        Header: t('phone-number'),
         accessor: 'phone',
         width: 130,
       },
       {
-        Header: 'E-mail cím',
+        Header: t('email-address'),
         accessor: 'email',
         width: 250,
       },
       {
-        Header: 'Lakcím',
+        Header: t('address-residental'),
         accessor: 'address',
         width: 220,
         Cell: (props) => <div>{formatAddress(props.value)}</div>,
       },
       {
-        Header: 'Végösszeg',
+        Header: t('grand-total'),
         accessor: 'grandTotal',
         width: 100,
         Cell: (props) => <div>{numberWithDots(props.value)} RSD</div>,
       },
       {
-        Header: 'Átveli dátum',
+        Header: t('delivery-date'),
         accessor: 'deliveryDate',
         width: 130,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
-        Header: 'Átvetel',
+        Header: t('delivery'),
         accessor: 'delivery',
-        Cell: (props) => <div>{formatDelivery(props.value)}</div>,
+        Cell: (props) => <div>{props.value === 'SHIPPING' ? t('home-delivery') : t('pick-up')}</div>,
       },
       {
-        Header: 'Megjegyzések',
+        Header: t('notes'),
         accessor: 'notes',
         width: 280,
       },
       {
-        Header: 'Rendelés kelte',
+        Header: t('created-date"'),
         accessor: 'createdDate',
         width: 130,
         Cell: (props) => <div>{formatDate(props.value)}</div>,
       },
       {
-        Header: 'Termékek',
+        Header: t('items'),
         accessor: 'items',
         width: 330,
         Cell: (props) => {
@@ -72,14 +75,16 @@ const Orders = (props) => {
           });
           return (
             <details>
-              <summary>Rendelt elemek ({items.length}):</summary>
+              <summary>
+                {t('ordered-items')} ({items.length}):
+              </summary>
               {result.slice(0, -2)}
             </details>
           );
         },
       },
     ],
-    [],
+    [t],
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(

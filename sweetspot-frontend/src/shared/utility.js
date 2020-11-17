@@ -10,8 +10,6 @@ export const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3}
 export const formatDate = (dateString) =>
   new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: '2-digit' });
 
-export const formatDelivery = (delivery) => (delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel');
-
 export const formatAddress = (address) => address.split(';')[0].replace('null ,', '');
 
 export const checkValidity = (value, rules) => {

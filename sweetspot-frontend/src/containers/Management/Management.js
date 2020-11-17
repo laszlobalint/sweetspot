@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Management.module.css';
 import * as actions from '../../store/actions';
 import { checkValidity, updateObject } from '../../shared/utility';
-import { managementControls } from './Management.input';
+import managementControls from './Management.input';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -12,6 +13,8 @@ import Cropper from '../../components/Cropper/Cropper';
 
 const Management = (props) => {
   const { picture, loading, error, onEditItem, onDeleteItem, location } = props;
+
+  const { t } = useTranslation();
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -109,10 +112,10 @@ const Management = (props) => {
       ))}
       <div className={classes.Buttons}>
         <Button disabled={!isValid} onClick={editItemHandler}>
-          Mentés
+          {t('save')}
         </Button>
         <Button type={'Warning'} onClick={deleteItemHandler}>
-          Törlés
+          {t('delete')}
         </Button>
       </div>
     </form>
@@ -122,7 +125,7 @@ const Management = (props) => {
     form = (
       <div>
         <Spinner />
-        <div>Mentés folyamatban...</div>
+        <div>{t('save-progress')}</div>
       </div>
     );
 
@@ -132,7 +135,7 @@ const Management = (props) => {
   return (
     <div ref={ref} className={classes.Management}>
       <article className={classes.Form}>
-        <p>Lehetőséged van az adatok módosításra a már feltöltött terméknél. Vigyázz, hogy az adatok pontosak és egyértelműek legyenek.</p>
+        <p>{t('management-infos')}</p>
         {errorMessage}
         {form}
       </article>

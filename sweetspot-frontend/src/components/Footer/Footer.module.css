@@ -29,6 +29,10 @@
   border-right: 0.1rem solid var(--font-light);
 }
 
+.Upper {
+  text-transform: uppercase;
+}
+
 @media (max-width: 600px) {
   .Footer {
     flex-direction: column;

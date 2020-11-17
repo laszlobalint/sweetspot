@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Upload.module.css';
 import * as actions from '../../store/actions';
 import { checkValidity, updateObject } from '../../shared/utility';
-import { uploadControls } from './Upload.input';
+import uploadControls from './Upload.input';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -12,6 +13,8 @@ import Cropper from '../../components/Cropper/Cropper';
 
 const Upload = (props) => {
   const { picture, loading, error, onSaveNewItem } = props;
+
+  const { t } = useTranslation();
 
   const [controls, setControls] = useState(uploadControls);
   const [isValid, setIsValid] = useState(false);
@@ -89,7 +92,7 @@ const Upload = (props) => {
       ))}
       <div className={classes.Buttons}>
         <Button disabled={!isValid} onClick={itemSaveHandler}>
-          Mentés
+          {t('save')}
         </Button>
       </div>
     </form>
@@ -99,7 +102,7 @@ const Upload = (props) => {
     form = (
       <div>
         <Spinner />
-        <div>Mentés folyamatban...</div>
+        <div>{t('save-progress')}</div>
       </div>
     );
 
@@ -109,10 +112,7 @@ const Upload = (props) => {
   return (
     <div className={classes.Upload}>
       <article className={classes.Form}>
-        <p>
-          Előbb add meg a termék elnevezését, majd utána tölts fel egy képet, melyet négyzet formában körülvágsz. A sikeres feltöltés után
-          add meg a további adatokat, és mentsd el az új terméket.
-        </p>
+        <p>{t('upload-infos')}</p>
         {errorMessage}
         {form}
       </article>

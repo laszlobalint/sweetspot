@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Form.module.css';
 import * as actions from '../../../store/actions';
@@ -7,11 +8,13 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Calendar from '../../../components/UI/Calendar/Calendar';
-import { formControls } from './Form.input';
+import formControls from './Form.input';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
 const Forms = (props) => {
   const { history, basket, grandTotal, error, loading, onSaveOrder } = props;
+
+  const { t } = useTranslation();
 
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);
@@ -39,6 +42,7 @@ const Forms = (props) => {
       notes: controls.notes.value,
       items: createItemsFromBasket(),
     };
+
     onSaveOrder(order);
   };
 
@@ -76,7 +80,7 @@ const Forms = (props) => {
   for (let key in controls) formElements.push({ id: key, config: controls[key] });
   let form = (
     <form>
-      <Calendar key="calendar" label="Átvétel ideje (kötelező)" onDateChangedHandler={(newDate) => setDate(newDate)} />
+      <Calendar key="calendar" label={t('mandatory-delivery')} onDateChangedHandler={(newDate) => setDate(newDate)} />
       {formElements.map((element) => (
         <Input
           key={element.id}
@@ -92,10 +96,10 @@ const Forms = (props) => {
       ))}
       <div key="formButton" className={classes.Buttons}>
         <Button key="backButton" onClick={checkoutCancelledHandler}>
-          Vissza
+          {t('back')}
         </Button>
         <Button key="orderButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
-          Rendelés
+          {t('ordering')}
         </Button>
       </div>
     </form>
@@ -105,7 +109,7 @@ const Forms = (props) => {
     form = (
       <div>
         <Spinner />
-        <div>Rendelés folyamatban...</div>
+        <div>{t('order-progress')}</div>
       </div>
     );
 

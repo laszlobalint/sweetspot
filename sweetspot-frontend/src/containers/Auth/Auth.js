@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import { formControls } from './Auth.input';
+import formControls from './Auth.input';
 import { updateObject, checkValidity } from '../../shared/utility';
 
 const Auth = (props) => {
   const { authenticated, error, loading, onAuthenticate } = props;
+
+  const { t } = useTranslation();
 
   const [controls, setControls] = useState(formControls);
 
@@ -47,7 +50,7 @@ const Auth = (props) => {
         changed={(event) => inputChangedHandler(event, element.id)}
       />
     )),
-    <Button key="loginButton">Bejelentkezés</Button>,
+    <Button key="loginButton">{t('login')}</Button>,
   ];
 
   if (loading) form = <Spinner />;

@@ -30,6 +30,10 @@
   cursor: pointer;
 }
 
+.Upper {
+  text-transform: uppercase;
+}
+
 @media (max-width: 600px) {
   .Summary {
     padding: 0.1rem 0 0.1rem 0;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './Summary.module.css';
@@ -9,6 +10,8 @@ import { numberWithDots } from '../../shared/utility';
 
 const Summary = (props) => {
   const { items, basket, grandTotal } = props;
+
+  const { t } = useTranslation();
 
   const basketItems = [];
   basket.forEach((element) => {
@@ -27,10 +30,14 @@ const Summary = (props) => {
             {item.description}
           </details>
         </li>
-        <li>{numberWithDots(item.price)} RSD</li>
+        <li>
+          {numberWithDots(item.price)} {t('currency')}
+        </li>
         <li className={classes.MinContainer}>
-          <p>{item.quantity} darab</p>
-          <img className={classes.DeleteIcon} src={deleteIcon} alt="Törlés" onClick={() => props.onClickedDelete(item.id)} />
+          <p>
+            {item.quantity} {t('piece')}
+          </p>
+          <img className={classes.DeleteIcon} src={deleteIcon} alt={t('delete')} onClick={() => props.onClickedDelete(item.id)} />
         </li>
       </ul>
     ));
@@ -38,12 +45,12 @@ const Summary = (props) => {
     let grandTotalItem = (
       <ul key={grandTotal} className={classes.Summary}>
         <li>
-          <b>ÖSSZESEN:</b>
+          <b className={classes.Upper}>{t('summary')}:</b>
         </li>
         <li></li>
         <li className={classes.MinContainer}>
           <b>{numberWithDots(grandTotal)}</b>
-          <b>&nbsp;RSD</b>
+          <b>&nbsp;{t('currency')}</b>
         </li>
       </ul>
     );

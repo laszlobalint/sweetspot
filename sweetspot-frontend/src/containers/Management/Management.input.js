@@ -1,4 +1,6 @@
-export const managementControls = {
+import i18n from '../../shared/i18n';
+
+const managementControls = {
   id: {
     elementType: 'input',
     elementConfig: {
@@ -18,7 +20,7 @@ export const managementControls = {
       type: 'text',
       placeholder: 'Add meg a termék elnevezését...',
     },
-    label: 'Termék címe',
+    label: 'Termék neve',
     value: '',
     validation: {
       required: true,
@@ -120,3 +122,21 @@ export const managementControls = {
     touched: false,
   },
 };
+
+const translate = () => {
+  managementControls.title.elementConfig.placeholder = i18n.t('title-placeholder');
+  managementControls.title.label = i18n.t('title');
+  managementControls.description.elementConfig.placeholder = i18n.t('description-placeholder');
+  managementControls.description.label = i18n.t('description');
+  managementControls.price.label = i18n.t('price');
+  managementControls.glutenfree.label = `${i18n.t('glutenfree')}?`;
+  managementControls.sugarfree.label = `${i18n.t('sugarfree')}?`;
+  managementControls.lactosefree.label = `${i18n.t('lactosefree')}?`;
+  managementControls.picture.label = i18n.t('picture');
+};
+
+translate();
+
+i18n.on('languageChanged init', () => translate());
+
+export default managementControls;
