@@ -7,7 +7,7 @@ const uploadControls = {
       type: 'text',
       placeholder: 'Add meg a termék MAGYAR elnevezését...',
     },
-    label: 'Termék címe',
+    label: 'Termék címe (HUN)',
     value: '',
     validation: {
       required: true,
@@ -24,7 +24,7 @@ const uploadControls = {
       type: 'text',
       placeholder: 'Add meg a termék SZERB elnevezését...',
     },
-    label: 'Termék címe',
+    label: 'Termék címe (SER)',
     value: '',
     validation: {
       required: true,
@@ -41,7 +41,7 @@ const uploadControls = {
       type: 'text',
       placeholder: 'Add meg a termék ANGOL elnevezését...',
     },
-    label: 'Termék címe',
+    label: 'Termék címe (ENG)',
     value: '',
     validation: {
       required: true,
@@ -60,7 +60,7 @@ const uploadControls = {
       cols: 36,
     },
     value: '',
-    label: 'Leírás',
+    label: 'Leírás (HUN)',
     validation: {
       required: true,
       minLength: 70,
@@ -77,7 +77,7 @@ const uploadControls = {
       cols: 36,
     },
     value: '',
-    label: 'Leírás',
+    label: 'Leírás (SER)',
     validation: {
       required: true,
       minLength: 70,
@@ -94,7 +94,7 @@ const uploadControls = {
       cols: 36,
     },
     value: '',
-    label: 'Leírás',
+    label: 'Leírás (ENG)',
     validation: {
       required: true,
       minLength: 70,

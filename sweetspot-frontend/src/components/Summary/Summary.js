@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './Summary.module.css';
+import i18n from '../../shared/i18n';
 import deleteIcon from '../../assets/ingredients/delete.png';
 import { numberWithDots } from '../../shared/utility';
 
@@ -16,7 +17,20 @@ const Summary = (props) => {
   const basketItems = [];
   basket.forEach((element) => {
     let item = items.find((i) => i.id === element.id);
-    basketItems.push({ id: item.id, title: item.title, description: item.description, price: item.price, quantity: element.quantity });
+    let title = '';
+    let description = '';
+    if (i18n.language === 'hu') {
+      title = item.titleHun;
+      description = item.descriptionHun;
+    } else if (i18n.language === 'sr') {
+      title = item.titleSer;
+      description = item.descriptionSer;
+    } else {
+      title = item.titleEng;
+      description = item.descriptionEng;
+    }
+
+    basketItems.push({ id: item.id, title, description, price: item.price, quantity: element.quantity });
   });
 
   let summary = <Redirect to="/offers" />;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import classes from './Item.module.css';
 import * as actions from '../../store/actions';
+import i18n from '../../shared/i18n';
 import ingredientsLogos from './Item.logos';
 import { numberWithDots } from '../../shared/utility';
 import Button from '../UI/Button/Button';
@@ -14,12 +15,56 @@ import { Redirect } from 'react-router-dom';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 const Item = (props) => {
-  const { id, title, description, picture, price, glutenfree, sugarfree, lactosefree, onAddedItems, authenticated, onSelectedItem } = props;
+  const {
+    id,
+    titleHun,
+    titleSer,
+    titleEng,
+    descriptionHun,
+    descriptionSer,
+    descriptionEng,
+    picture,
+    price,
+    glutenfree,
+    sugarfree,
+    lactosefree,
+    onAddedItems,
+    authenticated,
+    onSelectedItem,
+  } = props;
 
   const { t } = useTranslation();
 
   const [quantity, setQuantity] = useState(1);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
   const [isSelected, setIsSelected] = useState(false);
+
+  const setTitleAndDescription = useCallback(() => {
+    switch (i18n.language) {
+      case 'hu':
+        setTitle(titleHun);
+        setDescription(descriptionHun);
+        break;
+      case 'sr':
+        setTitle(titleSer);
+        setDescription(descriptionSer);
+        break;
+      case 'en':
+        setTitle(titleEng);
+        setDescription(descriptionEng);
+        break;
+      default:
+        setTitle(titleHun);
+        setDescription(descriptionHun);
+        break;
+    }
+  }, [titleHun, descriptionHun, titleSer, descriptionSer, titleEng, descriptionEng]);
+
+  useEffect(() => {
+    setTitleAndDescription();
+    i18n.on('languageChanged init', () => setTitleAndDescription());
+  }, [setTitleAndDescription]);
 
   const onIncreasedHandler = () => {
     if (quantity < 100) setQuantity(quantity + 1);
@@ -45,7 +90,23 @@ const Item = (props) => {
     <Aux>
       {isSelected && (
         <Redirect
-          to={{ pathname: '/admin/management/edit', state: { id, title, description, picture, price, glutenfree, sugarfree, lactosefree } }}
+          to={{
+            pathname: '/admin/management/edit',
+            state: {
+              id,
+              titleHun,
+              titleSer,
+              titleEng,
+              descriptionHun,
+              descriptionSer,
+              descriptionEng,
+              picture,
+              price,
+              glutenfree,
+              sugarfree,
+              lactosefree,
+            },
+          }}
         />
       )}
       <div className={classes.Item}>

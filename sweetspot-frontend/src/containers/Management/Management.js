@@ -147,7 +147,7 @@ const Management = (props) => {
         {errorMessage}
         {form}
       </article>
-      <Cropper alt={controls.title.value} />
+      <Cropper alt={controls.titleHun.value} />
     </div>
   );
 };
