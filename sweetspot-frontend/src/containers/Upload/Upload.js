@@ -59,8 +59,12 @@ const Upload = (props) => {
   const itemSaveHandler = (event) => {
     event.preventDefault();
     const item = {
-      title: controls.title.value,
-      description: controls.description.value,
+      titleHun: controls.titleHun.value,
+      titleSer: controls.titleSer.value,
+      titleEng: controls.titleEng.value,
+      descriptionHun: controls.descriptionHun.value,
+      descriptionSer: controls.descriptionSer.value,
+      descriptionEng: controls.descriptionEng.value,
       picture: controls.picture.value,
       price: Number(controls.price.value),
       glutenfree: controls.glutenfree.value,

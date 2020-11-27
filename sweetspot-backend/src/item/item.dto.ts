@@ -2,14 +2,34 @@ import { IsBoolean, IsArray, IsString, MinLength, MaxLength, IsInt, IsPositive }
 
 export class ItemDto {
   @IsString()
-  @MinLength(3)
+  @MinLength(10)
   @MaxLength(50)
-  title: string;
+  titleHun: string;
 
   @IsString()
-  @MinLength(3)
+  @MinLength(10)
+  @MaxLength(50)
+  titleSer: string;
+
+  @IsString()
+  @MinLength(10)
+  @MaxLength(50)
+  titleEng: string;
+
+  @IsString()
+  @MinLength(70)
   @MaxLength(100)
-  description: string;
+  descriptionHun: string;
+
+  @IsString()
+  @MinLength(70)
+  @MaxLength(100)
+  descriptionSer: string;
+
+  @IsString()
+  @MinLength(70)
+  @MaxLength(100)
+  descriptionEng: string;
 
   @IsString()
   @MinLength(3)

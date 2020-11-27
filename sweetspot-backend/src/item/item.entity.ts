@@ -10,10 +10,22 @@ export class Item extends BaseEntity {
   id: number;
 
   @Column({ type: 'text' })
-  title: string;
+  titleHun: string;
 
   @Column({ type: 'text' })
-  description: string;
+  titleSer: string;
+
+  @Column({ type: 'text' })
+  titleEng: string;
+
+  @Column({ type: 'text' })
+  descriptionHun: string;
+
+  @Column({ type: 'text' })
+  descriptionSer: string;
+
+  @Column({ type: 'text' })
+  descriptionEng: string;
 
   @Column({ type: 'text' })
   picture: string;

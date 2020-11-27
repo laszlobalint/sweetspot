@@ -25,8 +25,12 @@ const Offers = React.memo((props) => {
       <Item
         key={item.id}
         id={item.id}
-        title={item.title}
-        description={item.description}
+        titleHun={item.titleHun}
+        titleSer={item.titleSer}
+        titleEng={item.titleEng}
+        descriptionHun={item.descriptionHun}
+        descriptionSer={item.descriptionSer}
+        descriptionEng={item.descriptionEng}
         price={item.price}
         glutenfree={item.glutenfree}
         sugarfree={item.sugarfree}

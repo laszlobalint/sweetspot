@@ -25,8 +25,12 @@ const Management = (props) => {
   const setInputValues = useCallback(() => {
     if (location.state) {
       controls.id.value = location.state.id;
-      controls.title.value = location.state.title;
-      controls.description.value = location.state.description;
+      controls.titleHun.value = location.state.titleHun;
+      controls.titleSer.value = location.state.titleSer;
+      controls.titleEng.value = location.state.titleEng;
+      controls.descriptionHun.value = location.state.descriptionHun;
+      controls.descriptionSer.value = location.state.descriptionSer;
+      controls.descriptionEng.value = location.state.descriptionEng;
       controls.price.value = location.state.price;
       controls.picture.value = location.state.picture;
       controls.glutenfree.value = location.state.glutenfree;
@@ -73,8 +77,12 @@ const Management = (props) => {
     event.preventDefault();
     const item = {
       id: controls.id.value,
-      title: controls.title.value,
-      description: controls.description.value,
+      titleHun: controls.titleHun.value,
+      titleSer: controls.titleSer.value,
+      titleEng: controls.titleEng.value,
+      descriptionHun: controls.descriptionHun.value,
+      descriptionSer: controls.descriptionSer.value,
+      descriptionEng: controls.descriptionEng.value,
       picture: controls.picture.value,
       price: Number(controls.price.value),
       glutenfree: controls.glutenfree.value,

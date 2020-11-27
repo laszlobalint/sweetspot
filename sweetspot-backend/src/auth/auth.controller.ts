@@ -1,6 +1,6 @@
 import { Controller, Body, Post, ValidationPipe, UseGuards, Put, UsePipes, ParseIntPipe, Param, Delete } from '@nestjs/common';
-import { RateLimit } from 'nestjs-rate-limiter';
 import { DeleteResult } from 'typeorm';
+import { RateLimit } from 'nestjs-rate-limiter';
 
 import { AuthDto, AccessToken, Logout } from './auth.dto';
 import { User } from './auth.entity';

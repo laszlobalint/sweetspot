@@ -13,12 +13,31 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async createItem(createItemDto: ItemDto): Promise<Item> {
-    const { title, description, picture, price, glutenfree, sugarfree, lactosefree, ingredients } = createItemDto;
+    const {
+      titleHun,
+      titleSer,
+      titleEng,
+      descriptionHun,
+      descriptionSer,
+      descriptionEng,
+      picture,
+      price,
+      glutenfree,
+      sugarfree,
+      lactosefree,
+      ingredients,
+    } = createItemDto;
+
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
+
     if (ingredientsForItem.length === ingredients.length) {
       const item = new Item({
-        title,
-        description,
+        titleHun,
+        titleSer,
+        titleEng,
+        descriptionHun,
+        descriptionSer,
+        descriptionEng,
         picture,
         price,
         glutenfree,
@@ -27,6 +46,7 @@ export class ItemRepository extends Repository<Item> {
         ingredients: ingredientsForItem,
         orders: [],
       });
+
       return item.save();
     } else {
       throw new NotFoundException('Could not find all the ingredients!');
@@ -34,17 +54,37 @@ export class ItemRepository extends Repository<Item> {
   }
 
   async updateItem(item: Item, updateItemDto: ItemDto): Promise<Item> {
-    const { title, description, picture, price, glutenfree, sugarfree, lactosefree, ingredients } = updateItemDto;
+    const {
+      titleHun,
+      titleSer,
+      titleEng,
+      descriptionHun,
+      descriptionSer,
+      descriptionEng,
+      picture,
+      price,
+      glutenfree,
+      sugarfree,
+      lactosefree,
+      ingredients,
+    } = updateItemDto;
+
     const ingredientsForItem = await this.ingredientRepository.findByIds(ingredients, { relations: ['items'] });
+
     if (ingredientsForItem.length === ingredients.length) {
-      item.title = title;
-      item.description = description;
+      item.titleHun = titleHun;
+      item.titleSer = titleSer;
+      item.titleEng = titleEng;
+      item.descriptionHun = descriptionHun;
+      item.descriptionSer = descriptionSer;
+      item.descriptionEng = descriptionEng;
       item.picture = picture;
       item.price = price;
       item.glutenfree = glutenfree;
       item.sugarfree = sugarfree;
       item.lactosefree = lactosefree;
       item.ingredients = ingredientsForItem;
+
       return item.save();
     } else {
       throw new NotFoundException('Could not find all the ingredients!');

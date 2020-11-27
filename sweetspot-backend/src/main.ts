@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import * as config from 'config';
 import * as helmet from 'helmet';
+import * as config from 'config';
 
 import { AppModule } from './app.module';
 
@@ -11,4 +11,5 @@ async function bootstrap(): Promise<void> {
   app.use(helmet());
   await app.listen(process.env.PORT || server.port);
 }
+
 bootstrap();
