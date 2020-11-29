@@ -28,6 +28,7 @@ const managementControls = {
       maxLength: 50,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 10, max (char): 50',
     disabled: false,
     touched: false,
   },
@@ -45,6 +46,7 @@ const managementControls = {
       maxLength: 50,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 10, max (char): 50',
     disabled: false,
     touched: false,
   },
@@ -62,6 +64,7 @@ const managementControls = {
       maxLength: 50,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 10, max (char): 50',
     disabled: false,
     touched: false,
   },
@@ -80,6 +83,7 @@ const managementControls = {
       maxLength: 100,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 70, max (char): 100',
     touched: false,
   },
   descriptionSer: {
@@ -97,6 +101,7 @@ const managementControls = {
       maxLength: 100,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 70, max (char): 100',
     touched: false,
   },
   descriptionEng: {
@@ -114,6 +119,7 @@ const managementControls = {
       maxLength: 100,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 70, max (char): 100',
     touched: false,
   },
   price: {
@@ -128,6 +134,7 @@ const managementControls = {
       isPositive: true,
     },
     valid: false,
+    errorMessage: 'Info: positive number',
     disabled: false,
     touched: false,
   },
@@ -142,6 +149,7 @@ const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    errorMessage: 'Info: true or false',
     disabled: false,
     touched: false,
   },
@@ -156,6 +164,7 @@ const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    errorMessage: 'Info: true or false',
     disabled: false,
     touched: false,
   },
@@ -170,6 +179,7 @@ const managementControls = {
       isBoolean: true,
     },
     valid: true,
+    errorMessage: 'Info: true or false',
     disabled: false,
     touched: false,
   },
@@ -186,16 +196,25 @@ const managementControls = {
       maxLength: 100,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 3, max (char): 100',
     disabled: true,
     touched: false,
   },
 };
 
 const translate = () => {
-  managementControls.title.elementConfig.placeholder = i18n.t('title-placeholder');
-  managementControls.title.label = i18n.t('title');
-  managementControls.description.elementConfig.placeholder = i18n.t('description-placeholder');
-  managementControls.description.label = i18n.t('description');
+  managementControls.titleHun.elementConfig.placeholder = i18n.t('title-hun-placeholder');
+  managementControls.titleHun.label = i18n.t('title-hun');
+  managementControls.descriptionHun.elementConfig.placeholder = i18n.t('description-hun-placeholder');
+  managementControls.descriptionHun.label = i18n.t('description-hun');
+  managementControls.titleSer.elementConfig.placeholder = i18n.t('title-ser-placeholder');
+  managementControls.titleSer.label = i18n.t('title-ser');
+  managementControls.descriptionSer.elementConfig.placeholder = i18n.t('description-ser-placeholder');
+  managementControls.descriptionSer.label = i18n.t('description-ser');
+  managementControls.titleEng.elementConfig.placeholder = i18n.t('title-eng-placeholder');
+  managementControls.titleEng.label = i18n.t('title-eng');
+  managementControls.descriptionEng.elementConfig.placeholder = i18n.t('description-eng-placeholder');
+  managementControls.descriptionEng.label = i18n.t('description-eng');
   managementControls.price.label = i18n.t('price');
   managementControls.glutenfree.label = `${i18n.t('glutenfree')}?`;
   managementControls.sugarfree.label = `${i18n.t('sugarfree')}?`;

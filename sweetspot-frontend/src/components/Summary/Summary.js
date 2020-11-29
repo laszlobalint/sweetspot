@@ -14,24 +14,29 @@ const Summary = (props) => {
 
   const { t } = useTranslation();
 
-  const basketItems = [];
-  basket.forEach((element) => {
-    let item = items.find((i) => i.id === element.id);
-    let title = '';
-    let description = '';
-    if (i18n.language === 'hu') {
-      title = item.titleHun;
-      description = item.descriptionHun;
-    } else if (i18n.language === 'sr') {
-      title = item.titleSer;
-      description = item.descriptionSer;
-    } else {
-      title = item.titleEng;
-      description = item.descriptionEng;
-    }
+  const initializeBasket = () => {
+    const b = [];
+    basket.forEach((element) => {
+      let item = items.find((i) => i.id === element.id);
+      let title = '';
+      let description = '';
+      if (i18n.language === 'hu') {
+        title = item.titleHun;
+        description = item.descriptionHun;
+      } else if (i18n.language === 'sr') {
+        title = item.titleSer;
+        description = item.descriptionSer;
+      } else {
+        title = item.titleEng;
+        description = item.descriptionEng;
+      }
+      b.push({ id: item.id, title, description, price: item.price, quantity: element.quantity });
+    });
 
-    basketItems.push({ id: item.id, title, description, price: item.price, quantity: element.quantity });
-  });
+    return b;
+  };
+
+  const basketItems = initializeBasket();
 
   let summary = <Redirect to="/offers" />;
 

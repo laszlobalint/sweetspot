@@ -1,27 +1,28 @@
 import i18n from 'i18next';
 import Backend from 'i18next-xhr-backend';
+import detector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 i18n
+  .use(detector)
   .use(Backend)
   .use(initReactI18next)
   .init({
     lng: 'hu',
-    backend: {
-      loadPath: '/i18n/{{ns}}/{{lng}}.json',
-      crossDomain: true,
-    },
-    fallbackLng: 'sr',
+    fallbackLng: 'en',
     debug: false,
-    ns: ['translations'],
-    defaultNS: 'translations',
+    nsSeparator: false,
     keySeparator: false,
     interpolation: {
       escapeValue: false,
-      formatSeparator: ',',
     },
     react: {
       wait: true,
+    },
+    ns: ['translations'],
+    defaultNS: 'translations',
+    backend: {
+      loadPath: 'i18n/{{ns}}/{{lng}}.json',
     },
   });
 

@@ -15,7 +15,6 @@ const Auth = (props) => {
   const { authenticated, error, loading, onAuthenticate } = props;
 
   const { t } = useTranslation();
-
   const [controls, setControls] = useState(formControls);
 
   const inputChangedHandler = (event, controlName) => {
@@ -46,6 +45,7 @@ const Auth = (props) => {
         label={element.config.label}
         invalid={!element.config.valid}
         validate={element.config.validation}
+        errorMessage={element.config.errorMessage}
         touched={element.config.touched}
         changed={(event) => inputChangedHandler(event, element.id)}
       />

@@ -1,12 +1,7 @@
 import React from 'react';
 
 import classes from './Layout.module.css';
-import Aux from '../Auxiliary/Auxiliary';
 
-const Layout = (props) => (
-  <Aux>
-    <main className={classes.Layout}>{props.children}</main>
-  </Aux>
-);
+const Layout = (props) => <main className={classes.Layout}>{props.children}</main>;
 
 export default Layout;

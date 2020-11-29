@@ -34,7 +34,6 @@ const Item = (props) => {
   } = props;
 
   const { t } = useTranslation();
-
   const [quantity, setQuantity] = useState(1);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);

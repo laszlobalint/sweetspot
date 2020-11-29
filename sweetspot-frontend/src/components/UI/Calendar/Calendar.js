@@ -12,13 +12,11 @@ import i18n from '../../../shared/i18n';
 registerLocale('hu', hu);
 registerLocale('sr-Latn', sr);
 registerLocale('en-GB', en);
-registerLocale('hu', hu);
 
 const Calendar = React.memo((props) => {
   const { label, onDateChangedHandler } = props;
 
   const { t } = useTranslation();
-
   const [date, setDate] = useState(null);
 
   const isWeekend = (date) => {

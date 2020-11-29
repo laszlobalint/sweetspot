@@ -15,6 +15,7 @@ const formControls = {
       maxLength: 30,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 4, max (char): 30',
     touched: false,
   },
   password: {
@@ -31,6 +32,7 @@ const formControls = {
       maxLength: 30,
     },
     valid: false,
+    errorMessage: 'Info: min (char): 8, max (char): 30',
     touched: false,
   },
 };

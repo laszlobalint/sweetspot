@@ -14,6 +14,7 @@ export const formatAddress = (address) => address.split(';')[0].replace('null ,'
 
 export const checkValidity = (value, rules) => {
   let isValid = true;
+
   if (!rules) return true;
 
   if (rules.required) isValid = value.trim() !== '' && isValid;
@@ -22,10 +23,11 @@ export const checkValidity = (value, rules) => {
 
   if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
 
-  if (rules.isEmail) {
-    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    isValid = pattern.test(value) && isValid;
-  }
+  if (rules.isEmail)
+    isValid =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
+        value,
+      ) && isValid;
 
   if (rules.isPostalcode) isValid = parseInt(value) >= 11000 && parseInt(value) <= 38999 && isValid;
 
@@ -37,7 +39,7 @@ export const checkValidity = (value, rules) => {
 };
 
 export const generateFilename = (title) => {
-  return `${title
+  return `http://localhost:3333/${title
     .toString()
     .toLowerCase()
     .normalize('NFD')

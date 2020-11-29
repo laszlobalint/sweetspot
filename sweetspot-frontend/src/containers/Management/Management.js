@@ -15,7 +15,6 @@ const Management = (props) => {
   const { picture, loading, error, onEditItem, onDeleteItem, location } = props;
 
   const { t } = useTranslation();
-
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
   const [controls, setControls] = useState(managementControls);
@@ -84,7 +83,7 @@ const Management = (props) => {
       descriptionSer: controls.descriptionSer.value,
       descriptionEng: controls.descriptionEng.value,
       picture: controls.picture.value,
-      price: Number(controls.price.value),
+      price: +controls.price.value,
       glutenfree: controls.glutenfree.value,
       sugarfree: controls.sugarfree.value,
       lactosefree: controls.lactosefree.value,
@@ -113,6 +112,7 @@ const Management = (props) => {
           label={element.config.label}
           invalid={!element.config.valid}
           validate={element.config.validation}
+          errorMessage={element.config.errorMessage}
           touched={element.config.touched}
           disabled={element.config.disabled}
           changed={(event) => inputChangedHandler(event, element.id)}

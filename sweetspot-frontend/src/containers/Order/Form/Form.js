@@ -15,10 +15,10 @@ const Forms = (props) => {
   const { history, basket, grandTotal, error, loading, onSaveOrder } = props;
 
   const { t } = useTranslation();
-
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);
   const [isValid, setIsValid] = useState(false);
+  const [country] = useState('SERBIA')[0];
 
   const checkoutCancelledHandler = () => {
     history.push('/order');
@@ -34,9 +34,9 @@ const Forms = (props) => {
         street: controls.street.value,
         settlement: controls.settlement.value,
         postalCode: parseInt(controls.postalCode.value),
-        country: 'SERBIA',
+        country,
       },
-      grandTotal: Number(grandTotal),
+      grandTotal: +grandTotal,
       deliveryDate: date.toISOString(),
       delivery: controls.delivery.value,
       notes: controls.notes.value,
@@ -90,6 +90,7 @@ const Forms = (props) => {
           label={element.config.label}
           invalid={!element.config.valid}
           validate={element.config.validation}
+          errorMessage={element.config.errorMessage}
           touched={element.config.touched}
           changed={(event) => inputChangedHandler(event, element.id)}
         />

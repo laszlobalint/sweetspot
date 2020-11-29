@@ -13,7 +13,6 @@ const Cropper = (props) => {
   const { alt, onSaveItemImage } = props;
 
   const { t } = useTranslation();
-
   const [uploadedImage, setUploadedImage] = useState(null);
   const [crop, setCrop] = useState({ unit: '%', aspect: 1 / 1 });
   const [completedCrop, setCompletedCrop] = useState(null);

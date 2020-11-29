@@ -11,7 +11,6 @@ const Orders = (props) => {
   const { data } = props;
 
   const { t } = useTranslation();
-
   const columns = React.useMemo(
     () => [
       {
@@ -57,7 +56,7 @@ const Orders = (props) => {
         width: 280,
       },
       {
-        Header: t('created-date"'),
+        Header: t('created-date'),
         accessor: 'createdDate',
         width: 130,
         Cell: (props) => <div>{formatDate(props.value)}</div>,

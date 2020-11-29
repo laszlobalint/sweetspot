@@ -15,7 +15,6 @@ const Upload = (props) => {
   const { picture, loading, error, onSaveNewItem } = props;
 
   const { t } = useTranslation();
-
   const [controls, setControls] = useState(uploadControls);
   const [isValid, setIsValid] = useState(false);
 
@@ -23,7 +22,7 @@ const Upload = (props) => {
     if (picture && !controls.picture.value) {
       const updatedControls = updateObject(controls, {
         picture: updateObject(controls['picture'], {
-          value: `http://localhost:3333/${picture}`,
+          value: picture,
           valid: checkValidity(picture, controls['picture'].validation),
           touched: true,
         }),
@@ -66,7 +65,7 @@ const Upload = (props) => {
       descriptionSer: controls.descriptionSer.value,
       descriptionEng: controls.descriptionEng.value,
       picture: controls.picture.value,
-      price: Number(controls.price.value),
+      price: +controls.price.value,
       glutenfree: controls.glutenfree.value,
       sugarfree: controls.sugarfree.value,
       lactosefree: controls.lactosefree.value,
@@ -89,6 +88,7 @@ const Upload = (props) => {
           label={element.config.label}
           invalid={!element.config.valid}
           validate={element.config.validation}
+          errorMessage={element.config.errorMessage}
           touched={element.config.touched}
           disabled={element.config.disabled}
           changed={(event) => inputChangedHandler(event, element.id)}
@@ -120,7 +120,7 @@ const Upload = (props) => {
         {errorMessage}
         {form}
       </article>
-      <Cropper alt={controls.title.value} />
+      <Cropper alt={controls.titleHun.value} />
     </div>
   );
 };

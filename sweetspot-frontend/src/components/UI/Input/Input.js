@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classes from './Input.module.css';
 
 const Input = (props) => {
-  const { elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label } = props;
+  const { elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label, errorMessage } = props;
 
   const { t } = useTranslation();
 
@@ -15,7 +15,13 @@ const Input = (props) => {
 
   if (invalid && validate && touched) {
     inputClasses.push(classes.Invalid);
-    validationError = <p className={classes.ValidationError}>{t('fill-properly')}</p>;
+    validationError = (
+      <p className={classes.ValidationError}>
+        {t('fill-properly')}
+        <br />
+        <p>{errorMessage}</p>
+      </p>
+    );
   }
 
   switch (elementType) {
