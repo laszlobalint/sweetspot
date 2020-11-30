@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinTable, ManyToMany } from 'typeorm';
 
-import { Delivery } from './order.dto';
+import { Delivery, Language } from './order.dto';
 import { Item } from '../item/item.entity';
 
 @Entity()
@@ -49,6 +49,13 @@ export class Order extends BaseEntity {
   )
   @JoinTable()
   items: Item[];
+
+  @Column({
+    type: 'enum',
+    enum: Language,
+    default: Language.HU,
+  })
+  language: Language;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdDate: Date;

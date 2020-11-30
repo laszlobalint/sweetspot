@@ -16,11 +16,11 @@ const Input = (props) => {
   if (invalid && validate && touched) {
     inputClasses.push(classes.Invalid);
     validationError = (
-      <p className={classes.ValidationError}>
+      <div className={classes.ValidationError}>
         {t('fill-properly')}
         <br />
         <p>{errorMessage}</p>
-      </p>
+      </div>
     );
   }
 

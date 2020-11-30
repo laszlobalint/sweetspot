@@ -34,8 +34,12 @@ const Order = (props) => {
       <Summary onClickedDelete={(id) => removeOrderItemsHandler(id)} />
       {history.location.pathname === '/order' && (
         <div className={classes.Buttons}>
-          <Button onClick={onCancelledHandler}>{t('cancel')}</Button>
-          <Button onClick={onContinuedHandler}>{t('continue')}</Button>
+          <Button type="button" onClick={onCancelledHandler}>
+            {t('cancel')}
+          </Button>
+          <Button type="button" onClick={onContinuedHandler}>
+            {t('continue')}
+          </Button>
         </div>
       )}
       <Route path={`${match.path}/form`} component={Form} />

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import classes from './Form.module.css';
 import * as actions from '../../../store/actions';
+import i18n from '../../../shared/i18n';
 import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -18,7 +19,7 @@ const Forms = (props) => {
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);
   const [isValid, setIsValid] = useState(false);
-  const [country] = useState('SERBIA')[0];
+  const [country] = useState('SERBIA');
 
   const checkoutCancelledHandler = () => {
     history.push('/order');
@@ -41,6 +42,7 @@ const Forms = (props) => {
       delivery: controls.delivery.value,
       notes: controls.notes.value,
       items: createItemsFromBasket(),
+      language: i18n.language.toUpperCase(),
     };
 
     onSaveOrder(order);
@@ -96,10 +98,10 @@ const Forms = (props) => {
         />
       ))}
       <div key="formButton" className={classes.Buttons}>
-        <Button key="backButton" onClick={checkoutCancelledHandler}>
+        <Button key="backButton" type="button" onClick={checkoutCancelledHandler}>
           {t('back')}
         </Button>
-        <Button key="orderButton" disabled={!isValid} onClick={checkoutContinuedHandler}>
+        <Button key="orderButton" type="submit" disabled={!isValid} onClick={checkoutContinuedHandler}>
           {t('ordering')}
         </Button>
       </div>

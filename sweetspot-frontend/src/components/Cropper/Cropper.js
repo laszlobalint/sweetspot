@@ -79,6 +79,7 @@ const Cropper = (props) => {
         onComplete={(c) => setCompletedCrop(c)}
       />
       <Button
+        type="button"
         onClick={(event) => onSendUploadableImage(imageRef.current, completedCrop, event)}
         disabled={!completedCrop?.width || !completedCrop?.height || !alt}
       >

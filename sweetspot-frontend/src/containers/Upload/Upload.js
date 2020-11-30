@@ -95,7 +95,7 @@ const Upload = (props) => {
         />
       ))}
       <div className={classes.Buttons}>
-        <Button disabled={!isValid} onClick={itemSaveHandler}>
+        <Button type="submit" disabled={!isValid} onClick={itemSaveHandler}>
           {t('save')}
         </Button>
       </div>

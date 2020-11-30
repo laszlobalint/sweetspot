@@ -17,15 +17,15 @@ export class OrderRepository extends Repository<Order> {
   }
 
   async createOrder(createOrderDto: OrderDto, items: Item[]): Promise<Order> {
-    const { name, phone, email, deliveryDate, delivery, notes } = createOrderDto;
+    const { name, phone, email, deliveryDate, delivery, notes, language } = createOrderDto;
     const address = `${createOrderDto.address.postalCode} ${createOrderDto.address.settlement}, ${createOrderDto.address.street}; ${createOrderDto.address.country}`;
     const grandTotal = this.countGrandTotalAmount(items);
-    const order = new Order({ name, phone, email, address, grandTotal, deliveryDate, delivery, notes, items });
+    const order = new Order({ name, phone, email, address, grandTotal, deliveryDate, delivery, notes, items, language });
     return await order.save();
   }
 
   async updateOrder(order: Order, updateOrderDto: OrderDto, items: Item[]): Promise<Order> {
-    const { name, phone, email, deliveryDate, delivery, notes } = updateOrderDto;
+    const { name, phone, email, deliveryDate, delivery, notes, language } = updateOrderDto;
     const address = `${updateOrderDto.address.postalCode} ${updateOrderDto.address.settlement}, ${updateOrderDto.address.street}; ${updateOrderDto.address.country}`;
     const grandTotal = this.countGrandTotalAmount(items);
     if (updateOrderDto.items.length === items.length) {
@@ -38,6 +38,7 @@ export class OrderRepository extends Repository<Order> {
       order.delivery = delivery;
       order.notes = notes;
       order.items = items;
+      order.language = language;
       return order.save();
     } else {
       throw new NotFoundException('Could not find all the items!');

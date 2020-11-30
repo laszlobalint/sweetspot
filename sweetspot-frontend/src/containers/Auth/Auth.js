@@ -50,7 +50,9 @@ const Auth = (props) => {
         changed={(event) => inputChangedHandler(event, element.id)}
       />
     )),
-    <Button key="loginButton">{t('login')}</Button>,
+    <Button key="loginButton" type="submit">
+      {t('login')}
+    </Button>,
   ];
 
   if (loading) form = <Spinner />;

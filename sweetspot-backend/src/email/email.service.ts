@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 import { Order } from '../order/order.entity';
+import { getEmailTemplateTranslation } from './email.translations';
 
 @Injectable()
 export class EmailService {
@@ -11,15 +12,19 @@ export class EmailService {
     return this.mailerService
       .sendMail({
         to,
-        subject: 'Sikeres rendelés a SweetSpot oldalon - Összegző',
+        subject: 'SweetSpot | ❤',
         html: this.getHtml(order),
       })
       .then(() => order)
-      .catch(error => error);
+      .catch(error => {
+        throw new ServiceUnavailableException(error);
+      });
   }
 
   private getHtml(order: Order): string {
-    const { name, phone, email, address, grandTotal, deliveryDate, delivery, notes } = order;
+    const { name, phone, email, address, grandTotal, deliveryDate, delivery, notes, language } = order;
+    const t = getEmailTemplateTranslation(language);
+
     return `<table width="100%" cellpadding="0" cellspacing="0" border="0">
     <tbody>
       <tr>
@@ -72,7 +77,7 @@ export class EmailService {
                                   <td style="text-align: center; vertical-align: middle">
                                     <strong style="font-family: Helvetica, Arial, sans-serif; color: #234567"></strong>
                                     <h1 style="font-size: 26px; line-height: 30px; color: #054752; word-break: normal">
-                                      Üdvözöljük! Sikeresen rendelt a SweetSpot oldalán keresztül!
+                                      ${t.welcome}
                                     </h1>
                                   </td>
                                 </tr>
@@ -104,12 +109,12 @@ export class EmailService {
                                         line-height: 1.5;
                                       "
                                   >
-                                    <th width="180px">Név</th>
-                                    <th width="120px">Telefon</th>
-                                    <th width="210px">E-mail</th>
-                                    <th width="110px">Végösszeg</th>
-                                    <th width="120px">Dátum</th>
-                                    <th width="120px">Átvétel</th>
+                                    <th width="180px">${t.name}</th>
+                                    <th width="120px">${t.phone}</th>
+                                    <th width="210px">${t.email}</th>
+                                    <th width="110px">${t.grandTotal}</th>
+                                    <th width="120px">${t.date}</th>
+                                    <th width="120px">${t.delivery}</th>
                                   </tr>
                                   <tr
                                     style="
@@ -120,8 +125,8 @@ export class EmailService {
                                     <td>${phone}</td>
                                     <td>${email}</td>
                                     <td>${this.formatGrandTotal(grandTotal)}</td>
-                                    <td>${this.formatDate(deliveryDate)}</td>
-                                    <td>${this.formatDelivery(delivery)}</td>
+                                    <td>${this.formatDate(deliveryDate, language)}</td>
+                                    <td>${this.formatDelivery(delivery, language)}</td>
                                   </tr>
                                   <tr
                                     style="
@@ -136,8 +141,8 @@ export class EmailService {
                                         line-height: 1.5;
                                       "
                                   >
-                                    <th colspan="3">Lakcím</th>
-                                    <th colspan="3">Megjegyzés</th>
+                                    <th colspan="3">${t.address}</th>
+                                    <th colspan="3">${t.notes}</th>
                                   </tr>
                                   <tr style="line-height: 4; text-align: center;">
                                     <td colspan="3">${this.formatAddress(address)}</td>
@@ -180,9 +185,9 @@ export class EmailService {
                 </tr>
                 <tr>
                   <td style="text-align: center; font-size: 13px">
-                    <a href="#" style="color: #00aff5" target="_blank"> SweetSpot Rendelés </a>
+                    <a href="#" style="color: #00aff5" target="_blank"> ${t.site} </a>
                     <span style="color: #00aff5">|</span>
-                    <a href="https://sweetspot.rs/" style="color: #00aff5" target="_blank"> SweetSpot Blog </a>
+                    <a href="https://sweetspot.rs/" style="color: #00aff5" target="_blank"> ${t.blog} </a>
                   </td>
                 </tr>
                 <tr>
@@ -196,7 +201,7 @@ export class EmailService {
                         <tr>
                           <td style="text-align: center">
                             <p style="font-size: 10px; color: #708c91; text-align: center; padding: 0; margin-top: 10px; margin-bottom: 2px">
-                              Az e-mail üzenetet sweetspot.subotica@gmail.com címen keresztül kapta meg
+                            ${t.notification}
                             </p>
                           </td>
                         </tr>
@@ -214,12 +219,31 @@ export class EmailService {
   `;
   }
 
-  formatDate = (dateString: string): string =>
-    new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  formatDate = (dateString: string, language: string): string => {
+    if (language === 'SR')
+      return new Date(dateString).toLocaleDateString('sr-Latn-RS', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+    if (language === 'EN') return new Date(dateString).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+    return new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  };
 
   formatAddress = (address: string): string => address.split(';')[0].replace('null ,', '');
 
-  formatDelivery = (delivery: string): string => (delivery === 'SHIPPING' ? 'Házhozszállítás' : 'Személyes átvétel');
+  formatDelivery = (delivery: string, language: string): string => {
+    if (language === 'SR') {
+      if (delivery === 'SHIPPING') return 'Kućna dostava';
+      else return 'Lično preuzimanje';
+    }
 
-  formatGrandTotal = (number: number): string => `${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} RSD (dinár)`;
+    if (language === 'EN') {
+      if (delivery === 'SHIPPING') return 'Home delivery';
+      else return 'Personal collection (pick up)"';
+    }
+
+    if (delivery === 'SHIPPING') return 'Házhozszállítás';
+    else return 'Személyes átvétel';
+  };
+
+  formatGrandTotal = (number: number): string => `${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')},00 RSD`;
 }

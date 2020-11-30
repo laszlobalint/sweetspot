@@ -119,10 +119,10 @@ const Management = (props) => {
         />
       ))}
       <div className={classes.Buttons}>
-        <Button disabled={!isValid} onClick={editItemHandler}>
+        <Button type="submit" disabled={!isValid} onClick={editItemHandler}>
           {t('save')}
         </Button>
-        <Button type={'Warning'} onClick={deleteItemHandler}>
+        <Button type="button" behaviour="Warning" onClick={deleteItemHandler}>
           {t('delete')}
         </Button>
       </div>

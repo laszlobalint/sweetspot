@@ -150,7 +150,9 @@ const Item = (props) => {
             )}
           </div>
           <div className={classes.Navigation}>
-            <Button onClick={onAddedOrderItemsHandler}>{t('to-basket')}</Button>
+            <Button type="button" onClick={onAddedOrderItemsHandler}>
+              {t('to-basket')}
+            </Button>
             <Number onClickedMore={onIncreasedHandler} onClickedLess={onDecreasedHandler} value={quantity} onChanged={() => {}} />
           </div>
         </div>

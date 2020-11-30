@@ -23,6 +23,12 @@ export enum Delivery {
   PICK_UP = 'PICK_UP',
 }
 
+export enum Language {
+  HU = 'HU',
+  SR = 'SR',
+  EN = 'EN',
+}
+
 export interface Address {
   street: string;
   settlement: string;
@@ -72,6 +78,9 @@ export class OrderDto {
 
   @IsArray()
   items: number[];
+
+  @IsEnum(Language)
+  language: Language;
 }
 
 export class GetOrdersFilterDto {

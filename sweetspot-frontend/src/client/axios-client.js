@@ -9,15 +9,13 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  config.headers.Authorization = token && `Bearer ${token}`;
 
-  if (token && isTokenExpired(token)) {
+  if (token && !isTokenExpired(token)) {
+    config.headers.Authorization = token && `Bearer ${token}`;
+  } else if (token && isTokenExpired(token)) {
+    localStorage.clear('token');
     history.push('/logout');
-    localStorage.clear();
-    setTimeout(() => {
-      history.push('/');
-      history.go(0);
-    }, 3000);
+    history.go(0);
   }
 
   return config;

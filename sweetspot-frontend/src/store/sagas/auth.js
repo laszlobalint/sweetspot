@@ -23,8 +23,9 @@ export function* authenticateSaga(action) {
 export function* authenticateLogoutSaga(action) {
   try {
     yield axios.post(`${URL}logout`);
-    yield call([localStorage, 'clear']);
+    yield call([localStorage, localStorage.clear('token')]);
+    toastr.message(i18n.t('logout-success'), i18n.t('come-back'));
   } catch (error) {
-    yield call([localStorage, 'clear']);
+    yield call([localStorage, localStorage.clear('token')]);
   }
 }
