@@ -67,10 +67,10 @@ const Orders = (props) => {
         width: 330,
         Cell: (props) => {
           const items = props.data[parseInt(props.row.id)]['items'];
-          const fullString = items.map((item) => item.title).join(', ');
+          const fullString = items.map((item) => item.titleHun).join(', ');
           let result = '';
           items.forEach((e) => {
-            if (!result.includes(e.title)) result += `${e.title} (${fullString.match(new RegExp(e.title, 'g')).length}), `;
+            if (!result.includes(e.titleHun)) result += `${e.titleHun} (${fullString.match(new RegExp(e.titleHun, 'g')).length}), `;
           });
           return (
             <details>

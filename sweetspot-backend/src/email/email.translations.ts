@@ -17,7 +17,7 @@ const templateHun: EmailTemplate = {
 
 const templateSer: EmailTemplate = {
   welcome: 'Dobro došli! Uspešno ste poručili preko SweetSpot sajta!',
-  name: 'IME',
+  name: 'Ime',
   phone: 'Telefon',
   email: 'Email',
   grandTotal: 'Zbir',

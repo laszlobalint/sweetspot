@@ -143,8 +143,8 @@ const formControls = {
 };
 
 const translate = () => {
-  formControls.name.elementConfig.placeholder = `${i18n.t('name-placeholder')} ${i18n.t('mandatory')}`;
-  formControls.name.label = i18n.t('full-name');
+  formControls.name.elementConfig.placeholder = i18n.t('name-placeholder');
+  formControls.name.label = `${i18n.t('full-name')} ${i18n.t('mandatory')}`;
   formControls.phone.label = `${i18n.t('phone-number')} ${i18n.t('mandatory')}`;
   formControls.email.elementConfig.placeholder = i18n.t('email-placeholder');
   formControls.email.label = `${i18n.t('email-address')} ${i18n.t('mandatory')}`;

@@ -39,7 +39,7 @@ export const checkValidity = (value, rules) => {
 };
 
 export const generateFilename = (title) => {
-  return `http://localhost:3333/${title
+  return `${title
     .toString()
     .toLowerCase()
     .normalize('NFD')

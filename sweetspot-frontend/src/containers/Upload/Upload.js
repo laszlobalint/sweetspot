@@ -22,7 +22,7 @@ const Upload = (props) => {
     if (picture && !controls.picture.value) {
       const updatedControls = updateObject(controls, {
         picture: updateObject(controls['picture'], {
-          value: picture,
+          value: `http://localhost:3333/${picture}`,
           valid: checkValidity(picture, controls['picture'].validation),
           touched: true,
         }),
@@ -64,7 +64,7 @@ const Upload = (props) => {
       descriptionHun: controls.descriptionHun.value,
       descriptionSer: controls.descriptionSer.value,
       descriptionEng: controls.descriptionEng.value,
-      picture: controls.picture.value,
+      picture: `http://localhost:3333/${controls.picture.value}`,
       price: +controls.price.value,
       glutenfree: controls.glutenfree.value,
       sugarfree: controls.sugarfree.value,

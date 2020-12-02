@@ -43,7 +43,7 @@ const Management = (props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const checkPictureChange = useCallback(() => {
-    if (picture && picture !== controls.picture.value) controls.picture.value = picture;
+    if (picture && picture !== controls.picture.value) controls.picture.value = `http://localhost:3333/${picture}`;
   }, [picture, controls]);
 
   useEffect(() => {
