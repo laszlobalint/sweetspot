@@ -11,6 +11,8 @@ import NavigationLink from '../UI/NavigationLink/NavigationLink';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 const Header = (props) => {
+  const { authenticated, grandTotal } = props;
+
   const { t } = useTranslation();
 
   return (
@@ -28,7 +30,7 @@ const Header = (props) => {
         <LanguageSelector />
         <ul className={classes.Navigation}>
           {
-            <NavigationLink link="/order" disabled={props.grandTotal === 0}>
+            <NavigationLink link="/order" disabled={grandTotal === 0}>
               {t('ordering')}
             </NavigationLink>
           }
@@ -45,7 +47,7 @@ const Header = (props) => {
           <NavigationLink link="/contact" exact>
             {t('contact')}
           </NavigationLink>
-          {!props.authenticated ? (
+          {!authenticated ? (
             <NavigationLink link="/auth" exact>
               {t('admin')}
             </NavigationLink>
@@ -60,8 +62,10 @@ const Header = (props) => {
             ]
           )}
         </ul>
-        <span className={[classes.GrandTotal]}>
-          {<img src={basketLogo} alt={t('basket-content')} />} {t('basket')}: {numberWithDots(props.grandTotal)} {t('currency')}
+        <span className={classes.GrandTotal}>
+          <NavigationLink link="/order" disabled={grandTotal <= 0}>
+            {<img src={basketLogo} alt={t('basket-content')} />} {t('basket')}: {numberWithDots(grandTotal)} {t('currency')}
+          </NavigationLink>
         </span>
       </div>
       <p className={classes.Title}>{t('slogan')}</p>

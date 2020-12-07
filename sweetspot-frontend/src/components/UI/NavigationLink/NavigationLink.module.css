@@ -55,7 +55,7 @@ a.active {
 }
 
 .DisabledLink {
-  pointer-events: stroke;
+  pointer-events: none;
   cursor: not-allowed;
   opacity: 0.5;
 }
