@@ -70,9 +70,14 @@ export function* deleteItemSaga(action) {
 }
 
 const redirect = (toastrType, toastrTitle, toastrMessage) => {
-  toastr[toastrType](i18n.t(toastrTitle), i18n.t(toastrMessage), { attention: true });
-  setTimeout(() => {
-    history.push('/');
-    history.go(0);
-  }, 5000);
+  toastr[toastrType](i18n.t(toastrTitle), i18n.t(toastrMessage), {
+    timeOut: 0,
+    attention: true,
+    onAttentionClick: (id) => {
+      setTimeout(() => {
+        history.push('/');
+        history.go(0);
+      }, 500);
+    },
+  });
 };
