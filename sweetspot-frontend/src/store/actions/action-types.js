@@ -1,44 +1,44 @@
-export const AUTHENTICATE = 'AUTHENTICATE';
-export const AUTHENTICATE_INITIALIZED = 'AUTHENTICATE_INITIALIZED';
-export const AUTHENTICATE_SUCCESS = 'AUTHENTICATE_SUCCESS';
-export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
-export const AUTHENTICATE_LOGOUT = 'AUTHENTICATE_LOGOUT';
-export const AUTHENTICATE_RELOAD = 'AUTHENTICATE_RELOAD';
+export const AUTHENTICATE = '[Authenticate] Auth Start';
+export const AUTHENTICATE_INITIALIZED = '[Authenticate] Auth Initialized';
+export const AUTHENTICATE_SUCCESS = '[Authenticate] Auth Success';
+export const AUTHENTICATE_FAILURE = '[Authenticate] Auth Failure';
+export const AUTHENTICATE_LOGOUT = '[Authenticate] Auth Logout';
+export const AUTHENTICATE_RELOAD = '[Authenticate] Auth Reload';
 
-export const FETCH_ORDER_ITEMS = 'FETCH_ORDER_ITEMS';
-export const FETCH_ORDER_ITEMS_INITIALIZED = 'FETCH_ORDER_ITEMS_INITIALIZED';
-export const FETCH_ORDER_ITEMS_SUCCESS = 'FETCH_ORDER_ITEMS_SUCCESS';
-export const FETCH_ORDER_ITEMS_FAILURE = 'FETCH_ORDER_ITEMS_FAILURE';
+export const FETCH_ORDER_ITEMS = '[Order] Fetch Start';
+export const FETCH_ORDER_ITEMS_INITIALIZED = '[Order] Fetch Initialized';
+export const FETCH_ORDER_ITEMS_SUCCESS = '[Order] Fetch Success';
+export const FETCH_ORDER_ITEMS_FAILURE = '[Order] Fetch Failure';
 
-export const ADD_ORDER_ITEMS = 'ADD_ORDER_ITEMS';
-export const REMOVE_ORDER_ITEMS = 'REMOVE_ORDER_ITEMS';
+export const FETCH_ORDERS_ADMIN = '[Administrator] Fetch Start';
+export const FETCH_ORDERS_ADMIN_INITIZALITED = '[Administrator] Fetch Initialized';
+export const FETCH_ORDERS_ADMIN_SUCCESS = '[Administrator] Fetch Success';
+export const FETCH_ORDERS_ADMIN_FAILURE = '[Administrator] Fetch Failure';
 
-export const SAVE_ORDER = 'SAVE_ORDER';
-export const SAVE_ORDER_INITIALIZED = 'SAVE_ORDER_INITIALIZED';
-export const SAVE_ORDER_SUCCESS = 'SAVE_ORDER_SUCCESS';
-export const SAVE_ORDER_FAILURE = 'SAVE_ORDER_FAILURE';
+export const SAVE_ITEM_IMAGE = '[Administrator] Save Image Start';
+export const SAVE_ITEM_IMAGE_INITIZALITED = '[Administrator] Save Image Initialized';
+export const SAVE_ITEM_IMAGE_SUCCESS = '[Administrator] Save Image Success';
+export const SAVE_ITEM_IMAGE_FAILURE = '[Administrator] Save Image Failure';
 
-export const FETCH_ORDERS_ADMIN = 'FETCH_ORDERS_ADMIN';
-export const FETCH_ORDERS_ADMIN_INITIZALITED = 'FETCH_ORDERS_ADMIN_INITIZALITED';
-export const FETCH_ORDERS_ADMIN_SUCCESS = 'FETCH_ORDERS_ADMIN_SUCCESS';
-export const FETCH_ORDERS_ADMIN_FAILURE = 'FETCH_ORDERS_ADMIN_FAILURE';
+export const SAVE_NEW_ITEM = '[Administrator] Save Item Start';
+export const SAVE_NEW_ITEM_INITIZALITED = '[Administrator] Save Item Initialized';
+export const SAVE_NEW_ITEM_SUCCESS = '[Administrator] Save Item Success';
+export const SAVE_NEW_ITEM_FAILURE = '[Administrator] Save Item Failure';
 
-export const SAVE_ITEM_IMAGE = 'SAVE_ITEM_IMAGE';
-export const SAVE_ITEM_IMAGE_INITIZALITED = 'SAVE_ITEM_IMAGE_INITIZALITED';
-export const SAVE_ITEM_IMAGE_SUCCESS = 'SAVE_ITEM_IMAGE_SUCCESS';
-export const SAVE_ITEM_IMAGE_FAILURE = 'SAVE_ITEM_IMAGE_FAILURE';
+export const EDIT_ITEM = '[Administrator] Edit Item Start';
+export const EDIT_ITEM_INITIZALITED = '[Administrator] Edit Item Initialized';
+export const EDIT_ITEM_SUCCESS = '[Administrator] Edit Item Success';
+export const EDIT_ITEM_FAILURE = '[Administrator] Edit Item Failure';
 
-export const SAVE_NEW_ITEM = 'SAVE_NEW_ITEM';
-export const SAVE_NEW_ITEM_INITIZALITED = 'SAVE_NEW_ITEM_INITIZALITED';
-export const SAVE_NEW_ITEM_SUCCESS = 'SAVE_NEW_ITEM_SUCCESS';
-export const SAVE_NEW_ITEM_FAILURE = 'SAVE_NEW_ITEM_FAILURE';
+export const DELETE_ITEM = '[Administrator] Delete Item Start';
+export const DELETE_ITEM_INITIALIZED = '[Administrator] Delete Item Initialized';
+export const DELETE_ITEM_SUCCESS = '[Administrator] Delete Item Success';
+export const DELETE_ITEM_FAILURE = '[Administrator] Delete Item Failure';
 
-export const EDIT_ITEM = 'EDIT_ITEM';
-export const EDIT_ITEM_INITIZALITED = 'EDIT_ITEM_INITIZALITED';
-export const EDIT_ITEM_SUCCESS = 'EDIT_ITEM_SUCCESS';
-export const EDIT_ITEM_FAILURE = 'EDIT_ITEM_FAILURE';
+export const ADD_ORDER_ITEMS = '[Order] Add Items';
+export const REMOVE_ORDER_ITEMS = '[Order] Remove Items';
 
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const DELETE_ITEM_INITIALIZED = 'DELETE_ITEM_INITIALIZED';
-export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS';
-export const DELETE_ITEM_FAILURE = 'DELETE_ITEM_FAILURE';
+export const SAVE_ORDER = '[Order] Save Start';
+export const SAVE_ORDER_INITIALIZED = '[Order] Save Initialized';
+export const SAVE_ORDER_SUCCESS = '[Order] Save Success';
+export const SAVE_ORDER_FAILURE = '[Order] Save Failure';
