@@ -14,7 +14,7 @@ export function* fetchOrdersAdminSaga(action) {
   try {
     const response = yield axios.get(`${URL_ORDERS}`);
     yield put(actions.fetchOrdersAdminSuccess(response.data));
-    toastr.success(i18n.t('fetch-success'), i18n.t('fetch-success-details'));
+    toastr.success(i18n.t('fetch-success'), i18n.t('success-details'));
   } catch (error) {
     yield put(actions.fetchOrdersAdminFailure(error.message));
     toastr.error(i18n.t('error'), i18n.t('error-fetch'));
@@ -26,7 +26,7 @@ export function* saveNewItemImageSaga(action) {
   try {
     const response = yield axios.post(`${URL_ITEMS}/upload`, action.file);
     yield put(actions.saveItemImageSuccess(response.data));
-    toastr.success(i18n.t('picture-upload-success'), i18n.t('picture-upload-success-details'));
+    redirect('success', 'picture-upload-success', 'picture-upload-success-details');
   } catch (error) {
     yield put(actions.saveItemImageFailure(error.message));
     toastr.error(i18n.t('error'), i18n.t('error-picture'));
@@ -38,11 +38,7 @@ export function* saveNewItemSaga(action) {
   try {
     const response = yield axios.post(`${URL_ITEMS}`, action.item);
     yield put(actions.saveNewItemSuccess(response.data));
-    toastr.success(i18n.t('upload-success'), i18n.t('success-details'));
-    setTimeout(() => {
-      history.push('/');
-      history.go(0);
-    }, 3000);
+    redirect('success', 'upload-success', 'success-details');
   } catch (error) {
     yield put(actions.saveNewItemFailure(error.message));
     toastr.error(i18n.t('error'), i18n.t('error-upload'));
@@ -54,11 +50,7 @@ export function* editItemSaga(action) {
   try {
     const response = yield axios.put(`${URL_ITEMS}/${action.item.id}`, action.item);
     yield put(actions.editItemSuccess(response.data));
-    toastr.success(i18n.t('edit-success'), i18n.t('success-details'));
-    setTimeout(() => {
-      history.push('/');
-      history.go(0);
-    }, 3000);
+    redirect('success', 'edit-success', 'success-details');
   } catch (error) {
     yield put(actions.editItemFailure(error.message));
     toastr.error(i18n.t('error'), i18n.t('error-edit'));
@@ -70,13 +62,17 @@ export function* deleteItemSaga(action) {
   try {
     const response = yield axios.delete(`${URL_ITEMS}/${action.id}`);
     yield put(actions.deleteItemSuccess(response.data));
-    toastr.success(i18n.t('delete-success'), i18n.t('success-details'));
-    setTimeout(() => {
-      history.push('/');
-      history.go(0);
-    }, 3000);
+    redirect('success', 'delete-success', 'success-details');
   } catch (error) {
     yield put(actions.deleteItemFailure(error.message));
     toastr.error(i18n.t('error'), i18n.t('error-delete'));
   }
 }
+
+const redirect = (toastrType, toastrTitle, toastrMessage) => {
+  toastr[toastrType](i18n.t(toastrTitle), i18n.t(toastrMessage), { attention: true });
+  setTimeout(() => {
+    history.push('/');
+    history.go(0);
+  }, 5000);
+};

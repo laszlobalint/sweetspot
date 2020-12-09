@@ -12,6 +12,9 @@ const initialState = {
 export const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_ORDER_ITEMS_INITIALIZED:
+    case actionTypes.SAVE_ORDER_INITIALIZED:
+    case actionTypes.SAVE_ITEM_IMAGE_INITIZALITED:
+    case actionTypes.DELETE_ITEM_INITIALIZED:
       return updateObject(state, { error: null, loading: true });
     case actionTypes.FETCH_ORDER_ITEMS_SUCCESS:
       return updateObject(state, { items: action.items, error: null, loading: false });
@@ -21,8 +24,6 @@ export const ordersReducer = (state = initialState, action) => {
       return addOrderItems(state, action);
     case actionTypes.REMOVE_ORDER_ITEMS:
       return removeOrderItems(state, action);
-    case actionTypes.SAVE_ORDER_INITIALIZED:
-      return updateObject(state, { error: null, loading: true });
     case actionTypes.SAVE_ORDER_SUCCESS:
       return updateObject(state, { basket: [], grandTotal: 0, error: null, loading: false });
     case actionTypes.SAVE_ORDER_FAILURE:
@@ -30,9 +31,13 @@ export const ordersReducer = (state = initialState, action) => {
     case actionTypes.SAVE_NEW_ITEM_SUCCESS:
       return updateObject(state, { items: [...state.items, action.item], error: null, loading: false });
     case actionTypes.EDIT_ITEM_SUCCESS:
-      return updateObject(state, { items: [...state.items.filter((item) => item.id !== action.item.id), action.item] });
+      return updateObject(state, {
+        items: [...state.items.filter((item) => item.id !== action.item.id), action.item],
+        error: null,
+        loading: false,
+      });
     case actionTypes.DELETE_ITEM_SUCCESS:
-      return updateObject(state, { items: state.items.filter((item) => item.id !== action.id) });
+      return updateObject(state, { items: state.items.filter((item) => item.id !== action.id), error: null, loading: false });
     default:
       return state;
   }

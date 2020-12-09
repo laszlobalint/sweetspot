@@ -14,7 +14,7 @@ export function* fetchOrderItemsSaga(action) {
     const response = yield axios.get(URL_ITEMS);
     yield put(actions.fetchOrderItemsSuccess(response.data));
     toastr.message(i18n.t('order-steps'), i18n.t('order-steps-details'), {
-      timeOut: 15000,
+      timeOut: 12000,
       attention: true,
     });
   } catch (error) {
