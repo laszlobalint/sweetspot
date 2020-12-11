@@ -1,7 +1,7 @@
 {
   "name": "sweetspot-frontend",
   "version": "1.0.0",
-  "description": "React frontend application for bakery order management.",
+  "description": "React frontend application for pastry order management.",
   "author": "Bálint László",
   "private": true,
   "dependencies": {
