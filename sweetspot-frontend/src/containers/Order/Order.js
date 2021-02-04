@@ -10,9 +10,7 @@ import Button from '../../components/UI/Button/Button';
 import Summary from '../../components/Summary/Summary';
 import Form from './Form/Form';
 
-const Order = (props) => {
-  const { match, history, onRemoveOrderItems } = props;
-
+const Order = ({ match, history, onRemoveOrderItems }) => {
   const { t } = useTranslation();
 
   const removeOrderItemsHandler = (id) => {

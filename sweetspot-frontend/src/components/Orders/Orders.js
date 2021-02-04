@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import classes from './Orders.module.css';
 import { formatDate, formatAddress, numberWithDots } from '../../shared/utility';
 
-const Orders = (props) => {
-  const { data } = props;
-
+const Orders = ({ data }) => {
   const { t } = useTranslation();
   const columns = React.useMemo(
     () => [

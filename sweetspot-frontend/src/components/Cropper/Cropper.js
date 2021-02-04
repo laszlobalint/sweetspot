@@ -9,9 +9,7 @@ import * as actions from '../../store/actions';
 import { generateFilename } from '../../shared/utility';
 import Button from '../UI/Button/Button';
 
-const Cropper = (props) => {
-  const { alt, onSaveItemImage } = props;
-
+const Cropper = ({ alt, onSaveItemImage }) => {
   const { t } = useTranslation();
   const [uploadedImage, setUploadedImage] = useState(null);
   const [crop, setCrop] = useState({ unit: '%', aspect: 1 / 1 });

@@ -13,9 +13,7 @@ registerLocale('hu', hu);
 registerLocale('sr-Latn', sr);
 registerLocale('en-GB', en);
 
-const Calendar = React.memo((props) => {
-  const { label, onDateChangedHandler } = props;
-
+const Calendar = React.memo(({ label, onDateChangedHandler }) => {
   const { t } = useTranslation();
   const [date, setDate] = useState(null);
 

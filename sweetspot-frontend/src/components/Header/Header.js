@@ -10,9 +10,7 @@ import { numberWithDots } from '../../shared/utility';
 import NavigationLink from '../UI/NavigationLink/NavigationLink';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
-const Header = (props) => {
-  const { authenticated, grandTotal } = props;
-
+const Header = ({ authenticated, grandTotal }) => {
   const { t } = useTranslation();
 
   return (

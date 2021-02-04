@@ -11,9 +11,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Cropper from '../../components/Cropper/Cropper';
 
-const Management = (props) => {
-  const { picture, loading, error, onEditItem, onDeleteItem, location } = props;
-
+const Management = ({ picture, loading, error, onEditItem, onDeleteItem, location }) => {
   const { t } = useTranslation();
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);

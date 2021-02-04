@@ -11,9 +11,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Cropper from '../../components/Cropper/Cropper';
 
-const Upload = (props) => {
-  const { picture, loading, error, onSaveNewItem } = props;
-
+const Upload = ({ picture, loading, error, onSaveNewItem }) => {
   const { t } = useTranslation();
   const [controls, setControls] = useState(uploadControls);
   const [isValid, setIsValid] = useState(false);

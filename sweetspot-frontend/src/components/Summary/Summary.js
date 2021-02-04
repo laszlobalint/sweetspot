@@ -9,9 +9,7 @@ import i18n from '../../shared/i18n';
 import deleteIcon from '../../assets/ingredients/delete.png';
 import { numberWithDots } from '../../shared/utility';
 
-const Summary = (props) => {
-  const { items, basket, grandTotal } = props;
-
+const Summary = ({ items, basket, grandTotal, onClickedDelete }) => {
   const { t } = useTranslation();
 
   const initializeBasket = () => {
@@ -56,7 +54,7 @@ const Summary = (props) => {
           <p>
             {item.quantity} {t('piece')}
           </p>
-          <img className={classes.DeleteIcon} src={deleteIcon} alt={t('delete')} onClick={() => props.onClickedDelete(item.id)} />
+          <img className={classes.DeleteIcon} src={deleteIcon} alt={t('delete')} onClick={() => onClickedDelete(item.id)} />
         </li>
       </ul>
     ));

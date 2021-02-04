@@ -11,9 +11,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import formControls from './Auth.input';
 import { updateObject, checkValidity } from '../../shared/utility';
 
-const Auth = (props) => {
-  const { authenticated, error, loading, onAuthenticate } = props;
-
+const Auth = ({ authenticated, error, loading, onAuthenticate }) => {
   const { t } = useTranslation();
   const [controls, setControls] = useState(formControls);
 

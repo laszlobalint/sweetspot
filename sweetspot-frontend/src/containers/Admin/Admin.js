@@ -11,9 +11,7 @@ import Upload from '../Upload/Upload';
 import Offers from '../Offers/Offers';
 import Management from '../Management/Management';
 
-const Admin = (props) => {
-  const { onFetchOrdersAdmin } = props;
-
+const Admin = ({ match, onFetchOrdersAdmin }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -22,13 +20,13 @@ const Admin = (props) => {
 
   return (
     <div className={classes.Admin}>
-      <NavigationLink link={`${props.match.path}/orders`}>{t('orders')}</NavigationLink>
-      <NavigationLink link={`${props.match.path}/upload`}>{t('upload')}</NavigationLink>
-      <NavigationLink link={`${props.match.path}/management`}>{t('management')}</NavigationLink>
-      <Route path={`${props.match.path}/orders`} component={Orders} />
-      <Route path={`${props.match.path}/upload`} component={Upload} />
-      <Route path={`${props.match.path}/management`} component={Offers} />
-      <Route path={`${props.match.path}/management/edit`} render={(props) => <Management {...props} />} />
+      <NavigationLink link={`${match.path}/orders`}>{t('orders')}</NavigationLink>
+      <NavigationLink link={`${match.path}/upload`}>{t('upload')}</NavigationLink>
+      <NavigationLink link={`${match.path}/management`}>{t('management')}</NavigationLink>
+      <Route path={`${match.path}/orders`} component={Orders} />
+      <Route path={`${match.path}/upload`} component={Upload} />
+      <Route path={`${match.path}/management`} component={Offers} />
+      <Route path={`${match.path}/management/edit`} render={(props) => <Management {...props} />} />
     </div>
   );
 };

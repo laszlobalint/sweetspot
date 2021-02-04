@@ -9,9 +9,7 @@ import Layout from './hoc/Layout/Layout';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
-const App = (props) => {
-  const { authenticated, grandTotal, onAuthenticateReload } = props;
-
+const App = ({ authenticated, grandTotal, onAuthenticateReload }) => {
   useEffect(() => {
     if (localStorage.getItem('token')) onAuthenticateReload(localStorage.getItem('token'));
   }, [onAuthenticateReload]);

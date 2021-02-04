@@ -14,25 +14,23 @@ import Number from '../UI/Number/Number';
 import { Redirect } from 'react-router-dom';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 
-const Item = (props) => {
-  const {
-    id,
-    titleHun,
-    titleSer,
-    titleEng,
-    descriptionHun,
-    descriptionSer,
-    descriptionEng,
-    picture,
-    price,
-    glutenfree,
-    sugarfree,
-    lactosefree,
-    onAddedItems,
-    authenticated,
-    onSelectedItem,
-  } = props;
-
+const Item = ({
+  id,
+  titleHun,
+  titleSer,
+  titleEng,
+  descriptionHun,
+  descriptionSer,
+  descriptionEng,
+  picture,
+  price,
+  glutenfree,
+  sugarfree,
+  lactosefree,
+  onAddedItems,
+  authenticated,
+  onSelectedItem,
+}) => {
   const { t } = useTranslation();
   const [quantity, setQuantity] = useState(1);
   const [title, setTitle] = useState(null);

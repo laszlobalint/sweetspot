@@ -12,9 +12,7 @@ import Calendar from '../../../components/UI/Calendar/Calendar';
 import formControls from './Form.input';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
-const Forms = (props) => {
-  const { history, basket, grandTotal, error, loading, onSaveOrder } = props;
-
+const Forms = ({ history, basket, grandTotal, error, loading, onSaveOrder }) => {
   const { t } = useTranslation();
   const [controls, setControls] = useState(formControls);
   const [date, setDate] = useState(null);

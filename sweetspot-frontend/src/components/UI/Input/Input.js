@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 
 import classes from './Input.module.css';
 
-const Input = (props) => {
-  const { elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label, errorMessage } = props;
-
+const Input = ({ elementConfig, elementType, value, changed, disabled, invalid, validate, touched, label, errorMessage }) => {
   const { t } = useTranslation();
 
   let inputElement = null;
