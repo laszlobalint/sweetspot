@@ -8,7 +8,11 @@ export const updateObject = (oldObject, updatedProperties) => {
 export const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 export const formatDate = (dateString) =>
-  new Date(dateString).toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: '2-digit' });
+  new Date(dateString).toLocaleDateString('hu-HU', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  });
 
 export const formatAddress = (address) => address.split(';')[0].replace('null ,', '');
 
@@ -29,9 +33,9 @@ export const checkValidity = (value, rules) => {
         value,
       ) && isValid;
 
-  if (rules.isPostalcode) isValid = parseInt(value) >= 11000 && parseInt(value) <= 38999 && isValid;
+  if (rules.isPostalcode) isValid = Number(value) >= 11000 && Number(value) <= 38999 && isValid;
 
-  if (rules.isPositive) isValid = parseInt(value) > 0 && isValid;
+  if (rules.isPositive) isValid = Number(value) > 0 && isValid;
 
   if (rules.isBoolean) isValid = 'boolean' === typeof value && isValid;
 

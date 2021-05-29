@@ -1,4 +1,3 @@
-import React from 'react';
 import { toastr } from 'react-redux-toastr';
 import { useTranslation } from 'react-i18next';
 
@@ -60,11 +59,11 @@ const Header = ({ authenticated, grandTotal }) => {
             ]
           )}
         </ul>
-        <span className={classes.GrandTotal}>
+        <ul className={classes.GrandTotal}>
           <NavigationLink link="/order" disabled={grandTotal <= 0}>
             {<img src={basketLogo} alt={t('basket-content')} />} {t('basket')}: {numberWithDots(grandTotal)} {t('currency')}
           </NavigationLink>
-        </span>
+        </ul>
       </div>
       <p className={classes.Title}>{t('slogan')}</p>
     </header>

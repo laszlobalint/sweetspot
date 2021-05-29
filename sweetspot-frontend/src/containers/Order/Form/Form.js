@@ -32,7 +32,7 @@ const Forms = ({ history, basket, grandTotal, error, loading, onSaveOrder }) => 
       address: {
         street: controls.street.value,
         settlement: controls.settlement.value,
-        postalCode: parseInt(controls.postalCode.value),
+        postalCode: Number(controls.postalCode.value),
         country,
       },
       grandTotal: +grandTotal,
@@ -73,7 +73,7 @@ const Forms = ({ history, basket, grandTotal, error, loading, onSaveOrder }) => 
       }
     });
 
-    return orderItems.map((id) => parseInt(id));
+    return orderItems.map((id) => Number(id));
   };
 
   const formElements = [];

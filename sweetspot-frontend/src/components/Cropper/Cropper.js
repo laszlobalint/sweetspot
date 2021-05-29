@@ -52,7 +52,9 @@ const Cropper = ({ alt, onSaveItemImage }) => {
 
     canvas.toBlob(
       async (blob) => {
-        const file = new File([blob], generateFilename(alt), { lastModified: new Date() });
+        const file = new File([blob], generateFilename(alt), {
+          lastModified: new Date(),
+        });
         const formData = new FormData();
         formData.append('file', file);
         onSaveItemImage(formData);

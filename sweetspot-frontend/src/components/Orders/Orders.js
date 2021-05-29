@@ -64,7 +64,7 @@ const Orders = ({ data }) => {
         accessor: 'items',
         width: 330,
         Cell: (props) => {
-          const items = props.data[parseInt(props.row.id)]['items'];
+          const items = props.data[Number(props.row.id)]['items'];
           const fullString = items.map((item) => item.titleHun).join(', ');
           let result = '';
           items.forEach((e) => {
