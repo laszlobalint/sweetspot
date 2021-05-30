@@ -16,9 +16,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    react: {
-      wait: true,
-    },
+    useSuspense: true,
     ns: ['translations'],
     defaultNS: 'translations',
     backend: {
